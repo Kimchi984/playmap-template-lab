@@ -1,0 +1,529 @@
+{
+  "templateId": "list",
+  "templateVersion": 4,
+  "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally.",
+  "fixtures": [
+    {
+      "id": "six",
+      "label": "Representative · 6 items",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "6 things to do with kids this weekend",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "Lantern Parade",
+            "secondary": "Sat 17 Oct · Fitzroy",
+            "third": "Free"
+          },
+          {
+            "primary": "Teddy Bears’ Picnic",
+            "secondary": "Sun 18 Oct · Elwood",
+            "third": "Bring your bear"
+          },
+          {
+            "primary": "Splash Park Opening",
+            "secondary": "Sat 17 Oct · Werribee",
+            "third": "Free"
+          },
+          {
+            "primary": "Kids’ Bike Day",
+            "secondary": "Sun 18 Oct · Brunswick",
+            "third": "Bikes + helmets"
+          },
+          {
+            "primary": "Dino Discovery Trail",
+            "secondary": "All weekend · Carlton",
+            "third": "Bookings required"
+          },
+          {
+            "primary": "Pumpkin Patch Fun",
+            "secondary": "All weekend · Diggers Rest",
+            "third": "From $12"
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "long-headline",
+      "label": "Awkward long headline",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "What’s actually worth doing with the kids around Melbourne this weekend?",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "Lantern Parade",
+            "secondary": "Sat 17 Oct · Fitzroy",
+            "third": "Free"
+          },
+          {
+            "primary": "Teddy Bears’ Picnic",
+            "secondary": "Sun 18 Oct · Elwood",
+            "third": "Bring your bear"
+          },
+          {
+            "primary": "Splash Park Opening",
+            "secondary": "Sat 17 Oct · Werribee",
+            "third": "Free"
+          },
+          {
+            "primary": "Kids’ Bike Day",
+            "secondary": "Sun 18 Oct · Brunswick",
+            "third": "Bikes + helmets"
+          },
+          {
+            "primary": "Dino Discovery Trail",
+            "secondary": "All weekend · Carlton",
+            "third": "Bookings required"
+          },
+          {
+            "primary": "Pumpkin Patch Fun",
+            "secondary": "All weekend · Diggers Rest",
+            "third": "From $12"
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "short",
+      "label": "Short headline",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "Weekend sorted.",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "Lantern Parade",
+            "secondary": "Sat 17 Oct · Fitzroy",
+            "third": "Free"
+          },
+          {
+            "primary": "Teddy Bears’ Picnic",
+            "secondary": "Sun 18 Oct · Elwood",
+            "third": "Bring your bear"
+          },
+          {
+            "primary": "Splash Park Opening",
+            "secondary": "Sat 17 Oct · Werribee",
+            "third": "Free"
+          },
+          {
+            "primary": "Kids’ Bike Day",
+            "secondary": "Sun 18 Oct · Brunswick",
+            "third": "Bikes + helmets"
+          },
+          {
+            "primary": "Dino Discovery Trail",
+            "secondary": "All weekend · Carlton",
+            "third": "Bookings required"
+          },
+          {
+            "primary": "Pumpkin Patch Fun",
+            "secondary": "All weekend · Diggers Rest",
+            "third": "From $12"
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "multiline",
+      "label": "Explicit multiline headline",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "Little people.\nBig weekend.",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "Lantern Parade",
+            "secondary": "Sat 17 Oct · Fitzroy",
+            "third": "Free"
+          },
+          {
+            "primary": "Teddy Bears’ Picnic",
+            "secondary": "Sun 18 Oct · Elwood",
+            "third": "Bring your bear"
+          },
+          {
+            "primary": "Splash Park Opening",
+            "secondary": "Sat 17 Oct · Werribee",
+            "third": "Free"
+          },
+          {
+            "primary": "Kids’ Bike Day",
+            "secondary": "Sun 18 Oct · Brunswick",
+            "third": "Bikes + helmets"
+          },
+          {
+            "primary": "Dino Discovery Trail",
+            "secondary": "All weekend · Carlton",
+            "third": "Bookings required"
+          },
+          {
+            "primary": "Pumpkin Patch Fun",
+            "secondary": "All weekend · Diggers Rest",
+            "third": "From $12"
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "thirteen",
+      "label": "Maximum · 13 realistic items",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "13 family plans, sorted.",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "Lantern Parade",
+            "secondary": "Sat 17 Oct · Fitzroy",
+            "third": "Free"
+          },
+          {
+            "primary": "Teddy Bears’ Picnic",
+            "secondary": "Sun 18 Oct · Elwood",
+            "third": "Bring your bear"
+          },
+          {
+            "primary": "Splash Park Opening",
+            "secondary": "Sat 17 Oct · Werribee",
+            "third": "Free"
+          },
+          {
+            "primary": "Kids’ Bike Day",
+            "secondary": "Sun 18 Oct · Brunswick",
+            "third": "Bikes + helmets"
+          },
+          {
+            "primary": "Dino Discovery Trail",
+            "secondary": "All weekend · Carlton",
+            "third": "Bookings required"
+          },
+          {
+            "primary": "Pumpkin Patch Fun",
+            "secondary": "All weekend · Diggers Rest",
+            "third": "From $12"
+          },
+          {
+            "primary": "Touch a Truck",
+            "secondary": "Sat + Sun · Port Melbourne",
+            "third": "Free"
+          },
+          {
+            "primary": "Family Makers’ Market",
+            "secondary": "Sun 18 Oct · South Melbourne",
+            "third": "Free entry"
+          },
+          {
+            "primary": "Garden Adventure",
+            "secondary": "Sat 17 Oct · Cranbourne"
+          },
+          {
+            "primary": "Storytime in the Park",
+            "secondary": "Sun 18 Oct · St Kilda",
+            "third": "Free"
+          },
+          {
+            "primary": "Mini Railway Rides",
+            "secondary": "Sun 18 Oct · Box Hill",
+            "third": "From $5"
+          },
+          {
+            "primary": "Junior Ranger Walk",
+            "secondary": "Sat 17 Oct · Dandenong Ranges",
+            "third": "Bookings required"
+          },
+          {
+            "primary": "Messy Play Morning",
+            "secondary": "Sun 18 Oct · Cheltenham",
+            "third": "Ages 2–5"
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "mixed-names",
+      "label": "Short + long names / optional fields absent",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "Small people. Big plans.",
+        "subheading": "",
+        "items": [
+          {
+            "primary": "Zoo",
+            "secondary": "Parkville"
+          },
+          {
+            "primary": "The Very Curious Little Makers’ Workshop",
+            "secondary": "Sun 18 Oct · South Melbourne",
+            "third": "Bookings required"
+          },
+          {
+            "primary": "Trucks"
+          },
+          {
+            "primary": "Melbourne Museum’s Dinosaur Discovery Trail",
+            "third": "Ages 3–8"
+          },
+          {
+            "primary": "Picnic",
+            "secondary": "Elwood",
+            "third": "Free"
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "five",
+      "label": "Representative · 5 items",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "5 good reasons to get outside",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "Lantern Parade",
+            "secondary": "Sat 17 Oct · Fitzroy",
+            "third": "Free"
+          },
+          {
+            "primary": "Teddy Bears’ Picnic",
+            "secondary": "Sun 18 Oct · Elwood",
+            "third": "Bring your bear"
+          },
+          {
+            "primary": "Splash Park Opening",
+            "secondary": "Sat 17 Oct · Werribee",
+            "third": "Free"
+          },
+          {
+            "primary": "Kids’ Bike Day",
+            "secondary": "Sun 18 Oct · Brunswick",
+            "third": "Bikes + helmets"
+          },
+          {
+            "primary": "Dino Discovery Trail",
+            "secondary": "All weekend · Carlton",
+            "third": "Bookings required"
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "infeasible",
+      "label": "Deliberately infeasible · should warn",
+      "expectedRecipeVersion": 6,
+      "content": {
+        "headline": "A weekend with a lot to say",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          },
+          {
+            "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+            "secondary": "This fixture must warn, never claim it fits."
+          }
+        ],
+        "cta": "Find your next day out at theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium",
+        "columns": "auto",
+        "numberStyle": "filled-circle",
+        "numberColour": "cycle",
+        "density": "standard",
+        "position": "auto",
+        "primaryWeight": "bold",
+        "footerMode": "search-pill"
+      },
+      "referenceSnapshot": null
+    }
+  ]
+}

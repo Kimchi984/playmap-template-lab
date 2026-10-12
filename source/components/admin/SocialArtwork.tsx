@@ -14,7 +14,7 @@ import {
   type ListFitReport, type SocialListSpec,
 } from "@/lib/socialList";
 
-import { EDITORIAL_COVER_HERO_SIZES, CURATED_GRAPHIC_BOXES, CURATED_PHOTO_HEIGHT, clampSlideIndex, curatedPost, normaliseCoverAccents, pickNumber, resolvePickVisual, curatedNumberTreatment, curatedCopyMask, type EditorialCoverSlideSpec, type CuratedPickSlideSpec } from "@/lib/socialCurated";
+import { EDITORIAL_COVER_HERO_SIZES, CURATED_GRAPHIC_BOXES, CURATED_PHOTO_HEIGHT, clampSlideIndex, curatedPost, normaliseCoverAccents, pickNumber, resolvePickVisual, curatedNumberTreatment, curatedCopyProtectionBox, type EditorialCoverSlideSpec, type CuratedPickSlideSpec } from "@/lib/socialCurated";
 import { BOTTOM_MOTIF_HEIGHTS, bottomMotifGeometry, ctaInlineLayout, splitCtaAccents } from "@/lib/socialFooter";
 import { socialTypography, waitForSocialFont } from "@/lib/socialTypography";
 
@@ -325,20 +325,23 @@ function EditorialCover({ slide, spec, assets }: { slide: EditorialCoverSlideSpe
 /** One visual-above composition for every medium. Fit/focus never move the copy or number. */
 function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPickSlideSpec; number: string; spec: SocialPostSpec; assets: SocialGraphicAsset[] }) {
   const below = slide.treatment === 'visual-below';
-  const copyTop = below ? 286 : 700, copyHeight = below ? 500 : 566;
+  const showNumber=slide.numberStyle!=='none';
+  const copyTop = below ? (showNumber?286:176) : (showNumber?700:650), copyHeight = (below?800:1266)-copyTop;
   const width = 912;
   const fg = textColour(defaultTextStyle(), slide.background);
   const name = normaliseSocialText(slide.name.text, 'Pick name');
   const hook = normaliseSocialText(slide.hook.text);
   const detail = normaliseSocialText(slide.detail);
-  const location = normaliseSocialText(slide.location), price = normaliseSocialText(slide.price);
+  const location = normaliseSocialText(slide.location), price = slide.priceTreatment==='none'?'':normaliseSocialText(slide.price);
+  const priceTag=slide.priceTreatment==='tag';
+  const pricePadding=priceTag?16:0;
   const leftPrice = slide.priceAlignment === 'left' || (!slide.priceAlignment && below);
   const locationWidth = !leftPrice && location && price ? width-360-24 : width;
-  const hookFit = useHeadlineFit(hook, width, 110, 28, 38, 1.18, 'default', false, 600);
+  const hookFit = useHeadlineFit(hook, width, 110, 32, 36, 1.18, 'default', false, 600);
   const detailFit = useHeadlineFit(detail, width, 76, 26, 30, 1.25, 'default', false, 500);
-  const locationFit = useHeadlineFit(location, locationWidth, 102, 30, 42, 1.16, 'default', false, 800);
-  const priceFit = useHeadlineFit(price, 312, 58, 28, 42, 1.12, 'default', false, 800);
-  const locationHeight = location ? locationFit.fit.height : 0, priceHeight = price ? priceFit.fit.height+24 : 0;
+  const locationFit = useHeadlineFit(location, locationWidth, 102, 28, 28, 1.2, 'default', false, 600);
+  const priceFit = useHeadlineFit(price, 328, 72, 28, 28, 1.2, 'default', false, 600);
+  const locationHeight = location ? locationFit.fit.height : 0, priceHeight = price ? priceFit.fit.height+pricePadding : 0;
   const metaHeight = leftPrice ? locationHeight+priceHeight+(location && price ? 12 : 0) : Math.max(locationHeight,priceHeight);
   const remainingHeight = copyHeight - (hook ? hookFit.fit.height + 20 : 0) - (detail ? detailFit.fit.height + 14 : 0) - (location || price ? metaHeight + 28 : 0);
   const nameFit = useHeadlineFit(name, width, Math.max(100, remainingHeight), 54, 144, displayTypography(slide.name.style.size).lineHeight, slide.name.style.size, true);
@@ -350,9 +353,10 @@ function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPi
     const measure=()=>{const bottom=copyTop+Math.max(0,...Array.from(node.children).map(child=>{const n=child as HTMLElement;return n.offsetTop+n.offsetHeight}));setCopyBottom(current=>current===bottom?current:bottom)};
     const observer=new ResizeObserver(measure);Array.from(node.children).forEach(n=>observer.observe(n));measure();
     return ()=>observer.disconnect();
-  },[copyTop,name,hook,detail,location,price,leftPrice]);
+  },[copyTop,name,hook,detail,location,price,leftPrice,priceTag]);
   const protection = below && visual?.fit==='frame' && slide.overlapTreatment!=='none';
-  const mask = protection ? curatedCopyMask(copyBottom) : undefined;
+  const protectionBox=curatedCopyProtectionBox(copyTop,copyBottom);
+  const protectionMask='linear-gradient(to right, transparent 0px, #000 24px, #000 calc(100% - 24px), transparent 100%), linear-gradient(to bottom, transparent 0px, #000 24px, #000 calc(100% - 48px), transparent 100%)';
   const numberTreatment = curatedNumberTreatment(slide.numberStyle||'pill',slide.numberColour||'auto',slide.background,below);
   const asset = visual?.assetId ? assets.find(a => a.id === visual.assetId) : null;
   return <div className="social-artwork-stage" data-pick-treatment={slide.treatment} style={{ backgroundColor: SOCIAL_PALETTE[slide.background].value }}>
@@ -361,20 +365,21 @@ function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPi
     <HiddenMeasure measureRef={hookFit.measureRef} typography={hookFit.typography} text={hook} width={width} />
     <HiddenMeasure measureRef={detailFit.measureRef} typography={detailFit.typography} text={detail} width={width} />
     <HiddenMeasure measureRef={locationFit.measureRef} typography={locationFit.typography} text={location} width={locationWidth} />
-    <HiddenMeasure measureRef={priceFit.measureRef} typography={priceFit.typography} text={price} width={312} />
-    {below && visual?.fit === 'frame' ? <div data-pick-visual data-copy-protection={protection?'soft-fade':'none'} data-copy-bottom={copyBottom} className="absolute inset-0" style={{maskImage:mask,WebkitMaskImage:mask}}>
+    <HiddenMeasure measureRef={priceFit.measureRef} typography={priceFit.typography} text={price} width={328} />
+    {below && visual?.fit === 'frame' ? <div data-pick-visual data-copy-protection={protection?'soft-fade':'none'} data-copy-bottom={copyBottom} className="absolute inset-0">
       {asset ? <img data-pick-image src={asset.url} alt="" aria-hidden className="absolute" style={{width:{small:720,medium:900,large:1080}[visual.scale||'medium'],height:'auto',maxWidth:'none',left:(1080-{small:720,medium:900,large:1080}[visual.scale||'medium'])/2,bottom:0}} /> : null}
     </div> : <div data-pick-visual className="absolute overflow-hidden" style={{left:below?(1080-{small:720,medium:900,large:1080}[visual?.scale||'medium'])/2:0,width:below?{small:720,medium:900,large:1080}[visual?.scale||'medium']:1080,top:below?850:140,height:below?500:460,backgroundColor:SOCIAL_PALETTE[visual?.background||'seafoam'].value}}>
       {asset ? <img data-pick-image src={asset.url} alt="" aria-hidden className="h-full w-full" style={{objectFit:visual?.fit==='contain'?'contain':'cover',objectPosition:`center ${visual?.focus||'center'}`}} /> : null}
     </div>}
-    <div data-pick-number className="absolute z-20 flex items-center justify-center" style={{ left: 84, top: below ? 176 : 548, ...numberTreatment, ...displayTypography('default'), fontSize: below ? 68 : 88, lineHeight: 1 }}>{number}</div>
+    {protection ? <div data-pick-protection aria-hidden className="pointer-events-none absolute z-10" style={{...protectionBox,backgroundColor:SOCIAL_PALETTE[slide.background].value,opacity:.94,maskImage:protectionMask,WebkitMaskImage:protectionMask,maskComposite:'intersect',WebkitMaskComposite:'source-in'}} /> : null}
+    {showNumber ? <div data-pick-number className="absolute z-20 flex items-center justify-center" style={{ left: 84, top: below ? 176 : 548, ...displayTypography('default'), ...numberTreatment, lineHeight: 1 }}>{number}</div> : null}
     <div ref={copy} data-pick-copy className="absolute z-20" style={{ left: 84, right: 84, top: copyTop, height: copyHeight, color: fg }}>
       <h2 className="social-artwork-headline" style={{ width, fontSize: nameFit.fit.fontSize, ...nameFit.typography, textAlign: socialTextAlign(slide.name.style) }}><SocialDisplayText text={name} colour={fg} style={slide.name.style} /></h2>
       {hook ? <p data-pick-hook style={{ marginTop: 20, ...hookFit.typography, fontSize: hookFit.fit.fontSize }}><SocialDisplayText text={hook} colour={fg} style={slide.hook.style} /></p> : null}
-      {detail ? <p data-pick-detail style={{ marginTop: 14, ...detailFit.typography, fontSize: detailFit.fit.fontSize, opacity: .84 }}>{detail}</p> : null}
+      {detail ? <p data-pick-detail style={{ marginTop: 14, ...detailFit.typography, fontSize: detailFit.fit.fontSize, opacity: .92 }}>{detail}</p> : null}
       {location || price ? <div data-pick-metadata className="flex items-start" style={{marginTop:28,gap:leftPrice?12:24,flexDirection:leftPrice?'column':'row',justifyContent:leftPrice?'flex-start':location?'space-between':'flex-end'}}>
         {location ? <p data-pick-location style={{width:locationWidth,...locationFit.typography,fontSize:locationFit.fit.fontSize}}>{location}</p> : null}
-        {price ? <div data-pick-price-tag style={{flexShrink:0,width:'max-content',maxWidth:360,padding:'12px 24px',borderRadius:12,backgroundColor:fg,color:SOCIAL_PALETTE[slide.background].value}}><p data-pick-price style={{...priceFit.typography,fontSize:priceFit.fit.fontSize,maxWidth:312}}>{price}</p></div> : null}
+        {price ? <div data-pick-price-container data-price-treatment={priceTag?'tag':'plain'} style={{flexShrink:0,width:'max-content',maxWidth:360,padding:priceTag?'8px 16px':0,borderRadius:priceTag?12:0,backgroundColor:priceTag?fg:'transparent',color:priceTag?SOCIAL_PALETTE[slide.background].value:fg}}><p data-pick-price style={{...priceFit.typography,fontSize:priceFit.fit.fontSize,maxWidth:328,textAlign:leftPrice?'left':'right'}}>{price}</p></div> : null}
       </div> : null}
     </div>
   </div>;

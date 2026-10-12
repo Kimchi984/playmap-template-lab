@@ -72,9 +72,9 @@ export function distributeListColumns<T>(items: readonly T[], columns: 1 | 2): T
 }
 
 export const LIST_DENSITY_METRICS: Record<ListDensity, { gap: number; number: number; primary: number; secondary: number; third: number }> = {
-  spacious: { gap: 44, number: 87, primary: 53, secondary: 34, third: 34 },
-  standard: { gap: 30, number: 74, primary: 47, secondary: 30, third: 32 },
-  compact: { gap: 18, number: 62, primary: 40, secondary: 27, third: 28 },
+  spacious: { gap: 44, number: 87, primary: 53, secondary: 34, third: 29 },
+  standard: { gap: 30, number: 74, primary: 47, secondary: 30, third: 26 },
+  compact: { gap: 18, number: 62, primary: 40, secondary: 27, third: 23 },
 };
 /** Count/column-aware base metrics: more rows or narrower columns => tighter type and spacing. */
 export function listMetrics(density: ListDensity, count: number, columns: 1 | 2) {

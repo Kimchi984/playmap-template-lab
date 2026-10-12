@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {measureFittedText} from '../.test-build/fitting.mjs';
-import {makeSpec,coverFrameGeometry,coverHeadlineHeight} from '../.test-build/restored.mjs';
+import {makeSpec,coverFrameGeometry,coverHeadlineHeight,listMetrics,curatedCopyProtectionBox,curatedNumberTreatment,SocialArtwork} from '../.test-build/restored.mjs';
 // Synthetic metrics test policy only. Hosted browser checks verify actual typography separately.
 function metricNode(){return {style:{},dataset:{},textContent:'',get scrollWidth(){const w=parseFloat(this.style.width),s=parseFloat(this.style.fontSize);return this.style.whiteSpace==='nowrap'?Math.max(w,this.textContent.length*s*.5):w},get scrollHeight(){const s=parseFloat(this.style.fontSize),w=parseFloat(this.style.width),lh=Number(this.style.lineHeight);return this.textContent.split('\n').reduce((sum,line)=>sum+Math.max(1,Math.ceil(line.length*s*.5/w)),0)*s*lh}}}
 test('restored fitting preserves geometry and monotonic intent across headline stress cases',()=>{
@@ -74,4 +74,27 @@ test('Both Pick treatments share one image contract; lower frame keeps the compo
   const {spec,assets}=makeSpec('curated-pick',{name:'Plans',hook:'Go outside',location:'Melbourne',price:'Free'},{treatment,imageFit:treatment==='visual-below'?'frame':'contain',visualScale:'large'},{visual:'blob:illustration'});
   assert.equal(spec.curated.slides[0].treatment,treatment);assert.equal(spec.curated.slides[0].visual.scale,'large');assert.equal(assets.length,1);assert.equal(assets[0].url,'blob:illustration');
  }
+});
+
+
+test('List hierarchy survives every supported density, column count and fitting scale',()=>{
+ for(const density of ['spacious','standard','compact'])for(let count=3;count<=13;count++)for(const cols of [1,2])for(const scale of [.8,.85,.9,.95,1]){
+  const m=listMetrics(density,count,cols),[a,b,c]=[m.primary,m.secondary,m.third].map(x=>Math.round(x*scale));
+  assert.ok(a>b&&b>c,`${density}, ${count}, ${cols}, ${scale}: ${a}/${b}/${c}`);
+ }
+});
+test('Optional Pick price and number do not produce visible placeholders',async()=>{
+ const {createElement}=await import('react');const {renderToStaticMarkup}=await import('react-dom/server');
+ for(const treatment of ['visual-above','visual-below'])for(const price of ['', 'Free'])for(const priceTreatment of ['plain','tag','none']){
+  const {spec,assets}=makeSpec('curated-pick',{name:'Plans',hook:'Go outside',price},{treatment,numberStyle:'none',priceTreatment});
+  const html=renderToStaticMarkup(createElement(SocialArtwork,{spec,assets}));
+  assert.ok(!html.includes('data-pick-number'));assert.equal(html.includes('data-pick-price-container'),Boolean(price&&priceTreatment!=='none'));
+  if(price&&priceTreatment==='plain')assert.ok(html.includes('data-price-treatment="plain"'));
+ }
+});
+test('Copy protection follows measured copy rather than a fixed image zone',()=>{
+ const a=curatedCopyProtectionBox(200,400),b=curatedCopyProtectionBox(220,500);
+ assert.equal(b.top-a.top,20);assert.equal(b.height-a.height,80);assert.equal(b.left,a.left);assert.equal(b.width,a.width);
+ assert.equal(curatedNumberTreatment('none','auto','teal',true),null);
+ for(const below of [false,true]){const c=curatedNumberTreatment('outlined-circle','auto','sunshine',below);assert.equal(c.width,c.height);assert.ok(c.fontSize<=c.height/2);}
 });

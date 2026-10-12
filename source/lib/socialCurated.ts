@@ -36,22 +36,29 @@ export type CuratedPickSlideSpec = {
   graphic: { assetId: string | null; placement: CuratedGraphicPlacement };
   /** Lab recipe v3: composition is independent of the uploaded medium. */
   treatment?: 'visual-above' | 'visual-below';
-  numberStyle?: 'pill' | 'plain' | 'outlined-circle';
+  numberStyle?: 'pill' | 'plain' | 'outlined-circle' | 'none';
   numberColour?: 'auto' | SocialPaletteKey;
   priceAlignment?: 'left' | 'right';
+  priceTreatment?: 'plain' | 'tag' | 'none';
   overlapTreatment?: 'soft-fade' | 'none';
   visual?: { assetId: string | null; fit: 'cover' | 'contain' | 'frame'; focus: CuratedPhotoFocus; background: SocialBackgroundKey; scale?: SocialGraphicScale };
 };
 
 /** Bounded number treatments share the same anchor and never alter copy geometry. */
 export function curatedNumberTreatment(style: CuratedPickSlideSpec['numberStyle'], colour: CuratedPickSlideSpec['numberColour'], background: SocialBackgroundKey, below: boolean) {
+  if(style === 'none') return null;
   const foreground = SOCIAL_PALETTE[background].foreground === 'white' ? '#FFFFFF' : '#0F7C78';
   const selected = colour && colour !== 'auto' ? SOCIAL_PALETTE[colour].value : style === 'pill' ? SOCIAL_PALETTE[background === 'pink' ? 'sunshine' : 'pink'].value : foreground;
-  const height = below ? 82 : 116;
-  if (style === 'plain') return {width:below?144:176,height,color:selected,backgroundColor:'transparent',borderRadius:0,border:'none'};
-  if (style === 'outlined-circle') return {width:height,height,color:selected,backgroundColor:SOCIAL_PALETTE[background].value,borderRadius:height/2,border:`5px solid ${selected}`};
+  const height = below ? 72 : 96;
+  if (style === 'plain') return {width:below?112:144,height,fontSize:below?48:64,fontWeight:800,justifyContent:'flex-start',color:selected,backgroundColor:'transparent',borderRadius:0,border:'none'};
+  if (style === 'outlined-circle') return {width:height,height,fontSize:below?36:48,fontWeight:800,color:selected,backgroundColor:SOCIAL_PALETTE[background].value,borderRadius:height/2,border:`3px solid ${selected}`};
   const fillKey = colour && colour !== 'auto' ? colour : background === 'pink' ? 'sunshine' : 'pink';
-  return {width:below?144:176,height,color:SOCIAL_PALETTE[fillKey].foreground === 'white' ? '#FFFFFF' : '#0F7C78',backgroundColor:selected,borderRadius:height/2,border:'none'};
+  return {width:below?112:144,height,fontSize:below?48:64,fontWeight:800,color:SOCIAL_PALETTE[fillKey].foreground === 'white' ? '#FFFFFF' : '#0F7C78',backgroundColor:selected,borderRadius:height/2,border:'none'};
+}
+
+/** A feathered backdrop follows the real copy bounds, leaving other image areas untouched. */
+export function curatedCopyProtectionBox(copyTop: number, copyBottom: number) {
+  return {left:52,width:976,top:copyTop-24,height:Math.max(0,copyBottom-copyTop)+72};
 }
 
 /** Native canvas coordinates: subdued artwork under actual copy, full opacity below. */

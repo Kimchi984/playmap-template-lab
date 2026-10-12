@@ -169,6 +169,31 @@
       "kind": "graphics",
       "contract": "For lower composed frames, an explicit soft alpha mask reduces image opacity to .08 under actual measured copy, restoring full colour 130px below. Upload metrics and pixels never alter copy fitting.",
       "implementation": "source/lib/socialCurated.ts"
+    },
+    "list-readable-third-v2": {
+      "kind": "typography",
+      "contract": "Retain strong 600/.95 third line but use 29/26/23 base sizes below secondary34/30/27. Every count/column/fit scale must keep primary > secondary > third.",
+      "implementation": "source/lib/socialList.ts"
+    },
+    "curated-number-options-v2": {
+      "kind": "layout",
+      "contract": "Optional number. Style-owned font sizes and lighter 3px outline leave breathing room around two digits. Plain numeral aligns left. No number releases its copy spacing.",
+      "implementation": "source/lib/socialCurated.ts"
+    },
+    "curated-optional-price-v1": {
+      "kind": "layout",
+      "contract": "Empty or hidden price reserves no space. Plain price or filled tag aligns to the chosen copy edge. Reserve exact variant metadata height before fitting headline.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-copy-hierarchy-v1": {
+      "kind": "typography",
+      "contract": "Headline dominant; hook36/600; detail30/500; suburb and price28/600. Supporting and metadata roles have bounded minimum sizes; overflow warns.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-copy-protection-v2": {
+      "kind": "graphics",
+      "contract": "Feathered background-colour scrim follows actual copy top/bottom and horizontal bounds with modest padding. Image remains full-colour outside this local region. No pixel analysis or asset measurements drive copy fitting.",
+      "implementation": "source/lib/socialCurated.ts"
     }
   }
 }

@@ -51,6 +51,7 @@ export function makeSpec(id:string,c:any,d:any,images:any={}){
       slide.treatment=d.treatment;
       slide.numberStyle=d.numberStyle||'pill';slide.numberColour=d.numberColour||'auto';
       slide.priceAlignment=d.priceAlignment||(d.treatment==='visual-below'?'left':'right');
+      slide.priceTreatment=d.priceTreatment||'plain';
       slide.overlapTreatment=d.overlapTreatment||'soft-fade';
       slide.visual={assetId:asset('visual',images.visual),fit:d.imageFit||(d.treatment==='visual-below'?'frame':'cover'),focus:d.imageFocus||'center',background:d.visualBackground||'seafoam',scale:d.visualScale||'medium'};
     }
@@ -73,3 +74,7 @@ export function renderRestored(host:HTMLElement,id:string,c:any,d:any,images:any
 }
 
 export {coverFrameGeometry,coverHeadlineHeight} from '../source/lib/socialImagePlacement';
+
+export {curatedCopyProtectionBox,curatedNumberTreatment} from "../source/lib/socialCurated";
+export {listMetrics} from "../source/lib/socialList";
+export {SocialArtwork} from "../source/components/admin/SocialArtwork";

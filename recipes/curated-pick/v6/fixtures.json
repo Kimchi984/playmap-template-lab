@@ -1,0 +1,193 @@
+{
+  "templateId": "curated-pick",
+  "templateVersion": 4,
+  "fixtures": [
+    {
+      "id": "short",
+      "content": {
+        "name": "CERES Community Park",
+        "hook": "Chooks, gardens and a creek to explore",
+        "detail": "Grab a babycino at the café after.",
+        "location": "Brunswick East",
+        "price": "Free"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "treatment": "visual-above",
+        "imageFit": "cover",
+        "imageFocus": "center",
+        "visualBackground": "seafoam",
+        "visualScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 6
+    },
+    {
+      "id": "long",
+      "content": {
+        "name": "Mornington Peninsula Railway Adventure",
+        "hook": "A proper train day with plenty to see before and after the ride",
+        "detail": "Allow enough time to explore before boarding.",
+        "location": "Moorooduc",
+        "price": "From $18"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "treatment": "visual-above",
+        "imageFit": "cover",
+        "imageFocus": "center",
+        "visualBackground": "seafoam",
+        "visualScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 6
+    },
+    {
+      "id": "no-detail",
+      "label": "Short · no optional detail/location",
+      "content": {
+        "name": "CERES Community Park",
+        "hook": "Chooks, gardens and a creek to explore",
+        "price": "Free"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "treatment": "visual-above",
+        "imageFit": "cover",
+        "imageFocus": "center",
+        "visualBackground": "seafoam",
+        "visualScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 6
+    },
+    {
+      "id": "stress",
+      "label": "Long title, hook and metadata · stress",
+      "content": {
+        "name": "A very long recommended family adventure with little explorers around Melbourne",
+        "hook": "A deliberately long hook to test how all the supporting copy fits with a long place name and a full metadata line.",
+        "detail": "Bring snacks and allow extra time to explore together before heading home.",
+        "location": "A deliberately long suburb and meeting point",
+        "price": "From $18 per person"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "treatment": "visual-above",
+        "imageFit": "cover",
+        "imageFocus": "center",
+        "visualBackground": "seafoam",
+        "visualScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 6
+    },
+    {
+      "id": "frame-short",
+      "content": {
+        "name": "CERES Community Park",
+        "hook": "Chooks, gardens and a creek to explore",
+        "detail": "",
+        "location": "Brunswick East",
+        "price": "Free"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "treatment": "visual-below",
+        "imageFit": "frame",
+        "imageFocus": "center",
+        "visualBackground": "seafoam",
+        "visualScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 6,
+      "label": "Short · one supporting line"
+    },
+    {
+      "id": "no-price",
+      "content": {
+        "name": "CERES Community Park",
+        "hook": "Chooks, gardens and a creek to explore",
+        "detail": "Grab a babycino at the café after.",
+        "location": "Brunswick East",
+        "price": ""
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "treatment": "visual-above",
+        "imageFit": "cover",
+        "imageFocus": "center",
+        "visualBackground": "seafoam",
+        "visualScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 6,
+      "label": "No price · missing optional metadata"
+    },
+    {
+      "id": "no-number",
+      "content": {
+        "name": "CERES Community Park",
+        "hook": "Chooks, gardens and a creek to explore",
+        "detail": "Grab a babycino at the café after.",
+        "location": "Brunswick East",
+        "price": "Free"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "treatment": "visual-above",
+        "imageFit": "cover",
+        "imageFocus": "center",
+        "visualBackground": "seafoam",
+        "visualScale": "medium",
+        "numberStyle": "none"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 6,
+      "label": "No number · optional numbering"
+    }
+  ],
+  "note": "Design fixtures only. Uploads are local previews and never committed or included in URLs. Test the same composition with a real photo and transparent illustration."
+}
