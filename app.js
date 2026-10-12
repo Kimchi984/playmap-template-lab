@@ -2,7 +2,7 @@ import {renderRestored,prepareFonts} from './dist/restored.js';
 const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
 const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
 let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
-const names={gabarito:'Gabarito','dm-sans':'DM Sans',centre:'Centre','filled-circle':'Filled circle','outlined-circle':'Outlined circle',plain:'Plain',pill:'Pill / tab','last-word':'Last word',auto:'Auto',cycle:'Playmap cycle',none:'None',show:'Show',hide:'Hide','search-pill':'Search pill','bottom-right':'Contained lower right',bottom:'Contained bottom','full-bleed-bottom':'Full-width bottom — preserve transparency','top-right':'Top-right corner','full-frame':'Full-width overlay','small-accent':'Small accent',warmLight:'Warm light',blueTeal:'Blue teal',poolBlue:'Pool blue',sunshine:'Sunshine','bleed-right':'Bleed right','bleed-top-right':'Bleed top right','bleed-bottom-right':'Bleed bottom right'};
+const names={gabarito:'Gabarito','dm-sans':'DM Sans',centre:'Centre','filled-circle':'Filled circle','outlined-circle':'Outlined circle',plain:'Plain',pill:'Pill / tab','last-word':'Last word',auto:'Auto',cycle:'Playmap cycle',none:'None',show:'Show',hide:'Hide','search-pill':'Search pill','bottom-right':'Contained lower right',bottom:'Contained bottom','full-bleed-bottom':'Full-width bottom — preserve transparency','top-right':'Top right','top-left':'Top left','bottom-left':'Bottom left','full-frame':'Full-width overlay','small-accent':'Small accent',warmLight:'Warm light',blueTeal:'Blue teal',poolBlue:'Pool blue',sunshine:'Sunshine','bleed-right':'Bleed right','bleed-top-right':'Bleed top right','bleed-bottom-right':'Bleed bottom right'};
 const name=v=>names[v]||v[0].toUpperCase()+v.slice(1);
 async function fetchJson(path){const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error(`${path}: HTTP ${r.status}`);return r.json()}
 async function loadTemplate(){
@@ -19,26 +19,51 @@ function controls(){
  $('designControls').replaceChildren();
  for(const [key,spec] of Object.entries(recipe.designOptions)){
   const label=document.createElement('label');label.textContent=spec.label;const select=document.createElement('select');select.id=key;
-  for(const v of spec.values){const o=document.createElement('option');o.value=v;o.textContent=name(v);select.append(o)}
+  for(const v of spec.values){const o=document.createElement('option');o.value=v;o.textContent=spec.valueLabels?.[v]||name(v);select.append(o)}
   select.value=state[key];select.onchange=()=>{state[key]=select.value;render()};label.append(select);$('designControls').append(label);
  }
  $('assetControls').replaceChildren();const labels={hero:'Hero graphic',accent:'Accent graphic',topHero:'Top panel graphic',bottomHero:'Bottom panel graphic',motif:'Bottom motif',photo:'Photo'};
  for(const key of Object.keys(recipe.assetSlots||{})){
   const label=document.createElement('label');label.textContent=(recipe.assetSlots[key].label||labels[key])+' · optional';const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp,image/svg+xml';input.id=key+'File';
-  input.onchange=()=>{if(images[key])URL.revokeObjectURL(images[key]);images[key]=input.files?.[0]?URL.createObjectURL(input.files[0]):'';render()};label.append(input);$('assetControls').append(label);
+  const remove=document.createElement('button');remove.type='button';remove.textContent='Remove';remove.setAttribute('aria-label','Remove '+(recipe.assetSlots[key].label||labels[key]));remove.hidden=!images[key];remove.onclick=()=>{if(images[key])URL.revokeObjectURL(images[key]);delete images[key];input.value='';remove.hidden=true;render()};input.onchange=()=>{const previous=images[key];images[key]=input.files?.[0]?URL.createObjectURL(input.files[0]):'';remove.hidden=!images[key];render();if(previous)URL.revokeObjectURL(previous)};label.append(input,remove);$('assetControls').append(label);
  }
  $('assetNote').hidden=!Object.keys(recipe.assetSlots||{}).length;
 }
 function url(){const q=new URLSearchParams({template:state.template,fixture:state.fixture,templateVersion:String(recipe.templateVersion)});for(const k of Object.keys(recipe.designOptions))q.set(k,state[k]);return location.origin+location.pathname+'?'+q}
 function row(label,value,kind='pass'){const n=document.createElement('div');n.className='check';const a=document.createElement('span');a.textContent=label;const b=document.createElement('span');b.textContent=value;b.className=kind;n.append(a,b);return n}
+// Read alpha only to report overlap. It never changes rendering or fitting.
+function coverGraphicWarnings(){
+ const copy=$('stage').querySelector('[data-cover-copy]');if(!copy)return [];
+ const boxes=[...copy.querySelectorAll('h2,p,span.inline-block')].map(n=>n.getBoundingClientRect()),messages=[];
+ for(const img of $('stage').querySelectorAll('[data-cover-graphic]')){
+  if(!img.complete||!img.naturalWidth)continue;
+  try{
+   const frame=img.getBoundingClientRect(),ratio=Math.min(frame.width/img.naturalWidth,frame.height/img.naturalHeight);
+   const width=img.naturalWidth*ratio,height=img.naturalHeight*ratio;
+   const left=frame.left+(frame.width-width)/2,top=frame.bottom-height;
+   const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+   const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)continue;ctx.drawImage(img,0,0);
+   for(const box of boxes){
+    const x=Math.max(0,Math.floor((box.left-left)/ratio)),y=Math.max(0,Math.floor((box.top-top)/ratio));
+    const right=Math.min(canvas.width,Math.ceil((box.right-left)/ratio)),bottom=Math.min(canvas.height,Math.ceil((box.bottom-top)/ratio));
+    if(right<=x||bottom<=y)continue;
+    const pixels=ctx.getImageData(x,y,right-x,bottom-y).data;let opaque=0,total=0;
+    for(let i=3;i<pixels.length;i+=16){total++;if(pixels[i]>=32)opaque++}
+    if(opaque/total>.01){messages.push(`${img.dataset.coverGraphic==='main'?'Main':'Additional'} graphic overlaps the copy area. Review its placement or size.`);break}
+   }
+  }catch{messages.push('Graphic overlap could not be inspected. Review the composition visually.')}
+ }
+ return messages;
+}
 function refreshChecks(){
  const nodes=[...$('stage').querySelectorAll('.social-headline-measure')],headlines=[...$('stage').querySelectorAll('h2')],sizes=headlines.map(h=>Math.round(parseFloat(getComputedStyle(h).fontSize)));
  const constrained=nodes.filter(n=>n.dataset.constrained==='true'),overflow=nodes.filter(n=>n.dataset.overflow==='true'),warnings=[];
+ if(state.template==='editorial-cover')warnings.push(...coverGraphicWarnings());
  if(constrained.length)warnings.push(`${constrained.length} text block(s) limited by available space; requested size could not be reached.`);
  if(overflow.length)warnings.push('Some text cannot fit above its minimum size. Shorten the copy.');
  if(state.template==='list'&&listReport){if(listReport.overflow)warnings.push('List exceeds the safe area. Shorten copy, use Compact or two columns.');for(const i of listReport.tooManyLines)warnings.push(`Item ${i+1} exceeds three lines.`)}
  if(state.template==='curated-pick'&&!images[state.visualMode==='photo'?'photo':'hero'])warnings.push('No image supplied. The original image area stays empty; no filler graphic is invented.');
- $('checks').replaceChildren(row('Baseline','Lovable source ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.join(' / ')+'px'),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
+ $('checks').replaceChildren(row('Baseline','Lovable source ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.length?sizes.join(' / ')+'px':'Not rendered',sizes.length?'pass':'fail'),...(state.template==='editorial-cover'?[row('Local graphics',`${$('stage').querySelectorAll('img').length} / ${Object.values(images).filter(Boolean).length} present`)]:[]),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
  $('warnings').textContent=warnings.join(' ');$('warnings').hidden=!warnings.length;
 }
 function render(){
@@ -52,6 +77,7 @@ function updateScale(){for(const wrap of document.querySelectorAll('.preview-wra
 $('template').onchange=()=>{state.template=$('template').value;state.fixture='';loadTemplate().catch(failure)};
 $('fixture').onchange=()=>{state.fixture=$('fixture').value;render()};
 $('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(url());$('copyLink').textContent='Copied'}catch{$('testUrl').select();$('copyLink').textContent='Select + copy URL'}setTimeout(()=>$('copyLink').textContent='Copy test link',1200)};
+$('stage').addEventListener('load',()=>requestAnimationFrame(refreshChecks),true);
 $('nativeSize').onclick=()=>{document.body.classList.toggle('native-view');updateScale()};
 function failure(e){$('status').textContent=e.message;$('status').className='fail'}
 new ResizeObserver(updateScale).observe($('work'));window.addEventListener('resize',updateScale);

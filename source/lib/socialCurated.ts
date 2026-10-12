@@ -12,8 +12,8 @@ export type EditorialCoverSlideSpec = {
   hero: { assetId: string | null; scale: SocialGraphicScale; placement: EditorialCoverHeroPlacement };
   /** Freeform decorative accents only (kind "accent"), max SOCIAL_OVERLAY_LIMIT. */
   accents: SocialGraphicOverlay[];
-  /** Optional frame artwork anchored to the real canvas corner. */
-  corner?: { assetId: string | null; scale: SocialGraphicScale; placement: "top-right" | "full-frame" };
+  /** Optional additional artwork; placement is independent of the asset’s subject. */
+  corner?: { assetId: string | null; scale: SocialGraphicScale; placement: "top-right" | "top-left" | "bottom-right" | "bottom-left" | "full-frame" };
 };
 /** Retired shape, read only by the migration adapter. */
 export type LegacyCuratedCoverSlide = {

@@ -99,6 +99,11 @@
       "kind": "graphics",
       "contract": "Bottom composition uses canvas width + natural height, bottom=0; corner uses right=0/top=0, natural height and bounded width. Preserve transparent frame; never square-fit, stretch or trim it.",
       "implementation": "source/lib/socialImagePlacement.ts"
+    },
+    "cover-stable-graphics-v2": {
+      "kind": "graphics",
+      "contract": "Main and optional additional graphic preserve independent uploads and intrinsic aspect ratios. Four corner anchors are available. Copy uses the source lower-zone reservation across empty/loading/loaded/removed states. Pixel overlap is diagnostic only, never a headline-fit input.",
+      "implementation": "source/lib/socialImagePlacement.ts"
     }
   }
 }

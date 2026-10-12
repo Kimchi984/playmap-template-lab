@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {measureFittedText} from '../.test-build/fitting.mjs';
-import {makeSpec,coverFrameGeometry,firstVisibleRow,bottomFrameVisibleTop} from '../.test-build/restored.mjs';
+import {makeSpec,coverFrameGeometry,coverHeadlineHeight} from '../.test-build/restored.mjs';
 // A synthetic metric source tests sizing policy only. Real-font visual/DOM QA remains deferred.
 function metricNode(){return {style:{},dataset:{},textContent:'',get scrollWidth(){const w=parseFloat(this.style.width),s=parseFloat(this.style.fontSize);return this.style.whiteSpace==='nowrap'?Math.max(w,this.textContent.length*s*.5):w},get scrollHeight(){const s=parseFloat(this.style.fontSize),w=parseFloat(this.style.width),lh=Number(this.style.lineHeight);return this.textContent.split('\n').reduce((sum,line)=>sum+Math.max(1,Math.ceil(line.length*s*.5/w)),0)*s*lh}}}
 test('restored fitting preserves geometry and monotonic intent across headline stress cases',()=>{
@@ -35,8 +35,13 @@ test('transparent frames anchor to canvas edges without square fitting or aspect
  const both=makeSpec('editorial-cover',{headline:'Plans'},{heroPlacement:'full-bleed-bottom',cornerPlacement:'top-right',cornerScale:'large'},{hero:'blob:bottom',accent:'blob:corner'});
  assert.equal(both.spec.curated.slides[0].hero.placement,'full-bleed-bottom');assert.equal(both.spec.curated.slides[0].corner.placement,'top-right');assert.equal(both.spec.curated.slides[0].accents.length,0);
 });
-test('copy safety uses visible alpha but preserves transparent frame geometry',()=>{
- const pixels=new Uint8ClampedArray(4*4*4);pixels[(2*4+1)*4+3]=255;
- assert.equal(firstVisibleRow(pixels,4,4),2);assert.equal(firstVisibleRow(pixels,4,4,2,4),null);
- assert.equal(bottomFrameVisibleTop(1080,1350,675),675);assert.equal(bottomFrameVisibleTop(1080,1350,null),1350);
+test('cover copy geometry is stable and additional graphics keep independent asset IDs',()=>{
+ for(const scale of ['small','medium','large'])assert.equal(coverHeadlineHeight('full-bleed-bottom',scale,true),350);
+ for(const placement of ['top-left','bottom-left','bottom-right','top-right']){
+  const frame=coverFrameGeometry(placement,'medium');assert.equal(frame.width,540);assert.equal(frame.height,'auto');assert.equal(frame[placement.endsWith('left')?'left':'right'],0);assert.equal(frame[placement.startsWith('bottom')?'bottom':'top'],0);
+  for(const images of [{},{hero:'blob:bottom'},{accent:'blob:accent'},{hero:'blob:bottom',accent:'blob:accent'}]){
+   const {spec,assets}=makeSpec('editorial-cover',{headline:'Plans'},{heroPlacement:'full-bleed-bottom',cornerPlacement:placement},images),slide=spec.curated.slides[0];
+   assert.equal(assets.length,Object.keys(images).length);assert.equal(slide.hero.assetId,images.hero?'lab-hero':null);assert.equal(slide.corner?.assetId,images.accent?'lab-accent':undefined);
+  }
+ }
 });

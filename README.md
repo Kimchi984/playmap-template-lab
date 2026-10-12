@@ -32,14 +32,10 @@ upload or include them in copied URLs. No fake stock or decorative stand-in is u
 
 ## Current gate
 
-Build and seven focused source/contract checks pass. Browser/visual QA is deferred at Alina's
-request to limit usage. Do not claim visual acceptance or bug-free rendering from those tests.
-Next design work: Cover image treatment first, then Curated Pick; incremental List softening
-and image/full-bleed experiments after the baseline is reviewed. No new global style modes.
-
-## Cover frame artwork
-
-Cover v3 adds Full-width bottom (natural aspect ratio, transparent frame preserved) and a
-separate top-right corner image. Corner size is independent; Full-width overlay supports
-precomposed full-frame corner assets. Existing contained heroes and small accents remain.
-Bottom image alpha is read locally for copy safety; pixels/files are never changed.
+Build and focused source/contract checks are required, followed by real browser uploads for
+any image treatment change. Cover v3's alpha-driven copy fitting is superseded by v4: optional
+uploads now preserve the source copy zone. Both graphics are independent, removable local
+previews. Additional graphics support all four corner anchors, a full-width overlay, or a
+small accent; the source PNG is never flipped or cropped. Alpha is used only for conservative
+copy-area overlap warnings, with near-transparent noise ignored. Visual acceptance remains
+pending Alina's review. No new global style modes.

@@ -28,9 +28,9 @@
     {
       "id": "editorial-cover",
       "label": "Editorial Cover",
-      "version": 3,
-      "path": "recipes/editorial-cover/v3/recipe.json",
-      "fixtures": "recipes/editorial-cover/v3/fixtures.json",
+      "version": 4,
+      "path": "recipes/editorial-cover/v4/recipe.json",
+      "fixtures": "recipes/editorial-cover/v4/fixtures.json",
       "group": "Mixed post slides"
     },
     {

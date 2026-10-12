@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "editorial-cover",
+  "templateVersion": 4,
+  "status": "lab",
+  "label": "Editorial Cover",
+  "job": "Open a multi-slide post with a high-energy editorial hook and strong visual premise.",
+  "dominantVisualIdea": "Existing Playmap Editorial Cover composition, restored from source. Improve one treatment at a time.",
+  "contentSlots": {
+    "kicker": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 70
+    },
+    "headline": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 120
+    },
+    "supporting": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 90
+    }
+  },
+  "designOptions": {
+    "displayFont": {
+      "type": "enum",
+      "label": "Headline font",
+      "values": [
+        "gabarito",
+        "dm-sans"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "label": "Headline size",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "label": "Headline alignment",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    },
+    "accentEnding": {
+      "type": "enum",
+      "label": "Headline emphasis",
+      "values": [
+        "none",
+        "last-word"
+      ],
+      "default": "none"
+    },
+    "accentColour": {
+      "type": "enum",
+      "label": "Emphasis colour",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue",
+        "white"
+      ],
+      "default": "sunshine"
+    },
+    "wordmark": {
+      "type": "enum",
+      "label": "Wordmark",
+      "values": [
+        "show",
+        "hide"
+      ],
+      "default": "show"
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue"
+      ],
+      "default": "sunshine"
+    },
+    "graphicScale": {
+      "type": "enum",
+      "label": "Main graphic size",
+      "values": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "default": "large",
+      "disabledWhen": {
+        "heroPlacement": [
+          "full-bleed-bottom"
+        ]
+      }
+    },
+    "heroPlacement": {
+      "type": "enum",
+      "label": "Main graphic placement",
+      "values": [
+        "full-bleed-bottom",
+        "bottom",
+        "bottom-right"
+      ],
+      "default": "full-bleed-bottom"
+    },
+    "cornerPlacement": {
+      "type": "enum",
+      "label": "Additional graphic placement",
+      "values": [
+        "top-right",
+        "top-left",
+        "bottom-right",
+        "bottom-left",
+        "full-frame",
+        "small-accent"
+      ],
+      "default": "top-right",
+      "valueLabels": {
+        "top-right": "Top right",
+        "top-left": "Top left",
+        "bottom-right": "Bottom right",
+        "bottom-left": "Bottom left",
+        "full-frame": "Full-width overlay",
+        "small-accent": "Small accent"
+      }
+    },
+    "cornerScale": {
+      "type": "enum",
+      "label": "Additional graphic size",
+      "values": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "default": "medium",
+      "disabledWhen": {
+        "cornerPlacement": [
+          "full-frame"
+        ]
+      }
+    }
+  },
+  "artDirectionModes": [],
+  "rules": {
+    "layout": "lovable-restored-layout-v1",
+    "measurement": "restored-real-font-measurement-v1",
+    "headlineFitting": "restored-monotonic-headline-v1",
+    "frameGraphics": "cover-stable-graphics-v2"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "source-baseline-preserved",
+    "optional-uploads-independent",
+    "copy-stable-across-uploads"
+  ],
+  "sourceBaseline": {
+    "project": "The Playmap",
+    "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+    "component": "source/components/admin/SocialArtwork.tsx"
+  },
+  "assetSlots": {
+    "hero": {
+      "role": "hero",
+      "optional": true,
+      "scope": "local-preview",
+      "label": "Main graphic"
+    },
+    "accent": {
+      "role": "accent",
+      "optional": true,
+      "scope": "local-preview",
+      "label": "Additional graphic"
+    }
+  },
+  "acceptance": {
+    "visuals": "source-based restoration; Alina review pending",
+    "noNewModes": true
+  },
+  "graphicCapabilities": {
+    "main": "Full canvas width, bottom anchored, intrinsic aspect ratio; or original contained lower placements.",
+    "additional": "Optional graphic with four corner anchors, full-width overlay or original small accent. Independent of main graphic.",
+    "copy": "Source lower-zone reservation remains fixed regardless of image loading, transparency, addition or removal. Overlap is reported for review, never used to resize copy.",
+    "sourceFiles": "Unmodified. No automatic crop, flip, stretching or remote upload."
+  }
+}

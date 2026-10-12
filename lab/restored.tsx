@@ -64,4 +64,4 @@ export function renderRestored(host:HTMLElement,id:string,c:any,d:any,images:any
   flushSync(()=>root!.render(<SocialArtwork spec={spec} assets={assets} onListFit={onListFit}/>));
 }
 
-export {coverFrameGeometry,firstVisibleRow,bottomFrameVisibleTop} from '../source/lib/socialImagePlacement';
+export {coverFrameGeometry,coverHeadlineHeight} from '../source/lib/socialImagePlacement';

@@ -28,3 +28,5 @@ in memory and are not uploaded, persisted, or included in state URLs.
 Cover v3 adds frame placements in socialImagePlacement.ts: full-width bottom and independent
 top-right/full-frame corner. Alpha bounds determine bottom copy safety while original
 transparent files and aspect ratios remain unchanged.
+
+Cover v4 supersedes the unaccepted v3 image-fit experiment. Copy geometry is reserved independently of upload state; transparent pixels are diagnostic only. The second optional graphic supports four corner anchors without asset flipping or cropping. Real two-file browser upload verification is required.
