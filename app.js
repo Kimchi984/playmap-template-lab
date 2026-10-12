@@ -1,4 +1,4 @@
-import {renderRestored,prepareFonts} from './dist/restored.js?v=b6e1ed8e24ce';
+import {renderRestored,prepareFonts} from './dist/restored.js?v=b6cb3c252e18';
 const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
 const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
 let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
@@ -18,9 +18,9 @@ async function loadTemplate(){
 function controls(){
  $('designControls').replaceChildren();
  for(const [key,spec] of Object.entries(recipe.designOptions)){
-  const label=document.createElement('label');label.textContent=spec.label;const select=document.createElement('select');select.id=key;
+  const label=document.createElement('label');label.textContent=spec.label;const select=document.createElement('select');select.id=key;select.setAttribute('aria-label',spec.label);
   for(const v of spec.values){const o=document.createElement('option');o.value=v;o.textContent=spec.valueLabels?.[v]||name(v);select.append(o)}
-  select.disabled=spec.values.length===1;select.value=state[key];select.onchange=()=>{state[key]=select.value;for(const [dependent,spec] of Object.entries(recipe.designOptions))if(spec.defaultBy?.control===key)state[dependent]=spec.defaultBy.values[state[key]]||spec.default;render()};label.append(select);$('designControls').append(label);
+  select.disabled=spec.values.length===1;select.value=state[key];select.onchange=()=>{state[key]=select.value;for(const [dependent,spec] of Object.entries(recipe.designOptions))if(spec.defaultBy?.control===key)state[dependent]=spec.defaultBy.values[state[key]]||spec.default;render()};label.append(select);if(spec.help){const help=document.createElement('small');help.className='control-help';help.textContent=spec.help;label.append(help)}$('designControls').append(label);
  }
  $('assetControls').replaceChildren();const labels={hero:'Hero graphic',accent:'Accent graphic',topHero:'Top panel graphic',bottomHero:'Bottom panel graphic',motif:'Bottom motif',photo:'Photo'};
  for(const key of Object.keys(recipe.assetSlots||{})){
@@ -49,7 +49,7 @@ function coverGraphicWarnings(){
     if(right<=x||bottom<=y)continue;
     const pixels=ctx.getImageData(x,y,right-x,bottom-y).data;let opaque=0,total=0;
     for(let i=3;i<pixels.length;i+=16){total++;if(pixels[i]>=32)opaque++}
-    if(opaque/total>.01){messages.push(`${img.hasAttribute('data-pick-image')?'Image':img.dataset.coverGraphic==='main'?'Main graphic':'Additional graphic'} overlaps the copy area. Review its placement or size.`);break}
+    if(opaque/total>.01){if(img.closest('[data-copy-protection="soft-fade"]')){messages.push('Image reaches the copy area; soft fade is active. Review readability.');break}messages.push(`${img.hasAttribute('data-pick-image')?'Image':img.dataset.coverGraphic==='main'?'Main graphic':'Additional graphic'} overlaps the copy area. Review its placement or size.`);break}
    }
   }catch{messages.push('Graphic overlap could not be inspected. Review the composition visually.')}
  }
@@ -63,12 +63,12 @@ function refreshChecks(){
  if(overflow.length)warnings.push('Some text cannot fit above its minimum size. Shorten the copy.');
  if(state.template==='list'&&state.footerMode==='graphic'&&!images.motif)warnings.push('No image supplied for the graphic footer.');
  if(state.template==='list'&&listReport){if(listReport.overflow)warnings.push('List exceeds the safe area. Shorten copy, use Compact or two columns.');for(const i of listReport.tooManyLines)warnings.push(`Item ${i+1} exceeds three lines.`)}
- if(state.template==='curated-pick'){const count=n=>n?Math.round(n.offsetHeight/parseFloat(getComputedStyle(n).lineHeight)):0;const title=count($('stage').querySelector('h2'));const lines=title+count($('stage').querySelector('[data-pick-hook]'))+count($('stage').querySelector('[data-pick-detail]'))+Math.max(count($('stage').querySelector('[data-pick-location]')),count($('stage').querySelector('[data-pick-price]')));if(lines>7||title>3)warnings.push(`Copy-heavy state (${lines} lines). Shorten copy for a clearer visual hierarchy.`);const copy=$('stage').querySelector('[data-pick-copy]');if(copy&&copy.scrollHeight>copy.clientHeight+1)warnings.push('Pick copy exceeds its safe area. Shorten the title or supporting copy.');if(!images.visual)warnings.push('No image supplied. Upload a photo or illustration for this treatment.');}
+ if(state.template==='curated-pick'){const count=n=>n?Math.round(n.offsetHeight/parseFloat(getComputedStyle(n).lineHeight)):0;const title=count($('stage').querySelector('h2'));const lines=title+count($('stage').querySelector('[data-pick-hook]'))+count($('stage').querySelector('[data-pick-detail]'))+(state.priceAlignment==='left'?count($('stage').querySelector('[data-pick-location]'))+count($('stage').querySelector('[data-pick-price]')):Math.max(count($('stage').querySelector('[data-pick-location]')),count($('stage').querySelector('[data-pick-price]'))));if(lines>7||title>3)warnings.push(`Copy-heavy state (${lines} lines). Shorten copy for a clearer visual hierarchy.`);const copy=$('stage').querySelector('[data-pick-copy]');if(copy&&copy.scrollHeight>copy.clientHeight+1)warnings.push('Pick copy exceeds its safe area. Shorten the title or supporting copy.');if(!images.visual)warnings.push('No image supplied. Upload a photo or illustration for this treatment.');}
  $('checks').replaceChildren(row('Source origin','Lovable ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.length?sizes.join(' / ')+'px':'Not rendered',sizes.length?'pass':'fail'),...(['editorial-cover','curated-pick'].includes(state.template)?[row('Local images',`${[...$('stage').querySelectorAll('img')].filter(n=>n.complete&&n.naturalWidth).length} / ${Object.values(images).filter(Boolean).length} loaded`)]:[]),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
  $('warnings').textContent=warnings.join(' ');$('warnings').hidden=!warnings.length;
 }
 function render(){
- for(const [key,o] of Object.entries(recipe.designOptions)){if(o.valuesBy&&$(key)){const allowed=o.valuesBy.values[state[o.valuesBy.control]]||o.values;if(!allowed.includes(state[key]))state[key]=o.defaultBy?.values[state[o.defaultBy.control]]||allowed[0];$(key).replaceChildren(...allowed.map(v=>{const option=document.createElement('option');option.value=v;option.textContent=o.valueLabels?.[v]||name(v);return option}));}if($(key))$(key).value=state[key];if(o.disabledWhen&&$(key))$(key).disabled=Object.entries(o.disabledWhen).some(([control,values])=>values.includes(state[control]))}
+ for(const [key,o] of Object.entries(recipe.designOptions)){if(o.valuesBy&&$(key)){const allowed=o.valuesBy.values[state[o.valuesBy.control]]||o.values;if(!allowed.includes(state[key]))state[key]=o.defaultBy?.values[state[o.defaultBy.control]]||allowed[0];$(key).replaceChildren(...allowed.map(v=>{const option=document.createElement('option');option.value=v;option.textContent=o.valueLabels?.[v]||name(v);return option}));}if($(key)){$(key).value=state[key];$(key).parentElement.hidden=o.visibleWhen?Object.entries(o.visibleWhen).some(([control,values])=>!values.includes(state[control])):false;}if(o.disabledWhen&&$(key))$(key).disabled=Object.entries(o.disabledWhen).some(([control,values])=>values.includes(state[control]))}
  for(const [key,o] of Object.entries(recipe.assetSlots||{}))if(o.disabledWhen&&$(key+'File'))$(key+'File').disabled=Object.entries(o.disabledWhen).some(([control,values])=>values.includes(state[control]));
  const current=++generation,f=fixtureSet.fixtures.find(x=>x.id===state.fixture);
  renderRestored($('stage'),state.template,f.content,state,images,r=>{listReport=r;refreshChecks()});renderRestored($('stageMini'),state.template,f.content,state,images);

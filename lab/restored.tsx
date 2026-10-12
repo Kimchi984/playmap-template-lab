@@ -49,6 +49,9 @@ export function makeSpec(id:string,c:any,d:any,images:any={}){
     slide.visualMode=d.visualMode||'photo';slide.photo={url:images.photo||c.photoUrl||null,focus:d.photoFocus||'center'};slide.graphic={assetId:hero,placement:d.graphicPlacement||'bleed-right'};
     if(['visual-above','visual-below'].includes(d.treatment)){
       slide.treatment=d.treatment;
+      slide.numberStyle=d.numberStyle||'pill';slide.numberColour=d.numberColour||'auto';
+      slide.priceAlignment=d.priceAlignment||(d.treatment==='visual-below'?'left':'right');
+      slide.overlapTreatment=d.overlapTreatment||'soft-fade';
       slide.visual={assetId:asset('visual',images.visual),fit:d.imageFit||(d.treatment==='visual-below'?'frame':'cover'),focus:d.imageFocus||'center',background:d.visualBackground||'seafoam',scale:d.visualScale||'medium'};
     }
     spec.recipe='curated-picks';spec.curated={slides:[slide]};

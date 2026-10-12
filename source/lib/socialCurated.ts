@@ -1,4 +1,4 @@
-import { clampOverlay, defaultTextStyle, SOCIAL_OVERLAY_LIMIT, type SocialBackgroundKey, type SocialGraphicOverlay, type SocialGraphicScale, type SocialPostSpec, type SocialTextBlock, type SocialWordmarkSetting } from "./socialRenderer";
+import { clampOverlay, defaultTextStyle, SOCIAL_OVERLAY_LIMIT, SOCIAL_PALETTE, type SocialPaletteKey, type SocialBackgroundKey, type SocialGraphicOverlay, type SocialGraphicScale, type SocialPostSpec, type SocialTextBlock, type SocialWordmarkSetting } from "./socialRenderer";
 import { defaultListSpec, type SocialListSpec } from "./socialList";
 
 /** Post = parent; slides[] is heterogeneous and each slide names its own template.
@@ -36,8 +36,29 @@ export type CuratedPickSlideSpec = {
   graphic: { assetId: string | null; placement: CuratedGraphicPlacement };
   /** Lab recipe v3: composition is independent of the uploaded medium. */
   treatment?: 'visual-above' | 'visual-below';
+  numberStyle?: 'pill' | 'plain' | 'outlined-circle';
+  numberColour?: 'auto' | SocialPaletteKey;
+  priceAlignment?: 'left' | 'right';
+  overlapTreatment?: 'soft-fade' | 'none';
   visual?: { assetId: string | null; fit: 'cover' | 'contain' | 'frame'; focus: CuratedPhotoFocus; background: SocialBackgroundKey; scale?: SocialGraphicScale };
 };
+
+/** Bounded number treatments share the same anchor and never alter copy geometry. */
+export function curatedNumberTreatment(style: CuratedPickSlideSpec['numberStyle'], colour: CuratedPickSlideSpec['numberColour'], background: SocialBackgroundKey, below: boolean) {
+  const foreground = SOCIAL_PALETTE[background].foreground === 'white' ? '#FFFFFF' : '#0F7C78';
+  const selected = colour && colour !== 'auto' ? SOCIAL_PALETTE[colour].value : style === 'pill' ? SOCIAL_PALETTE[background === 'pink' ? 'sunshine' : 'pink'].value : foreground;
+  const height = below ? 82 : 116;
+  if (style === 'plain') return {width:below?144:176,height,color:selected,backgroundColor:'transparent',borderRadius:0,border:'none'};
+  if (style === 'outlined-circle') return {width:height,height,color:selected,backgroundColor:SOCIAL_PALETTE[background].value,borderRadius:height/2,border:`5px solid ${selected}`};
+  const fillKey = colour && colour !== 'auto' ? colour : background === 'pink' ? 'sunshine' : 'pink';
+  return {width:below?144:176,height,color:SOCIAL_PALETTE[fillKey].foreground === 'white' ? '#FFFFFF' : '#0F7C78',backgroundColor:selected,borderRadius:height/2,border:'none'};
+}
+
+/** Native canvas coordinates: subdued artwork under actual copy, full opacity below. */
+export function curatedCopyMask(copyBottom: number) {
+  const edge = Math.max(0,Math.ceil(copyBottom)+16);
+  return `linear-gradient(to bottom, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) ${edge}px, #000 ${edge+130}px)`;
+}
 export type PostSlideSpec = EditorialCoverSlideSpec | CuratedPickSlideSpec | ListSlideSpec;
 export type PostSlideTemplate = PostSlideSpec["template"];
 export const POST_SLIDE_TEMPLATES: readonly PostSlideTemplate[] = ["editorial-cover", "curated-pick", "list"];

@@ -149,6 +149,26 @@
       "kind": "diagnostic",
       "contract": "Fit and visual density are separate: more than 7 copy lines or more than 3 title lines warns, while every field remains visible.",
       "implementation": "app.js"
+    },
+    "list-readable-third-v1": {
+      "kind": "typography",
+      "contract": "Third line uses stronger 600 weight, .95 opacity, and larger 34/32/28 base sizes by density. The same row markup drives measurement and visible fitting.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-number-options-v1": {
+      "kind": "layout",
+      "contract": "Filled pill, plain numeral or outlined circle share a stable anchor in both treatments. Approved colour or automatic contrast; number choice never changes copy geometry.",
+      "implementation": "source/lib/socialCurated.ts"
+    },
+    "curated-aligned-price-v1": {
+      "kind": "layout",
+      "contract": "Left price stacks below suburb at the headline left edge; right price reaches the text right edge. Reserve the actual chosen metadata geometry before title fitting.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-copy-protection-v1": {
+      "kind": "graphics",
+      "contract": "For lower composed frames, an explicit soft alpha mask reduces image opacity to .08 under actual measured copy, restoring full colour 130px below. Upload metrics and pixels never alter copy fitting.",
+      "implementation": "source/lib/socialCurated.ts"
     }
   }
 }
