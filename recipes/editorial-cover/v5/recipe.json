@@ -226,5 +226,6 @@
     "additional": "Optional graphic with four corner anchors, full-width overlay or original small accent. Independent of main graphic.",
     "copy": "Explicit image reservation or expanded copy. Adding/removing/uploading graphics never changes the selected copy area. Overlap warns.",
     "sourceFiles": "Unmodified. No automatic crop, flip, stretching or remote upload."
-  }
+  },
+  "labNote": "Liked Cover composition · expanded copy under review"
 }

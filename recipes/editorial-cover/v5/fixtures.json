@@ -95,7 +95,7 @@
       },
       "referenceSnapshot": null,
       "expectedRecipeVersion": 5,
-      "label": "Long headline · expanded copy"
+      "label": "Long headline · copy-space test"
     }
   ],
   "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."

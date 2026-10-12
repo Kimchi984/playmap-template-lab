@@ -212,5 +212,6 @@
     "visual": "One upload for any image. Fit and focus are explicit; no source-type detection or automatic layout switch. Original pixels unchanged.",
     "empty": "Image area remains empty and the Lab warns; no invented filler.",
     "wordmark": "Wordmark setting is honoured with every uploaded medium."
-  }
+  },
+  "labNote": "Visual above · first candidate for review"
 }
