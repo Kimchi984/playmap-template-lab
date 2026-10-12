@@ -226,7 +226,7 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
   const motifSlot = listFooterSlots(list.footer).bottomMotif;
   const motifAsset = findAsset(motifSlot, assets);
   const contentKey = JSON.stringify([list.items, columns, list.density, list.primaryWeight, list.numberStyle, list.headline, list.subheading, list.position, list.footer.cta.text, motifSlot, motifAsset?.url]);
-  const [fitState, setFitState] = useState({ key: contentKey, scale: 1 });
+  const [fitState, setFitState] = useState({ key: contentKey, scale: 1, headerBottom: -1 });
   const scale = fitState.key === contentKey ? fitState.scale : 1;
   const zone = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -252,8 +252,12 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
       setHeaderHeight(current=>current===budget?current:budget);
       const next = listVerticalLayout(headerBottom, listHeight, list.position, motifHeight,footerHeight);
       setPlacement((current) => current.top === next.top && current.availableHeight === next.availableHeight && current.safeBottom === next.safeBottom && current.overflow === next.overflow ? current : next);
+      if (fitState.key !== contentKey || fitState.headerBottom !== headerBottom) {
+        setFitState({key:contentKey,scale:1,headerBottom});
+        return;
+      }
       const overflow = next.overflow;
-      if (overflow && scale > LIST_MIN_FIT_SCALE + .001) { setFitState({ key: contentKey, scale: Math.max(LIST_MIN_FIT_SCALE, Math.round((scale - .05) * 100) / 100) }); return; }
+      if (overflow && scale > LIST_MIN_FIT_SCALE + .001) { setFitState({ key: contentKey, headerBottom, scale: Math.max(LIST_MIN_FIT_SCALE, Math.round((scale - .05) * 100) / 100) }); return; }
       const measurements = Array.from(node.querySelectorAll<HTMLElement>("[data-list-item]")).map((item) => ({
         index: Number(item.dataset.listItem),
         lines: Array.from(item.querySelectorAll<HTMLElement>("[data-list-line]")).reduce((sum, line) => sum + Math.max(1, Math.round(line.offsetHeight / parseFloat(getComputedStyle(line).lineHeight))), 0),
@@ -269,7 +273,7 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
     measure();
     void document.fonts.ready.then(measure);
     return () => { cancelled = true; observer.disconnect(); };
-  }, [contentKey, scale, list.position, motifAsset, motifSlot.scale]);
+  }, [contentKey, scale, fitState.headerBottom, list.position, motifAsset, motifSlot.scale]);
   const s = (value: number) => Math.round(value * scale);
   const bodyText = textColour(defaultTextStyle(), list.background);
   const width = columnWidth(columns);
@@ -357,7 +361,7 @@ function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPi
       {detail ? <p data-pick-detail style={{ marginTop: 14, ...detailFit.typography, fontSize: detailFit.fit.fontSize, opacity: .84 }}>{detail}</p> : null}
       {location || price ? <div data-pick-metadata className="flex items-start" style={{marginTop:28,gap:24}}>
         {location ? <p data-pick-location style={{width:locationWidth,...locationFit.typography,fontSize:locationFit.fit.fontSize}}>{location}</p> : null}
-        {price ? <div style={{width:360,padding:'12px 24px',borderRadius:12,backgroundColor:fg,color:SOCIAL_PALETTE[slide.background].value}}><p data-pick-price style={{...priceFit.typography,fontSize:priceFit.fit.fontSize}}>{price}</p></div> : null}
+        {price ? <div style={{width:'max-content',maxWidth:360,padding:'12px 24px',borderRadius:12,backgroundColor:fg,color:SOCIAL_PALETTE[slide.background].value}}><p data-pick-price style={{...priceFit.typography,fontSize:priceFit.fit.fontSize,maxWidth:312}}>{price}</p></div> : null}
       </div> : null}
     </div>
   </div>;
