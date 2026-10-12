@@ -119,3 +119,41 @@ stronger List hierarchy. Treat these visual changes as candidates until that rev
 keep the first Pick option and liked Cover default. Dense copy, arbitrary frame/image
 collisions and lower-frame full-width overlap remain content-specific diagnostics.
 Production/Lovable unchanged; cumulative Lovable renderer spend remains 117.9 credits.
+
+
+## Readability/options refinement — 13 October 2026 (Sydney)
+
+Alina says the List is great and likes the second Pick composition. This qualifies the
+existing hierarchy/composition, not blanket acceptance for arbitrary imagery or dense copy.
+Current shared versions are List v5 and Pick v5; Cover v5/Big Type v2/Split v2 unchanged.
+
+List third-line base sizes rise from 28/25/23 to 34/32/28 across spacious/standard/compact,
+with 600 weight and .95 opacity (previously 400/.7). Real reusable row measurement remains
+the source of fitting; no per-item patch or truncation.
+
+Pick v5 exposes filled pill, plain numeral and outlined circle in both treatments, with
+approved palette colour selection and automatic contrast defaults. Price can stack at the
+headline left edge or align its tag to the text right edge; lower treatment defaults left,
+upper right. Metadata reservation follows the selected geometry before title fitting.
+
+For lower composed frames, Soft fade (default) masks artwork at .08 opacity through the
+actual measured copy bottom +16px, restoring full colour over the next 130px. No pixels are
+rewritten and no asset measurements change headline/copy allocation. Full colour remains
+an explicit option. Image width is shown only in the lower treatment, with a short helper;
+upper treatment no longer shows the confusing inactive width control.
+
+Published renderer cbdac7358e25003a1b24cf6cf13220f8c88532dc; Pages workflow completed successfully.
+Build, 11 focused checks, JavaScript syntax and diff checks pass. Live visual verification
+was attempted but is blocked: browser getAXState timed out, documentation recovery timed
+out, and a session reset also timed out. Those are browser-service failures, not evidence
+of a site bot block or proof of rendered correctness. Do not claim v5 desktop/phone/image
+checks are complete or reuse v4 screenshots as v5 evidence.
+
+New rules: list-readable-third-v1, curated-number-options-v1, curated-aligned-price-v1,
+curated-copy-protection-v1. Representative/stress fixtures copied with v5 expectations;
+allowed choices/visibility/help stay in the shared manifest. No new reference snapshots
+are frozen. Next: verify v5 on the hosted Lab when browser access recovers, particularly
+third-line fit in 1/2-column and 13-item cases, image width interaction, fade with overlapping
+illustrations, and both price edges/number treatments. Alina's original playground file
+23557.png is not locally available; do not claim exact-image verification from screenshots.
+No Lovable calls/changes; cumulative renderer spend stays 117.9 credits.

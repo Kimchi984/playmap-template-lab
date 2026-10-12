@@ -40,3 +40,10 @@ hiding rows. Curated Pick v4 retains the first panel treatment and adds a compos
 frame without source-type branching. Larger location/price typography and density warnings
 are shared. Grid note CSS is scoped outside the artwork to preserve composition parity.
 These are Lab candidates, not production changes or frozen visual acceptance.
+
+
+List v5 keeps the liked hierarchy and raises third-line legibility. Pick v5 adds bounded
+number styles/colour, explicit price-edge alignment and an optional image-only alpha fade
+under actual measured copy in lower frames. Manifest visibility hides lower-only width
+controls in the upper treatment. Browser-service verification for these refinements is
+blocked as documented in review/STATUS.md; source/build checks are not visual acceptance.
