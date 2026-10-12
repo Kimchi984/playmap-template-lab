@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "big-type",
+  "templateVersion": 1,
+  "status": "lab",
+  "label": "Big Type",
+  "job": "One dominant editorial statement with restrained support and optional graphic accents.",
+  "dominantVisualIdea": "Hero type is the composition; graphics support the headline rather than occupying a separate card.",
+  "contentSlots": {
+    "headline": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 140
+    },
+    "supporting": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 90
+    },
+    "cta": {
+      "type": "string",
+      "required": false,
+      "role": "cta",
+      "maxLength": 90
+    }
+  },
+  "designOptions": {
+    "artDirection": {
+      "type": "enum",
+      "values": [
+        "clean",
+        "playful",
+        "poster"
+      ],
+      "default": "playful"
+    },
+    "displayFont": {
+      "type": "enum",
+      "values": [
+        "dm-sans",
+        "gabarito"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    }
+  },
+  "artDirectionModes": [
+    "clean",
+    "playful",
+    "poster"
+  ],
+  "rules": {
+    "headlineFitting": "headline-fit-monotonic-v1",
+    "measurement": "real-font-measurement-v1",
+    "artDirection": "playmap-art-direction-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "grid-size-legibility"
+  ]
+}

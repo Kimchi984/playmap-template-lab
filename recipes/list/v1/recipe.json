@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "list",
+  "templateVersion": 1,
+  "status": "lab",
+  "label": "List",
+  "job": "Turn a curated set of family activities/events into a highly scannable social post.",
+  "dominantVisualIdea": "Strong editorial headline followed by a rhythmic numbered list that remains useful at feed size.",
+  "contentSlots": {
+    "headline": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 80
+    },
+    "subheading": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 50
+    },
+    "items": {
+      "type": "object[]",
+      "required": true,
+      "role": "content"
+    },
+    "cta": {
+      "type": "string",
+      "required": false,
+      "role": "cta",
+      "maxLength": 90
+    }
+  },
+  "designOptions": {
+    "artDirection": {
+      "type": "enum",
+      "values": [
+        "clean",
+        "playful",
+        "poster"
+      ],
+      "default": "playful"
+    },
+    "displayFont": {
+      "type": "enum",
+      "values": [
+        "dm-sans",
+        "gabarito"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    },
+    "columns": {
+      "type": "enum",
+      "values": [
+        "auto",
+        "1",
+        "2"
+      ],
+      "default": "auto"
+    },
+    "density": {
+      "type": "enum",
+      "values": [
+        "spacious",
+        "standard",
+        "compact"
+      ],
+      "default": "standard"
+    }
+  },
+  "artDirectionModes": [
+    "clean",
+    "playful",
+    "poster"
+  ],
+  "rules": {
+    "headlineFitting": "headline-fit-monotonic-v1",
+    "listFitting": "list-content-fit-v1",
+    "verticalPlacement": "list-header-connected-placement-v1",
+    "measurement": "real-font-measurement-v1",
+    "artDirection": "playmap-art-direction-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "grid-size-legibility"
+  ]
+}

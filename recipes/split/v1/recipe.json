@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "split",
+  "templateVersion": 1,
+  "status": "lab",
+  "label": "Split",
+  "job": "Two equal-status ideas or contrasts that read as one social composition.",
+  "dominantVisualIdea": "Two panels with equal typographic authority and one shared rhythm.",
+  "contentSlots": {
+    "topHeadline": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 90
+    },
+    "topSupporting": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 80
+    },
+    "bottomHeadline": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 90
+    },
+    "bottomSupporting": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 80
+    },
+    "cta": {
+      "type": "string",
+      "required": false,
+      "role": "cta",
+      "maxLength": 90
+    }
+  },
+  "designOptions": {
+    "artDirection": {
+      "type": "enum",
+      "values": [
+        "clean",
+        "playful",
+        "poster"
+      ],
+      "default": "playful"
+    },
+    "displayFont": {
+      "type": "enum",
+      "values": [
+        "dm-sans",
+        "gabarito"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    }
+  },
+  "artDirectionModes": [
+    "clean",
+    "playful",
+    "poster"
+  ],
+  "rules": {
+    "headlineFitting": "headline-fit-monotonic-v1",
+    "sharedHeadline": "split-shared-headline-v1",
+    "measurement": "real-font-measurement-v1",
+    "artDirection": "playmap-art-direction-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "grid-size-legibility"
+  ]
+}

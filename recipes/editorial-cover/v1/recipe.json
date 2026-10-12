@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "editorial-cover",
+  "templateVersion": 1,
+  "status": "lab",
+  "label": "Editorial Cover",
+  "job": "Open a multi-slide post with a high-energy editorial hook and strong visual premise.",
+  "dominantVisualIdea": "Headline and structural artwork behave as one cover composition rather than text above an image slot.",
+  "contentSlots": {
+    "kicker": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 70
+    },
+    "headline": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 120
+    },
+    "supporting": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 90
+    }
+  },
+  "designOptions": {
+    "artDirection": {
+      "type": "enum",
+      "values": [
+        "clean",
+        "playful",
+        "poster"
+      ],
+      "default": "playful"
+    },
+    "displayFont": {
+      "type": "enum",
+      "values": [
+        "dm-sans",
+        "gabarito"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    }
+  },
+  "artDirectionModes": [
+    "clean",
+    "playful",
+    "poster"
+  ],
+  "rules": {
+    "headlineFitting": "headline-fit-monotonic-v1",
+    "measurement": "real-font-measurement-v1",
+    "artDirection": "playmap-art-direction-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "grid-size-legibility"
+  ]
+}

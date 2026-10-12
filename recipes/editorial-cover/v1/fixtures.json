@@ -1,0 +1,36 @@
+{
+  "templateId": "editorial-cover",
+  "templateVersion": 1,
+  "fixtures": [
+    {
+      "id": "short",
+      "content": {
+        "kicker": "5 FAMILY ADVENTURES",
+        "headline": "Spring is calling",
+        "supporting": "Five easy ideas for getting outside."
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "long",
+      "content": {
+        "kicker": "5 FAMILY ADVENTURES FOR SPRING",
+        "headline": "Melbourne’s best picks for little explorers",
+        "supporting": "Saved by parents, tested by kids"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    }
+  ]
+}

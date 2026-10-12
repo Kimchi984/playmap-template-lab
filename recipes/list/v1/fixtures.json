@@ -1,0 +1,182 @@
+{
+  "templateId": "list",
+  "templateVersion": 1,
+  "fixtures": [
+    {
+      "id": "six",
+      "content": {
+        "headline": "6 things to do with kids this weekend",
+        "subheading": "Melbourne · 17–18 October",
+        "items": [
+          {
+            "primary": "Lantern Parade",
+            "secondary": "Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Teddy Bears’ Picnic",
+            "secondary": "Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Splash Park Opening",
+            "secondary": "Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Kids’ Bike Day",
+            "secondary": "Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Dino Discovery Trail",
+            "secondary": "Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Pumpkin Patch Fun",
+            "secondary": "Melbourne venue",
+            "third": "Free"
+          }
+        ],
+        "cta": "Find these + more at theplaymap.com.au"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "long-headline",
+      "content": {
+        "headline": "What’s actually worth doing with the kids around Melbourne this weekend?",
+        "subheading": "Melbourne · This weekend",
+        "items": [
+          {
+            "primary": "Family activity 1",
+            "secondary": "A Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Family activity 2",
+            "secondary": "A Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Family activity 3",
+            "secondary": "A Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Family activity 4",
+            "secondary": "A Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Family activity 5",
+            "secondary": "A Melbourne venue",
+            "third": "Free"
+          },
+          {
+            "primary": "Family activity 6",
+            "secondary": "A Melbourne venue",
+            "third": "Free"
+          }
+        ],
+        "cta": "Find more on The Playmap"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "thirteen",
+      "content": {
+        "headline": "13 family plans, sorted.",
+        "subheading": "Melbourne",
+        "items": [
+          {
+            "primary": "Pick 1",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 2",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 3",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 4",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 5",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 6",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 7",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 8",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 9",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 10",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 11",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 12",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          },
+          {
+            "primary": "Pick 13",
+            "secondary": "Venue or suburb",
+            "third": "Details"
+          }
+        ],
+        "cta": "Save this for later"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    }
+  ]
+}

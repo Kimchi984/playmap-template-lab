@@ -1,0 +1,36 @@
+{
+  "templateId": "big-type",
+  "templateVersion": 1,
+  "fixtures": [
+    {
+      "id": "short",
+      "content": {
+        "headline": "Go somewhere new",
+        "supporting": "Ideas made for family days out.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "long",
+      "content": {
+        "headline": "Need somewhere genuinely good to take the kids this weekend?",
+        "supporting": "Melbourne ideas that make leaving the house worth it.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    }
+  ]
+}

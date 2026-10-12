@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "curated-pick",
+  "templateVersion": 1,
+  "status": "lab",
+  "label": "Curated Pick",
+  "job": "Give one recommended place/event enough visual and practical information to stand alone as a slide.",
+  "dominantVisualIdea": "A destination visual plus an unmistakable title, followed by concise parent-facing context and price/location metadata.",
+  "contentSlots": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 100
+    },
+    "hook": {
+      "type": "string",
+      "required": true,
+      "role": "support",
+      "maxLength": 120
+    },
+    "detail": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 120
+    },
+    "location": {
+      "type": "string",
+      "required": false,
+      "role": "metadata",
+      "maxLength": 40
+    },
+    "price": {
+      "type": "string",
+      "required": true,
+      "role": "metadata",
+      "maxLength": 24
+    }
+  },
+  "designOptions": {
+    "artDirection": {
+      "type": "enum",
+      "values": [
+        "clean",
+        "playful",
+        "poster"
+      ],
+      "default": "playful"
+    },
+    "displayFont": {
+      "type": "enum",
+      "values": [
+        "dm-sans",
+        "gabarito"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    }
+  },
+  "artDirectionModes": [
+    "clean",
+    "playful",
+    "poster"
+  ],
+  "rules": {
+    "headlineFitting": "headline-fit-monotonic-v1",
+    "measurement": "real-font-measurement-v1",
+    "artDirection": "playmap-art-direction-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "grid-size-legibility"
+  ]
+}

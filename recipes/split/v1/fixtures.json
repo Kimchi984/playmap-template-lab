@@ -1,0 +1,57 @@
+{
+  "templateId": "split",
+  "templateVersion": 1,
+  "fixtures": [
+    {
+      "id": "balanced",
+      "content": {
+        "topHeadline": "Go somewhere new",
+        "topSupporting": "Ideas made for family days out.",
+        "bottomHeadline": "Play more often",
+        "bottomSupporting": "Melbourne discoveries, all in one place.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "top-long",
+      "content": {
+        "topHeadline": "Find a brilliant new place to explore",
+        "topSupporting": "Ideas made for family days out.",
+        "bottomHeadline": "Play more often",
+        "bottomSupporting": "Melbourne discoveries, all in one place.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    },
+    {
+      "id": "both-long",
+      "content": {
+        "topHeadline": "Find somewhere new with the kids",
+        "topSupporting": "Ideas made for family days out.",
+        "bottomHeadline": "Make the most of a warm Melbourne afternoon",
+        "bottomSupporting": "Melbourne discoveries, all in one place.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "artDirection": "playful",
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left"
+      },
+      "referenceSnapshot": null
+    }
+  ]
+}
