@@ -119,6 +119,36 @@
       "kind": "fitting",
       "contract": "Measure hook/detail/complete metadata with their visible typography. Reserve their actual height before fitting the title. Retain every field; warn on minimum-size or whole-copy overflow.",
       "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "list-headline-budget-v1": {
+      "kind": "fitting",
+      "contract": "Measure the same list rows at the minimum allowed scale with loaded fonts. Allocate headline height from real remaining geometry; this capacity is shared across size intents. Items follow measured header height.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "list-exclusive-footer-v1": {
+      "kind": "layout",
+      "contract": "The chosen footer is CTA, graphic or none. An inactive uploaded graphic cannot reserve space or overlap a CTA. If minimum-scale rows do not fit, report overflow and do not silently clip them at the list zone.",
+      "implementation": "lab/restored.tsx"
+    },
+    "list-strong-type-v1": {
+      "kind": "typography",
+      "contract": "Item weights 700/900; number weight 900 with stronger numerals. Plain numbers use the foreground on light palettes for legibility.",
+      "implementation": "source/lib/socialList.ts"
+    },
+    "curated-two-compositions-v1": {
+      "kind": "layout",
+      "contract": "Visual-above panel remains available; visual-below has dominant upper copy and bottom-anchored composed artwork. Neither medium nor load state selects layout. Frame fitting preserves natural aspect ratio/transparency.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-strong-metadata-v1": {
+      "kind": "typography",
+      "contract": "Measure the suburb and price independently at matching 42px target support typography; use a high-contrast price tag. Reserve actual metadata-row height before title fitting.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-copy-density-v1": {
+      "kind": "diagnostic",
+      "contract": "Fit and visual density are separate: more than 7 copy lines or more than 3 title lines warns, while every field remains visible.",
+      "implementation": "app.js"
     }
   }
 }

@@ -60,3 +60,18 @@ test('Visual-above uses one asset contract for any image and preserves all seman
   const slide=spec.curated.slides[0];assert.equal(slide.treatment,'visual-above');assert.equal(slide.visual.assetId,'lab-visual');assert.equal(slide.visual.fit,fit);assert.equal(slide.visual.focus,'bottom');assert.equal(assets.length,1);assert.equal(assets[0].url,url);assert.equal(slide.detail,content.detail);assert.equal(slide.price,content.price);assert.equal(spec.wordmark,'show');
  }
 });
+
+test('List footer choices keep an uploaded graphic from reserving space under a CTA',()=>{
+ for(const mode of ['plain','search-pill','none','graphic']){
+  const {spec,assets}=makeSpec('list',{headline:'Plans',items:[],cta:'Find more'},{footerMode:mode},{motif:'blob:footer'});
+  assert.equal(spec.list.footer.bottomMotif.assetId,mode==='graphic'?'lab-motif':null);
+  assert.equal(spec.list.footer.cta.text,['none','graphic'].includes(mode)?'':'Find more');
+  assert.equal(assets.length,mode==='graphic'?1:0);
+ }
+});
+test('Both Pick treatments share one image contract; lower frame keeps the composed source',()=>{
+ for(const treatment of ['visual-above','visual-below']){
+  const {spec,assets}=makeSpec('curated-pick',{name:'Plans',hook:'Go outside',location:'Melbourne',price:'Free'},{treatment,imageFit:treatment==='visual-below'?'frame':'contain',visualScale:'large'},{visual:'blob:illustration'});
+  assert.equal(spec.curated.slides[0].treatment,treatment);assert.equal(spec.curated.slides[0].visual.scale,'large');assert.equal(assets.length,1);assert.equal(assets[0].url,'blob:illustration');
+ }
+});

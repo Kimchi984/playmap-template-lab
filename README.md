@@ -50,3 +50,14 @@ before title fitting. Every field remains present; whole-copy overflow warns. Le
 rendering remains available in the source for older inputs; it is not the active design.
 `review/phone.html` runs the same hosted Lab in a real 390px iframe viewport for focused QA.
 These changes are candidates for review, not accepted reference snapshots.
+
+## Latest review pass
+
+List v4 measures a hidden instance of the same rows at the 0.8 scale floor before allocating
+headline space. Item/number weights are strengthened. CTA and graphic footer are exclusive;
+No footer reclaims its space. Overflow is reported instead of silently clipping at the list
+zone. Plain numerals use the foreground on light backgrounds to avoid faint palette colours.
+Curated Pick v4 retains the upper-panel option and adds a lower composed frame. The second
+option keeps the source aspect ratio/transparency and has bounded canvas widths. Stronger
+suburb and price typography is measured separately; fit warnings and density guidance are
+distinct. Nothing is omitted automatically to make a stress fixture look acceptable.

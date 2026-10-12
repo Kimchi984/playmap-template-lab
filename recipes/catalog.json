@@ -20,9 +20,9 @@
     {
       "id": "list",
       "label": "List",
-      "version": 3,
-      "path": "recipes/list/v3/recipe.json",
-      "fixtures": "recipes/list/v3/fixtures.json",
+      "version": 4,
+      "path": "recipes/list/v4/recipe.json",
+      "fixtures": "recipes/list/v4/fixtures.json",
       "group": "Single artwork"
     },
     {
@@ -36,9 +36,9 @@
     {
       "id": "curated-pick",
       "label": "Curated Pick",
-      "version": 3,
-      "path": "recipes/curated-pick/v3/recipe.json",
-      "fixtures": "recipes/curated-pick/v3/fixtures.json",
+      "version": 4,
+      "path": "recipes/curated-pick/v4/recipe.json",
+      "fixtures": "recipes/curated-pick/v4/fixtures.json",
       "group": "Mixed post slides"
     }
   ]

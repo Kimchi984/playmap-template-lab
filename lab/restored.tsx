@@ -31,8 +31,8 @@ export function makeSpec(id:string,c:any,d:any,images:any={}){
     list.columns=d.columns==='auto'?'auto':Number(d.columns||1) as 1|2;
     list.numberStyle=d.numberStyle||'filled-circle';list.numberColour=d.numberColour==='cycle'?{mode:'cycle'}:{mode:'single',colour:d.numberColour||'sunshine'};
     list.density=d.density||'standard';list.position=d.position||'auto';list.primaryWeight=d.primaryWeight||'bold';
-    list.footer.cta=support(d.footerMode==='none'?'':c.cta);list.footer.variant=d.footerMode==='search-pill'?'search-pill':'plain';
-    list.footer.bottomMotif={assetId:asset('motif',images.motif,'bottom_motif'),scale:d.graphicScale||'medium'};spec.list=list;
+    list.footer.cta=support(['none','graphic'].includes(d.footerMode)?'':c.cta);list.footer.variant=d.footerMode==='search-pill'?'search-pill':'plain';
+    list.footer.bottomMotif={assetId:d.footerMode==='graphic'?asset('motif',images.motif,'bottom_motif'):null,scale:d.graphicScale||'medium'};spec.list=list;
   }
   if(id==='editorial-cover'){
     const slide=createEditorialCover('lab-cover');slide.background=d.background||'sunshine';slide.kicker=support(c.kicker);slide.headline=text(c.headline,d);slide.supporting=support(c.supporting);
@@ -47,9 +47,9 @@ export function makeSpec(id:string,c:any,d:any,images:any={}){
   if(id==='curated-pick'){
     const slide=createCuratedPick('lab-pick');slide.background=d.background||'warmLight';slide.name=text(c.name,d);slide.hook=support(c.hook);slide.detail=c.detail||'';slide.location=c.location||'';slide.price=c.price||'';
     slide.visualMode=d.visualMode||'photo';slide.photo={url:images.photo||c.photoUrl||null,focus:d.photoFocus||'center'};slide.graphic={assetId:hero,placement:d.graphicPlacement||'bleed-right'};
-    if(d.treatment==='visual-above'){
-      slide.treatment='visual-above';
-      slide.visual={assetId:asset('visual',images.visual),fit:d.imageFit||'cover',focus:d.imageFocus||'center',background:d.visualBackground||'seafoam'};
+    if(['visual-above','visual-below'].includes(d.treatment)){
+      slide.treatment=d.treatment;
+      slide.visual={assetId:asset('visual',images.visual),fit:d.imageFit||(d.treatment==='visual-below'?'frame':'cover'),focus:d.imageFocus||'center',background:d.visualBackground||'seafoam',scale:d.visualScale||'medium'};
     }
     spec.recipe='curated-picks';spec.curated={slides:[slide]};
   }

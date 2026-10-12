@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "curated-pick",
+  "templateVersion": 4,
+  "status": "lab",
+  "label": "Curated Pick",
+  "job": "Give one recommended place/event enough visual and practical information to stand alone as a slide.",
+  "dominantVisualIdea": "Retain the visual-above panel option; add type above a bottom-anchored composed frame. Media fit is independent of layout. Location and price have clear visual weight.",
+  "contentSlots": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 100
+    },
+    "hook": {
+      "type": "string",
+      "required": true,
+      "role": "support",
+      "maxLength": 120
+    },
+    "detail": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 120
+    },
+    "location": {
+      "type": "string",
+      "required": false,
+      "role": "metadata",
+      "maxLength": 40
+    },
+    "price": {
+      "type": "string",
+      "required": true,
+      "role": "metadata",
+      "maxLength": 24
+    }
+  },
+  "designOptions": {
+    "treatment": {
+      "type": "enum",
+      "label": "Composition",
+      "values": [
+        "visual-above",
+        "visual-below"
+      ],
+      "valueLabels": {
+        "visual-above": "Visual above · panel",
+        "visual-below": "Visual below · composed frame"
+      },
+      "default": "visual-above"
+    },
+    "displayFont": {
+      "type": "enum",
+      "label": "Headline font",
+      "values": [
+        "gabarito",
+        "dm-sans"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "label": "Headline size",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "label": "Headline alignment",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    },
+    "accentEnding": {
+      "type": "enum",
+      "label": "Headline emphasis",
+      "values": [
+        "none",
+        "last-word"
+      ],
+      "default": "none"
+    },
+    "accentColour": {
+      "type": "enum",
+      "label": "Emphasis colour",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue",
+        "white"
+      ],
+      "default": "sunshine"
+    },
+    "wordmark": {
+      "type": "enum",
+      "label": "Wordmark",
+      "values": [
+        "show",
+        "hide"
+      ],
+      "default": "show"
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue"
+      ],
+      "default": "sunshine"
+    },
+    "imageFit": {
+      "type": "enum",
+      "label": "Image fit",
+      "values": [
+        "cover",
+        "contain",
+        "frame"
+      ],
+      "valueLabels": {
+        "cover": "Fill area · crop to fit",
+        "contain": "Fit whole image · preserve padding",
+        "frame": "Composed frame · natural aspect ratio"
+      },
+      "default": "cover",
+      "defaultBy": {
+        "control": "treatment",
+        "values": {
+          "visual-above": "cover",
+          "visual-below": "frame"
+        }
+      },
+      "valuesBy": {
+        "control": "treatment",
+        "values": {
+          "visual-above": [
+            "cover",
+            "contain"
+          ],
+          "visual-below": [
+            "frame",
+            "cover",
+            "contain"
+          ]
+        }
+      }
+    },
+    "imageFocus": {
+      "type": "enum",
+      "label": "Image focus",
+      "values": [
+        "top",
+        "center",
+        "bottom"
+      ],
+      "valueLabels": {
+        "top": "Top",
+        "center": "Centre",
+        "bottom": "Bottom"
+      },
+      "default": "center",
+      "disabledWhen": {
+        "imageFit": [
+          "frame"
+        ]
+      }
+    },
+    "visualBackground": {
+      "type": "enum",
+      "label": "Image area background",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue"
+      ],
+      "default": "seafoam",
+      "disabledWhen": {
+        "imageFit": [
+          "frame"
+        ]
+      }
+    },
+    "visualScale": {
+      "type": "enum",
+      "label": "Lower visual width",
+      "values": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "default": "medium",
+      "disabledWhen": {
+        "treatment": [
+          "visual-above"
+        ]
+      }
+    }
+  },
+  "artDirectionModes": [],
+  "rules": {
+    "layout": "curated-two-compositions-v1",
+    "measurement": "restored-real-font-measurement-v1",
+    "headlineFitting": "restored-monotonic-headline-v1",
+    "contentFitting": "curated-complete-copy-fit-v1",
+    "metadata": "curated-strong-metadata-v1",
+    "copyDensity": "curated-copy-density-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "media-independent-composition",
+    "image-fit-does-not-move-copy",
+    "all-fields-preserved-or-overflow-reported"
+  ],
+  "sourceBaseline": {
+    "project": "The Playmap",
+    "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+    "component": "source/components/admin/SocialArtwork.tsx"
+  },
+  "assetSlots": {
+    "visual": {
+      "role": "visual",
+      "optional": false,
+      "scope": "local-preview",
+      "label": "Image · photo or illustration"
+    }
+  },
+  "acceptance": {
+    "visuals": "Alina retained the first treatment as an option, not a universal Playmap baseline. Second treatment and metadata emphasis remain candidates.",
+    "noNewModes": true
+  },
+  "graphicCapabilities": {
+    "visual": "One upload for any image. Fit and focus are explicit; no source-type detection or automatic layout switch. Original pixels unchanged.",
+    "empty": "Image area remains empty and the Lab warns; no invented filler.",
+    "wordmark": "Wordmark setting is honoured with every uploaded medium.",
+    "frame": "Visual below defaults to a bottom-anchored 720/900/1080px-wide original frame at natural height. Transparency/padding stay intact. No photo-panel clipping. Overlap warns without resizing copy."
+  },
+  "labNote": "Two Pick treatments · stronger suburb/price"
+}

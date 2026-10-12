@@ -168,15 +168,15 @@ function SplitArtwork({ spec, assets }: { spec: SocialPostSpec; assets: SocialGr
   </div>;
 }
 
-function ListHeader({ list }: { list: SocialListSpec }) {
+function ListHeader({ list, maxHeight }: { list: SocialListSpec; maxHeight: number }) {
   const headline = normaliseSocialText(list.headline.text, "Things to do this weekend");
   const sub = normaliseSocialText(list.subheading.text);
   const width = SOCIAL_ARTWORK_WIDTH - LIST_PADDING_X * 2;
-  const fit = useHeadlineFit(headline, width, sub ? 148 : 196, 40, DISPLAY_CEILINGS.list, displayTypography(list.headline.style.size).lineHeight, list.headline.style.size, true);
+  const fit = useHeadlineFit(headline, width, maxHeight, 40, DISPLAY_CEILINGS.list, displayTypography(list.headline.style.size).lineHeight, list.headline.style.size, true);
   return <div data-list-header className="absolute inset-x-0 top-0 z-20" style={{ paddingLeft: LIST_PADDING_X, paddingRight: LIST_PADDING_X, paddingTop: 150 }}>
     <HiddenMeasure measureRef={fit.measureRef} typography={fit.typography} text={headline} width={width} />
     <h2 data-list-header-copy data-nudge={TEXT_NUDGE_PX[list.headline.style.nudge]} className="social-artwork-headline" style={{ textAlign: socialTextAlign(list.headline.style), color: textColour(list.headline.style, list.background), fontSize: fit.fit.fontSize, ...displayTypography(list.headline.style.size), transform: `translateY(${TEXT_NUDGE_PX[list.headline.style.nudge]}px)` }}><SocialDisplayText text={headline} colour={textColour(list.headline.style, list.background)} style={list.headline.style} /></h2>
-    {sub ? <p data-list-header-copy data-nudge={TEXT_NUDGE_PX[list.subheading.style.nudge]} className="mt-[16px] whitespace-nowrap font-medium leading-[1.15]" style={textStyle(list.subheading, list.background, 34)}><SocialDisplayText text={sub} colour={textColour(list.subheading.style, list.background)} style={list.subheading.style} /></p> : null}
+    {sub ? <p data-list-header-copy data-list-subheading data-nudge={TEXT_NUDGE_PX[list.subheading.style.nudge]} className="mt-[16px] whitespace-nowrap font-medium leading-[1.15]" style={textStyle(list.subheading, list.background, 34)}><SocialDisplayText text={sub} colour={textColour(list.subheading.style, list.background)} style={list.subheading.style} /></p> : null}
   </div>;
 }
 
@@ -200,6 +200,24 @@ function ListFooter({ list, assets }: { list: SocialListSpec; assets: SocialGrap
   </>;
 }
 
+function ListRows({list, groups, metrics, scale, minimum=false}: {list:SocialListSpec;groups:{item:SocialListSpec['items'][number];index:number}[][];metrics:ReturnType<typeof listMetrics>;scale:number;minimum?:boolean}) {
+  const s=(value:number)=>Math.round(value*scale),columns=groups.length as 1|2,width=columnWidth(columns),bodyText=textColour(defaultTextStyle(),list.background);
+  return <>{groups.map((group, column) => <div key={column} data-list-column={minimum ? undefined : ""} data-list-min-column={minimum ? "" : undefined} className="flex flex-none flex-col" style={{ width, gap: s(metrics.gap) }}>
+        {group.map(({ item, index }) => {
+          let treatment = listNumberTreatment(list.numberStyle, listNumberColour(list.numberColour, index, list.background), bodyText, s(metrics.number));
+          if(list.numberStyle === 'plain' && list.background !== 'teal' && list.background !== 'blueTeal')treatment={...treatment,color:bodyText};
+          return <div key={item.id} data-list-item={index} className="flex items-start" style={{ gap: s(24) }}>
+            <div className="flex flex-none items-center justify-center font-bold leading-none" style={treatment}>{index + 1}</div>
+            <div className="min-w-0 flex-1" style={{ color: bodyText }}>
+              <p data-list-line className="break-words" style={{ fontSize: s(metrics.primary), lineHeight: 1.08, fontWeight: listPrimaryFontWeight(list.primaryWeight) }}>{normaliseSocialText(item.primary, `Item ${index + 1}`)}</p>
+              {normaliseSocialText(item.secondary) ? <p data-list-line className="mt-[4px] break-words font-medium" style={{ fontSize: s(metrics.secondary), lineHeight: 1.15, opacity: .84 }}>{normaliseSocialText(item.secondary)}</p> : null}
+              {normaliseSocialText(item.third) ? <p data-list-line className="mt-[2px] break-words font-normal" style={{ fontSize: s(metrics.third), lineHeight: 1.15, opacity: .7 }}>{normaliseSocialText(item.third)}</p> : null}
+            </div>
+          </div>;
+        })}
+      </div>)}</>;
+}
+
 function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<SocialPostSpec, "wordmark" | "list">; list?: SocialListSpec; assets: SocialGraphicAsset[]; onListFit?: (report: ListFitReport) => void }) {
   const list = slideList ?? spec.list ?? defaultListSpec();
   const columns = resolveListColumns(list.columns, list.items.length);
@@ -207,11 +225,12 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
   const metrics = listMetrics(list.density, list.items.length, columns);
   const motifSlot = listFooterSlots(list.footer).bottomMotif;
   const motifAsset = findAsset(motifSlot, assets);
-  const contentKey = JSON.stringify([list.items, columns, list.density, list.primaryWeight, list.numberStyle, list.headline, list.subheading, list.position, motifSlot, motifAsset?.url]);
+  const contentKey = JSON.stringify([list.items, columns, list.density, list.primaryWeight, list.numberStyle, list.headline, list.subheading, list.position, list.footer.cta.text, motifSlot, motifAsset?.url]);
   const [fitState, setFitState] = useState({ key: contentKey, scale: 1 });
   const scale = fitState.key === contentKey ? fitState.scale : 1;
   const zone = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(264);
   const [placement, setPlacement] = useState(() => listVerticalLayout(150, 0));
   const lastReport = useRef<ListFitReport | null>(null);
   const report = useRef(onListFit); report.current = onListFit;
@@ -225,7 +244,13 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
       const listHeight = Math.max(0, ...Array.from(node.querySelectorAll<HTMLElement>("[data-list-column]")).map((column) => column.offsetHeight));
       const motif = root.querySelector<HTMLElement>("[data-list-motif]");
       const motifHeight = motifAsset ? (motif?.offsetHeight ?? BOTTOM_MOTIF_HEIGHTS[motifSlot.scale]) : 0;
-      const next = listVerticalLayout(headerBottom, listHeight, list.position, motifHeight);
+      const footerHeight = normaliseSocialText(list.footer.cta.text) ? LIST_FOOTER_HEIGHT : motifAsset ? 0 : 60;
+      const safeBottom = listVerticalLayout(150,0,list.position,motifHeight,footerHeight).safeBottom;
+      const minimumHeight = Math.max(0,...Array.from(root.querySelectorAll<HTMLElement>('[data-list-min-column]')).map(n=>n.offsetHeight));
+      const subheadingHeight = root.querySelector<HTMLElement>('[data-list-subheading]')?.offsetHeight ?? 0;
+      const budget = Math.max(40,Math.min(280,safeBottom-150-(subheadingHeight ? subheadingHeight+16 : 0)-32-minimumHeight));
+      setHeaderHeight(current=>current===budget?current:budget);
+      const next = listVerticalLayout(headerBottom, listHeight, list.position, motifHeight,footerHeight);
       setPlacement((current) => current.top === next.top && current.availableHeight === next.availableHeight && current.safeBottom === next.safeBottom && current.overflow === next.overflow ? current : next);
       const overflow = next.overflow;
       if (overflow && scale > LIST_MIN_FIT_SCALE + .001) { setFitState({ key: contentKey, scale: Math.max(LIST_MIN_FIT_SCALE, Math.round((scale - .05) * 100) / 100) }); return; }
@@ -240,7 +265,7 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
       }
     };
     const observer = new ResizeObserver(measure);
-    stage.current?.querySelectorAll<HTMLElement>("[data-list-header-copy], [data-list-column], [data-list-motif]").forEach((node) => observer.observe(node));
+    stage.current?.querySelectorAll<HTMLElement>("[data-list-header-copy], [data-list-column], [data-list-min-column], [data-list-motif]").forEach((node) => observer.observe(node));
     measure();
     void document.fonts.ready.then(measure);
     return () => { cancelled = true; observer.disconnect(); };
@@ -250,21 +275,12 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
   const width = columnWidth(columns);
   return <div ref={stage} className="social-artwork-stage" style={{ backgroundColor: SOCIAL_PALETTE[list.background].value }}>
     <Brand background={list.background} spec={spec} />
-    <ListHeader list={list} />
-    <div ref={zone} className="absolute z-20 flex items-start overflow-hidden" style={{ top: placement.top, height: placement.availableHeight, left: LIST_PADDING_X, right: LIST_PADDING_X, gap: LIST_COLUMN_GAP }}>
-      {groups.map((group, column) => <div key={column} data-list-column className="flex flex-none flex-col" style={{ width, gap: s(metrics.gap) }}>
-        {group.map(({ item, index }) => {
-          const treatment = listNumberTreatment(list.numberStyle, listNumberColour(list.numberColour, index, list.background), bodyText, s(metrics.number));
-          return <div key={item.id} data-list-item={index} className="flex items-start" style={{ gap: s(24) }}>
-            <div className="flex flex-none items-center justify-center font-bold leading-none" style={treatment}>{index + 1}</div>
-            <div className="min-w-0 flex-1" style={{ color: bodyText }}>
-              <p data-list-line className="break-words" style={{ fontSize: s(metrics.primary), lineHeight: 1.08, fontWeight: listPrimaryFontWeight(list.primaryWeight) }}>{normaliseSocialText(item.primary, `Item ${index + 1}`)}</p>
-              {normaliseSocialText(item.secondary) ? <p data-list-line className="mt-[4px] break-words font-medium" style={{ fontSize: s(metrics.secondary), lineHeight: 1.15, opacity: .84 }}>{normaliseSocialText(item.secondary)}</p> : null}
-              {normaliseSocialText(item.third) ? <p data-list-line className="mt-[2px] break-words font-normal" style={{ fontSize: s(metrics.third), lineHeight: 1.15, opacity: .7 }}>{normaliseSocialText(item.third)}</p> : null}
-            </div>
-          </div>;
-        })}
-      </div>)}
+    <ListHeader list={list} maxHeight={headerHeight} />
+    <div aria-hidden className="absolute flex items-start" style={{left:LIST_PADDING_X,top:0,width:SOCIAL_ARTWORK_WIDTH-LIST_PADDING_X*2,gap:LIST_COLUMN_GAP,visibility:'hidden'}}>
+      <ListRows list={list} groups={groups} metrics={metrics} scale={LIST_MIN_FIT_SCALE} minimum />
+    </div>
+    <div ref={zone} className="absolute z-20 flex items-start" style={{ top: placement.top, height: placement.availableHeight, left: LIST_PADDING_X, right: LIST_PADDING_X, gap: LIST_COLUMN_GAP }}>
+      <ListRows list={list} groups={groups} metrics={metrics} scale={scale} />
     </div>
     <ListFooter list={list} assets={assets} />
   </div>;
@@ -303,35 +319,46 @@ function EditorialCover({ slide, spec, assets }: { slide: EditorialCoverSlideSpe
 }
 
 /** One visual-above composition for every medium. Fit/focus never move the copy or number. */
-function CuratedPickVisualAbove({ slide, number, spec, assets }: { slide: CuratedPickSlideSpec; number: string; spec: SocialPostSpec; assets: SocialGraphicAsset[] }) {
+function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPickSlideSpec; number: string; spec: SocialPostSpec; assets: SocialGraphicAsset[] }) {
+  const below = slide.treatment === 'visual-below';
+  const copyTop = below ? 286 : 700, copyHeight = below ? 500 : 566;
   const width = 912;
   const fg = textColour(defaultTextStyle(), slide.background);
   const name = normaliseSocialText(slide.name.text, 'Pick name');
   const hook = normaliseSocialText(slide.hook.text);
   const detail = normaliseSocialText(slide.detail);
-  const metadata = [normaliseSocialText(slide.location), normaliseSocialText(slide.price)].filter(Boolean).join(' · ');
+  const location = normaliseSocialText(slide.location), price = normaliseSocialText(slide.price);
+  const locationWidth = location && price ? width-360-24 : width;
   const hookFit = useHeadlineFit(hook, width, 110, 28, 38, 1.18, 'default', false, 600);
   const detailFit = useHeadlineFit(detail, width, 76, 26, 30, 1.25, 'default', false, 500);
-  const metaFit = useHeadlineFit(metadata, width, 92, 28, 34, 1.16, 'default', false, 700);
-  const remainingHeight = 566 - (hook ? hookFit.fit.height + 20 : 0) - (detail ? detailFit.fit.height + 14 : 0) - (metadata ? metaFit.fit.height + 28 : 0);
+  const locationFit = useHeadlineFit(location, locationWidth, 102, 30, 42, 1.16, 'default', false, 800);
+  const priceFit = useHeadlineFit(price, 312, 58, 28, 42, 1.12, 'default', false, 800);
+  const metaHeight = Math.max(location ? locationFit.fit.height : 0, price ? priceFit.fit.height+24 : 0);
+  const remainingHeight = copyHeight - (hook ? hookFit.fit.height + 20 : 0) - (detail ? detailFit.fit.height + 14 : 0) - (location || price ? metaHeight + 28 : 0);
   const nameFit = useHeadlineFit(name, width, Math.max(100, remainingHeight), 54, 144, displayTypography(slide.name.style.size).lineHeight, slide.name.style.size, true);
   const visual = slide.visual;
   const asset = visual?.assetId ? assets.find(a => a.id === visual.assetId) : null;
-  return <div className="social-artwork-stage" data-pick-treatment="visual-above" style={{ backgroundColor: SOCIAL_PALETTE[slide.background].value }}>
+  return <div className="social-artwork-stage" data-pick-treatment={slide.treatment} style={{ backgroundColor: SOCIAL_PALETTE[slide.background].value }}>
     <Brand background={slide.background} spec={spec} />
     <HiddenMeasure measureRef={nameFit.measureRef} typography={nameFit.typography} text={name} width={width} />
     <HiddenMeasure measureRef={hookFit.measureRef} typography={hookFit.typography} text={hook} width={width} />
     <HiddenMeasure measureRef={detailFit.measureRef} typography={detailFit.typography} text={detail} width={width} />
-    <HiddenMeasure measureRef={metaFit.measureRef} typography={metaFit.typography} text={metadata} width={width} />
-    <div data-pick-visual className="absolute inset-x-0 overflow-hidden" style={{ top: 140, height: 460, backgroundColor: SOCIAL_PALETTE[visual?.background || 'seafoam'].value }}>
-      {asset ? <img src={asset.url} alt="" aria-hidden className="h-full w-full" style={{ objectFit: visual?.fit || 'cover', objectPosition: `center ${visual?.focus || 'center'}` }} /> : null}
-    </div>
-    <div data-pick-number className="absolute z-20 flex items-center justify-center" style={{ left: 84, top: 548, width: 176, height: 116, borderRadius: '58px', backgroundColor: SOCIAL_PALETTE.pink.value, color: '#0F7C78', ...displayTypography('default'), fontSize: 88, lineHeight: 1 }}>{number}</div>
-    <div data-pick-copy className="absolute z-20" style={{ left: 84, right: 84, top: 700, bottom: 84, color: fg }}>
+    <HiddenMeasure measureRef={locationFit.measureRef} typography={locationFit.typography} text={location} width={locationWidth} />
+    <HiddenMeasure measureRef={priceFit.measureRef} typography={priceFit.typography} text={price} width={312} />
+    {below && visual?.fit === 'frame' ? <div data-pick-visual className="absolute inset-0">
+      {asset ? <img data-pick-image src={asset.url} alt="" aria-hidden className="absolute" style={{width:{small:720,medium:900,large:1080}[visual.scale||'medium'],height:'auto',maxWidth:'none',left:(1080-{small:720,medium:900,large:1080}[visual.scale||'medium'])/2,bottom:0}} /> : null}
+    </div> : <div data-pick-visual className="absolute overflow-hidden" style={{left:below?(1080-{small:720,medium:900,large:1080}[visual?.scale||'medium'])/2:0,width:below?{small:720,medium:900,large:1080}[visual?.scale||'medium']:1080,top:below?850:140,height:below?500:460,backgroundColor:SOCIAL_PALETTE[visual?.background||'seafoam'].value}}>
+      {asset ? <img data-pick-image src={asset.url} alt="" aria-hidden className="h-full w-full" style={{objectFit:visual?.fit==='contain'?'contain':'cover',objectPosition:`center ${visual?.focus||'center'}`}} /> : null}
+    </div>}
+    <div data-pick-number className="absolute z-20 flex items-center justify-center" style={{ left: 84, top: below ? 176 : 548, width: below ? 144 : 176, height: below ? 82 : 116, borderRadius: '58px', backgroundColor: SOCIAL_PALETTE.pink.value, color: '#0F7C78', ...displayTypography('default'), fontSize: below ? 68 : 88, lineHeight: 1 }}>{number}</div>
+    <div data-pick-copy className="absolute z-20" style={{ left: 84, right: 84, top: copyTop, height: copyHeight, color: fg }}>
       <h2 className="social-artwork-headline" style={{ width, fontSize: nameFit.fit.fontSize, ...nameFit.typography, textAlign: socialTextAlign(slide.name.style) }}><SocialDisplayText text={name} colour={fg} style={slide.name.style} /></h2>
       {hook ? <p data-pick-hook style={{ marginTop: 20, ...hookFit.typography, fontSize: hookFit.fit.fontSize }}><SocialDisplayText text={hook} colour={fg} style={slide.hook.style} /></p> : null}
       {detail ? <p data-pick-detail style={{ marginTop: 14, ...detailFit.typography, fontSize: detailFit.fit.fontSize, opacity: .84 }}>{detail}</p> : null}
-      {metadata ? <p data-pick-metadata style={{ marginTop: 28, ...metaFit.typography, fontSize: metaFit.fit.fontSize }}>{metadata}</p> : null}
+      {location || price ? <div data-pick-metadata className="flex items-start" style={{marginTop:28,gap:24}}>
+        {location ? <p data-pick-location style={{width:locationWidth,...locationFit.typography,fontSize:locationFit.fit.fontSize}}>{location}</p> : null}
+        {price ? <div style={{width:360,padding:'12px 24px',borderRadius:12,backgroundColor:fg,color:SOCIAL_PALETTE[slide.background].value}}><p data-pick-price style={{...priceFit.typography,fontSize:priceFit.fit.fontSize}}>{price}</p></div> : null}
+      </div> : null}
     </div>
   </div>;
 }
@@ -373,7 +400,7 @@ function PostSlideArtwork({ spec, assets, slideIndex, onListFit }: { spec: Socia
   if (slide.template === "editorial-cover") return <EditorialCover slide={slide} spec={spec} assets={assets} />;
   if (slide.template === "list") return <ListArtwork key={slide.id} spec={spec} list={slide.list} assets={assets} onListFit={onListFit} />;
   const props = {slide, number: pickNumber(slides, index) ?? '01', spec, assets};
-  return slide.treatment === 'visual-above' ? <CuratedPickVisualAbove {...props} /> : <CuratedPickLegacy {...props} />;
+  return slide.treatment ? <CuratedPickComposed {...props} /> : <CuratedPickLegacy {...props} />;
 }
 
 export const SocialArtwork = forwardRef<HTMLDivElement, { spec: SocialPostSpec; assets: SocialGraphicAsset[]; onListFit?: (report: ListFitReport) => void; slideIndex?: number }>(function SocialArtwork({ spec, assets, onListFit, slideIndex = 0 }, ref) {

@@ -35,8 +35,8 @@ export type CuratedPickSlideSpec = {
   photo: { url: string | null; focus: CuratedPhotoFocus };
   graphic: { assetId: string | null; placement: CuratedGraphicPlacement };
   /** Lab recipe v3: composition is independent of the uploaded medium. */
-  treatment?: 'visual-above';
-  visual?: { assetId: string | null; fit: 'cover' | 'contain'; focus: CuratedPhotoFocus; background: SocialBackgroundKey };
+  treatment?: 'visual-above' | 'visual-below';
+  visual?: { assetId: string | null; fit: 'cover' | 'contain' | 'frame'; focus: CuratedPhotoFocus; background: SocialBackgroundKey; scale?: SocialGraphicScale };
 };
 export type PostSlideSpec = EditorialCoverSlideSpec | CuratedPickSlideSpec | ListSlideSpec;
 export type PostSlideTemplate = PostSlideSpec["template"];

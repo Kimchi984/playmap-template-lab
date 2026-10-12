@@ -27,8 +27,8 @@ export const LIST_FOOTER_GAP = 24;
 export function resolveListPosition(position?: ListPosition): ListPosition {
   return position === "higher" || position === "lower" ? position : "auto";
 }
-export function listVerticalLayout(headerBottom: number, listHeight: number, position?: ListPosition, motifHeight = 0) {
-  const safeBottom = SOCIAL_CANVAS.height - Math.max(LIST_FOOTER_HEIGHT, motifHeight) - LIST_FOOTER_GAP;
+export function listVerticalLayout(headerBottom: number, listHeight: number, position?: ListPosition, motifHeight = 0, footerHeight = LIST_FOOTER_HEIGHT) {
+  const safeBottom = SOCIAL_CANVAS.height - Math.max(footerHeight, motifHeight) - LIST_FOOTER_GAP;
   const minTop = Math.ceil(headerBottom) + LIST_MIN_HEADER_GAP;
   const desiredTop = Math.ceil(headerBottom) + LIST_HEADER_GAP + LIST_POSITION_OFFSETS[resolveListPosition(position)];
   const top = Math.max(minTop, Math.min(desiredTop, safeBottom - listHeight));
@@ -87,7 +87,7 @@ export function listMetrics(density: ListDensity, count: number, columns: 1 | 2)
   const narrow = { spacious: { number: 76, primary: 50 }, standard: { number: 64, primary: 44 }, compact: { number: 54, primary: 38 } }[density];
   return { gap: round(base.gap), number: round(columns === 2 ? narrow.number : base.number), primary: round(columns === 2 ? narrow.primary : base.primary), secondary: round(base.secondary), third: round(base.third) };
 }
-export function listPrimaryFontWeight(weight: ListPrimaryWeight): number { return weight === "bold" ? 800 : 600; }
+export function listPrimaryFontWeight(weight: ListPrimaryWeight): number { return weight === "bold" ? 900 : 700; }
 export function columnWidth(columns: 1 | 2): number {
   const inner = SOCIAL_CANVAS.width - LIST_PADDING_X * 2;
   return columns === 1 ? inner : (inner - LIST_COLUMN_GAP) / 2;
@@ -103,10 +103,10 @@ export function listNumberTreatment(style: ListNumberStyle, colour: SocialPalett
   const value = SOCIAL_PALETTE[colour].value;
   const onFill = SOCIAL_PALETTE[colour].foreground === "white" ? "#FFFFFF" : "#0F7C78";
   switch (style) {
-    case "filled-circle": return { width: size, height: size, borderRadius: size / 2, backgroundColor: value, color: onFill, border: "none", fontWeight: 800, fontSize: Math.round(size * .56) };
-    case "outlined-circle": return { width: size, height: size, borderRadius: size / 2, backgroundColor: "transparent", color: bodyText, border: `${Math.max(4, Math.round(size / 12))}px solid ${value}`, fontWeight: 800, fontSize: Math.round(size * .56) };
-    case "plain": return { width: size, height: size, borderRadius: 0, backgroundColor: "transparent", color: value, border: "none", fontWeight: 800, fontSize: Math.round(size * .95) };
-    case "pill": return { width: Math.round(size * 1.35), height: Math.round(size * 0.78), borderRadius: Math.round(size * 0.12), backgroundColor: value, color: onFill, border: "none", fontWeight: 800, fontSize: Math.round(size * .58) };
+    case "filled-circle": return { width: size, height: size, borderRadius: size / 2, backgroundColor: value, color: onFill, border: "none", fontWeight: 900, fontSize: Math.round(size * .66) };
+    case "outlined-circle": return { width: size, height: size, borderRadius: size / 2, backgroundColor: "transparent", color: bodyText, border: `${Math.max(4, Math.round(size / 12))}px solid ${value}`, fontWeight: 900, fontSize: Math.round(size * .66) };
+    case "plain": return { width: size, height: size, borderRadius: 0, backgroundColor: "transparent", color: value, border: "none", fontWeight: 900, fontSize: Math.round(size * 1.02) };
+    case "pill": return { width: Math.round(size * 1.35), height: Math.round(size * 0.78), borderRadius: Math.round(size * 0.12), backgroundColor: value, color: onFill, border: "none", fontWeight: 900, fontSize: Math.round(size * .68) };
   }
 }
 
