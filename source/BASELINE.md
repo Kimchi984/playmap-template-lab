@@ -30,3 +30,5 @@ top-right/full-frame corner. Alpha bounds determine bottom copy safety while ori
 transparent files and aspect ratios remain unchanged.
 
 Cover v4 supersedes the unaccepted v3 image-fit experiment. Copy geometry is reserved independently of upload state; transparent pixels are diagnostic only. The second optional graphic supports four corner anchors without asset flipping or cropping. Real two-file browser upload verification is required.
+
+Cover v5 adds explicit copy-space allocation. Curated Pick v3 introduces one media-independent visual-above candidate; historical v2 is preserved behind its original inputs. The current candidate is identified by the shared manifest and rule IDs, not a separate UI template definition.

@@ -10,6 +10,7 @@ export type EditorialCoverSlideSpec = {
   kicker: SocialTextBlock; headline: SocialTextBlock; supporting: SocialTextBlock;
   /** Structural, template-owned hero; never freeform. */
   hero: { assetId: string | null; scale: SocialGraphicScale; placement: EditorialCoverHeroPlacement };
+  copySpace?: 'image-reserved' | 'expanded';
   /** Freeform decorative accents only (kind "accent"), max SOCIAL_OVERLAY_LIMIT. */
   accents: SocialGraphicOverlay[];
   /** Optional additional artwork; placement is independent of the asset’s subject. */
@@ -33,6 +34,9 @@ export type CuratedPickSlideSpec = {
   visualMode: CuratedVisualMode;
   photo: { url: string | null; focus: CuratedPhotoFocus };
   graphic: { assetId: string | null; placement: CuratedGraphicPlacement };
+  /** Lab recipe v3: composition is independent of the uploaded medium. */
+  treatment?: 'visual-above';
+  visual?: { assetId: string | null; fit: 'cover' | 'contain'; focus: CuratedPhotoFocus; background: SocialBackgroundKey };
 };
 export type PostSlideSpec = EditorialCoverSlideSpec | CuratedPickSlideSpec | ListSlideSpec;
 export type PostSlideTemplate = PostSlideSpec["template"];

@@ -282,7 +282,7 @@ function EditorialCover({ slide, spec, assets }: { slide: EditorialCoverSlideSpe
   const headline = normaliseSocialText(slide.headline.text, "Our top picks");
   const support = normaliseSocialText(slide.supporting.text);
   // Template-owned copy geometry never changes when either optional upload loads.
-  const maxHeight = coverHeadlineHeight(slide.hero.placement, slide.hero.scale, Boolean(support));
+  const maxHeight = coverHeadlineHeight(slide.hero.placement, slide.hero.scale, Boolean(support), slide.copySpace);
   const fit = useHeadlineFit(headline, width, maxHeight, 48, DISPLAY_CEILINGS.editorial, displayTypography(slide.headline.style.size).lineHeight, slide.headline.style.size, true);
   const kickerColour = textColour(slide.kicker.style, slide.background);
   const align = socialTextAlign(slide.kicker.style);
@@ -302,7 +302,41 @@ function EditorialCover({ slide, spec, assets }: { slide: EditorialCoverSlideSpe
   </div>;
 }
 
-function CuratedPick({ slide, number, spec, assets }: { slide: CuratedPickSlideSpec; number: string; spec: SocialPostSpec; assets: SocialGraphicAsset[] }) {
+/** One visual-above composition for every medium. Fit/focus never move the copy or number. */
+function CuratedPickVisualAbove({ slide, number, spec, assets }: { slide: CuratedPickSlideSpec; number: string; spec: SocialPostSpec; assets: SocialGraphicAsset[] }) {
+  const width = 912;
+  const fg = textColour(defaultTextStyle(), slide.background);
+  const name = normaliseSocialText(slide.name.text, 'Pick name');
+  const hook = normaliseSocialText(slide.hook.text);
+  const detail = normaliseSocialText(slide.detail);
+  const metadata = [normaliseSocialText(slide.location), normaliseSocialText(slide.price)].filter(Boolean).join(' · ');
+  const hookFit = useHeadlineFit(hook, width, 110, 28, 38, 1.18, 'default', false, 600);
+  const detailFit = useHeadlineFit(detail, width, 76, 26, 30, 1.25, 'default', false, 500);
+  const metaFit = useHeadlineFit(metadata, width, 92, 28, 34, 1.16, 'default', false, 700);
+  const remainingHeight = 566 - (hook ? hookFit.fit.height + 20 : 0) - (detail ? detailFit.fit.height + 14 : 0) - (metadata ? metaFit.fit.height + 28 : 0);
+  const nameFit = useHeadlineFit(name, width, Math.max(100, remainingHeight), 54, 144, displayTypography(slide.name.style.size).lineHeight, slide.name.style.size, true);
+  const visual = slide.visual;
+  const asset = visual?.assetId ? assets.find(a => a.id === visual.assetId) : null;
+  return <div className="social-artwork-stage" data-pick-treatment="visual-above" style={{ backgroundColor: SOCIAL_PALETTE[slide.background].value }}>
+    <Brand background={slide.background} spec={spec} />
+    <HiddenMeasure measureRef={nameFit.measureRef} typography={nameFit.typography} text={name} width={width} />
+    <HiddenMeasure measureRef={hookFit.measureRef} typography={hookFit.typography} text={hook} width={width} />
+    <HiddenMeasure measureRef={detailFit.measureRef} typography={detailFit.typography} text={detail} width={width} />
+    <HiddenMeasure measureRef={metaFit.measureRef} typography={metaFit.typography} text={metadata} width={width} />
+    <div data-pick-visual className="absolute inset-x-0 overflow-hidden" style={{ top: 140, height: 460, backgroundColor: SOCIAL_PALETTE[visual?.background || 'seafoam'].value }}>
+      {asset ? <img src={asset.url} alt="" aria-hidden className="h-full w-full" style={{ objectFit: visual?.fit || 'cover', objectPosition: `center ${visual?.focus || 'center'}` }} /> : null}
+    </div>
+    <div data-pick-number className="absolute z-20 flex items-center justify-center" style={{ left: 84, top: 548, width: 176, height: 116, borderRadius: '58px', backgroundColor: SOCIAL_PALETTE.pink.value, color: '#0F7C78', ...displayTypography('default'), fontSize: 88, lineHeight: 1 }}>{number}</div>
+    <div data-pick-copy className="absolute z-20" style={{ left: 84, right: 84, top: 700, bottom: 84, color: fg }}>
+      <h2 className="social-artwork-headline" style={{ width, fontSize: nameFit.fit.fontSize, ...nameFit.typography, textAlign: socialTextAlign(slide.name.style) }}><SocialDisplayText text={name} colour={fg} style={slide.name.style} /></h2>
+      {hook ? <p data-pick-hook style={{ marginTop: 20, ...hookFit.typography, fontSize: hookFit.fit.fontSize }}><SocialDisplayText text={hook} colour={fg} style={slide.hook.style} /></p> : null}
+      {detail ? <p data-pick-detail style={{ marginTop: 14, ...detailFit.typography, fontSize: detailFit.fit.fontSize, opacity: .84 }}>{detail}</p> : null}
+      {metadata ? <p data-pick-metadata style={{ marginTop: 28, ...metaFit.typography, fontSize: metaFit.fit.fontSize }}>{metadata}</p> : null}
+    </div>
+  </div>;
+}
+
+function CuratedPickLegacy({ slide, number, spec, assets }: { slide: CuratedPickSlideSpec; number: string; spec: SocialPostSpec; assets: SocialGraphicAsset[] }) {
   const visual = resolvePickVisual(slide);
   const photo = slide.visualMode === "photo";
   const fg = textColour(defaultTextStyle(), slide.background);
@@ -338,7 +372,8 @@ function PostSlideArtwork({ spec, assets, slideIndex, onListFit }: { spec: Socia
   const slide = slides[index];
   if (slide.template === "editorial-cover") return <EditorialCover slide={slide} spec={spec} assets={assets} />;
   if (slide.template === "list") return <ListArtwork key={slide.id} spec={spec} list={slide.list} assets={assets} onListFit={onListFit} />;
-  return <CuratedPick slide={slide} number={pickNumber(slides, index) ?? "01"} spec={spec} assets={assets} />;
+  const props = {slide, number: pickNumber(slides, index) ?? '01', spec, assets};
+  return slide.treatment === 'visual-above' ? <CuratedPickVisualAbove {...props} /> : <CuratedPickLegacy {...props} />;
 }
 
 export const SocialArtwork = forwardRef<HTMLDivElement, { spec: SocialPostSpec; assets: SocialGraphicAsset[]; onListFit?: (report: ListFitReport) => void; slideIndex?: number }>(function SocialArtwork({ spec, assets, onListFit, slideIndex = 0 }, ref) {

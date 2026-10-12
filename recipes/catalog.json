@@ -28,17 +28,17 @@
     {
       "id": "editorial-cover",
       "label": "Editorial Cover",
-      "version": 4,
-      "path": "recipes/editorial-cover/v4/recipe.json",
-      "fixtures": "recipes/editorial-cover/v4/fixtures.json",
+      "version": 5,
+      "path": "recipes/editorial-cover/v5/recipe.json",
+      "fixtures": "recipes/editorial-cover/v5/fixtures.json",
       "group": "Mixed post slides"
     },
     {
       "id": "curated-pick",
       "label": "Curated Pick",
-      "version": 2,
-      "path": "recipes/curated-pick/v2/recipe.json",
-      "fixtures": "recipes/curated-pick/v2/fixtures.json",
+      "version": 3,
+      "path": "recipes/curated-pick/v3/recipe.json",
+      "fixtures": "recipes/curated-pick/v3/fixtures.json",
       "group": "Mixed post slides"
     }
   ]

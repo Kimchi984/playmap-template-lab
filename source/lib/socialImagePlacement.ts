@@ -10,7 +10,8 @@ export function coverFrameGeometry(placement: 'full-bleed-bottom' | 'top-right' 
 }
 
 /** Retain the source lower hero zone for all upload states. Full-width is independent of scale. */
-export function coverHeadlineHeight(placement: string, scale: SocialGraphicScale, support: boolean) {
+export function coverHeadlineHeight(placement: string, scale: SocialGraphicScale, support: boolean, copySpace: 'image-reserved' | 'expanded' = 'image-reserved') {
+  if (copySpace === 'expanded') return 1350 - 84 - 300 - (support ? 140 : 0);
   const reservedHeroHeight = placement === 'full-bleed-bottom' ? 520 : {small:360,medium:440,large:520}[scale];
   return Math.max(260, 1350 - reservedHeroHeight - 40 - 300 - (support ? 140 : 0));
 }

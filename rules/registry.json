@@ -104,6 +104,21 @@
       "kind": "graphics",
       "contract": "Main and optional additional graphic preserve independent uploads and intrinsic aspect ratios. Four corner anchors are available. Copy uses the source lower-zone reservation across empty/loading/loaded/removed states. Pixel overlap is diagnostic only, never a headline-fit input.",
       "implementation": "source/lib/socialImagePlacement.ts"
+    },
+    "cover-copy-space-v1": {
+      "kind": "layout",
+      "contract": "Explicit copy allocation: preserve v4 lower image reservation or use expanded height. Asset state never selects copy allocation. Overlap is diagnostic only.",
+      "implementation": "source/lib/socialImagePlacement.ts"
+    },
+    "curated-visual-above-v1": {
+      "kind": "layout",
+      "contract": "One full-width visual above a number tab bridging into dominant copy. Media type never selects geometry, number or wordmark behaviour. Fit/focus affect only the visual.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-complete-copy-fit-v1": {
+      "kind": "fitting",
+      "contract": "Measure hook/detail/complete metadata with their visible typography. Reserve their actual height before fitting the title. Retain every field; warn on minimum-size or whole-copy overflow.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
     }
   }
 }

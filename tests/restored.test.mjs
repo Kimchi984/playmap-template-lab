@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {measureFittedText} from '../.test-build/fitting.mjs';
 import {makeSpec,coverFrameGeometry,coverHeadlineHeight} from '../.test-build/restored.mjs';
-// A synthetic metric source tests sizing policy only. Real-font visual/DOM QA remains deferred.
+// Synthetic metrics test policy only. Hosted browser checks verify actual typography separately.
 function metricNode(){return {style:{},dataset:{},textContent:'',get scrollWidth(){const w=parseFloat(this.style.width),s=parseFloat(this.style.fontSize);return this.style.whiteSpace==='nowrap'?Math.max(w,this.textContent.length*s*.5):w},get scrollHeight(){const s=parseFloat(this.style.fontSize),w=parseFloat(this.style.width),lh=Number(this.style.lineHeight);return this.textContent.split('\n').reduce((sum,line)=>sum+Math.max(1,Math.ceil(line.length*s*.5/w)),0)*s*lh}}}
 test('restored fitting preserves geometry and monotonic intent across headline stress cases',()=>{
  for(const text of ['Go play.','6 things to do with kids this weekend','What’s actually worth doing with the kids around Melbourne this weekend?','Little people.\nBig weekend.']){
@@ -43,5 +43,20 @@ test('cover copy geometry is stable and additional graphics keep independent ass
    const {spec,assets}=makeSpec('editorial-cover',{headline:'Plans'},{heroPlacement:'full-bleed-bottom',cornerPlacement:placement},images),slide=spec.curated.slides[0];
    assert.equal(assets.length,Object.keys(images).length);assert.equal(slide.hero.assetId,images.hero?'lab-hero':null);assert.equal(slide.corner?.assetId,images.accent?'lab-accent':undefined);
   }
+ }
+});
+
+test('Cover copy-space choice expands geometry and remains independent of upload state',()=>{
+ assert.ok(coverHeadlineHeight('full-bleed-bottom','large',true,'expanded')>coverHeadlineHeight('full-bleed-bottom','large',true));
+ for(const images of [{},{hero:'blob:bottom'},{accent:'blob:accent'},{hero:'blob:bottom',accent:'blob:accent'}]){
+  const {spec}=makeSpec('editorial-cover',{headline:'Plans'},{copySpace:'expanded'},images);
+  assert.equal(spec.curated.slides[0].copySpace,'expanded');
+ }
+});
+test('Visual-above uses one asset contract for any image and preserves all semantic fields',()=>{
+ const content={name:'A day out',hook:'Have a look',detail:'Bring snacks',location:'Brunswick East',price:'Free'};
+ for(const url of ['blob:photo','blob:transparent'])for(const fit of ['cover','contain']){
+  const {spec,assets}=makeSpec('curated-pick',content,{treatment:'visual-above',imageFit:fit,imageFocus:'bottom',wordmark:'show'},{visual:url});
+  const slide=spec.curated.slides[0];assert.equal(slide.treatment,'visual-above');assert.equal(slide.visual.assetId,'lab-visual');assert.equal(slide.visual.fit,fit);assert.equal(slide.visual.focus,'bottom');assert.equal(assets.length,1);assert.equal(assets[0].url,url);assert.equal(slide.detail,content.detail);assert.equal(slide.price,content.price);assert.equal(spec.wordmark,'show');
  }
 });

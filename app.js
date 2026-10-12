@@ -1,4 +1,4 @@
-import {renderRestored,prepareFonts} from './dist/restored.js?v=4f4160f58554';
+import {renderRestored,prepareFonts} from './dist/restored.js?v=3c7257ec0c12';
 const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
 const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
 let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
@@ -20,11 +20,11 @@ function controls(){
  for(const [key,spec] of Object.entries(recipe.designOptions)){
   const label=document.createElement('label');label.textContent=spec.label;const select=document.createElement('select');select.id=key;
   for(const v of spec.values){const o=document.createElement('option');o.value=v;o.textContent=spec.valueLabels?.[v]||name(v);select.append(o)}
-  select.value=state[key];select.onchange=()=>{state[key]=select.value;render()};label.append(select);$('designControls').append(label);
+  select.disabled=spec.values.length===1;select.value=state[key];select.onchange=()=>{state[key]=select.value;render()};label.append(select);$('designControls').append(label);
  }
  $('assetControls').replaceChildren();const labels={hero:'Hero graphic',accent:'Accent graphic',topHero:'Top panel graphic',bottomHero:'Bottom panel graphic',motif:'Bottom motif',photo:'Photo'};
  for(const key of Object.keys(recipe.assetSlots||{})){
-  const label=document.createElement('label');label.textContent=(recipe.assetSlots[key].label||labels[key])+' · optional';const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp,image/svg+xml';input.id=key+'File';
+  const label=document.createElement('label');label.textContent=(recipe.assetSlots[key].label||labels[key])+(recipe.assetSlots[key].optional===false?' · required for this treatment':' · optional');const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp,image/svg+xml';input.id=key+'File';
   const remove=document.createElement('button');remove.type='button';remove.textContent='Remove';remove.setAttribute('aria-label','Remove '+(recipe.assetSlots[key].label||labels[key]));remove.hidden=!images[key];remove.onclick=()=>{if(images[key])URL.revokeObjectURL(images[key]);delete images[key];input.value='';remove.hidden=true;render()};input.onchange=()=>{const previous=images[key];images[key]=input.files?.[0]?URL.createObjectURL(input.files[0]):'';remove.hidden=!images[key];render();if(previous)URL.revokeObjectURL(previous)};label.append(input,remove);$('assetControls').append(label);
  }
  $('assetNote').hidden=!Object.keys(recipe.assetSlots||{}).length;
@@ -62,8 +62,8 @@ function refreshChecks(){
  if(constrained.length)warnings.push(`${constrained.length} text block(s) limited by available space; requested size could not be reached.`);
  if(overflow.length)warnings.push('Some text cannot fit above its minimum size. Shorten the copy.');
  if(state.template==='list'&&listReport){if(listReport.overflow)warnings.push('List exceeds the safe area. Shorten copy, use Compact or two columns.');for(const i of listReport.tooManyLines)warnings.push(`Item ${i+1} exceeds three lines.`)}
- if(state.template==='curated-pick'&&!images[state.visualMode==='photo'?'photo':'hero'])warnings.push('No image supplied. The original image area stays empty; no filler graphic is invented.');
- $('checks').replaceChildren(row('Baseline','Lovable source ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.length?sizes.join(' / ')+'px':'Not rendered',sizes.length?'pass':'fail'),...(state.template==='editorial-cover'?[row('Local graphics',`${[...$('stage').querySelectorAll('img')].filter(n=>n.complete&&n.naturalWidth).length} / ${Object.values(images).filter(Boolean).length} loaded`)]:[]),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
+ if(state.template==='curated-pick'){const copy=$('stage').querySelector('[data-pick-copy]');if(copy&&copy.scrollHeight>copy.clientHeight+1)warnings.push('Pick copy exceeds its safe area. Shorten the title or supporting copy.');if(!images.visual)warnings.push('No image supplied. Upload a photo or illustration for this treatment.');}
+ $('checks').replaceChildren(row('Baseline','Lovable source ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.length?sizes.join(' / ')+'px':'Not rendered',sizes.length?'pass':'fail'),...(['editorial-cover','curated-pick'].includes(state.template)?[row('Local images',`${[...$('stage').querySelectorAll('img')].filter(n=>n.complete&&n.naturalWidth).length} / ${Object.values(images).filter(Boolean).length} loaded`)]:[]),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
  $('warnings').textContent=warnings.join(' ');$('warnings').hidden=!warnings.length;
 }
 function render(){

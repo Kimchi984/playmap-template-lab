@@ -39,3 +39,14 @@ previews. Additional graphics support all four corner anchors, a full-width over
 small accent; the source PNG is never flipped or cropped. Alpha is used only for conservative
 copy-area overlap warnings, with near-transparent noise ignored. Visual acceptance remains
 pending Alina's review. No new global style modes.
+
+## Current bounded experiments
+
+Cover v5 preserves the liked image reservation as its default and offers expanded copy space.
+Copy allocation is explicit; graphics do not select it. Curated Pick v3 tests one visual-above
+composition with one image upload for photographs or illustrations. Crop/contain, focus and
+image-area background are independent of layout. Supporting fields use real measured height
+before title fitting. Every field remains present; whole-copy overflow warns. Legacy v2
+rendering remains available in the source for older inputs; it is not the active design.
+`review/phone.html` runs the same hosted Lab in a real 390px iframe viewport for focused QA.
+These changes are candidates for review, not accepted reference snapshots.
