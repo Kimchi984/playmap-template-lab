@@ -2,7 +2,7 @@
   "schemaVersion": "0.1",
   "templateId": "list",
   "templateVersion": 2,
-  "status": "lab",
+  "status": "retired",
   "label": "List",
   "job": "Turn a curated set of family activities/events into a highly scannable social post.",
   "dominantVisualIdea": "Strong editorial headline followed by a rhythmic numbered list that remains useful at feed size.",
@@ -114,9 +114,8 @@
     "grid-size-human-review"
   ],
   "acceptance": {
-    "architecture": "accepted",
-    "visuals": "experimental \u2014 awaiting Alina",
-    "referenceSnapshots": "not frozen"
+    "visuals": "Rejected by Alina on 12 October 2026",
+    "architecture": "Shared contract retained; composition candidate superseded by source restoration"
   },
   "compositions": {
     "clean": {

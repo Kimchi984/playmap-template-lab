@@ -1,0 +1,76 @@
+{
+  "templateId": "split",
+  "templateVersion": 2,
+  "fixtures": [
+    {
+      "id": "balanced",
+      "content": {
+        "topHeadline": "Go somewhere new",
+        "topSupporting": "Ideas made for family days out.",
+        "bottomHeadline": "Play more often",
+        "bottomSupporting": "Melbourne discoveries, all in one place.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "graphicScale": "medium",
+        "topBackground": "teal",
+        "bottomBackground": "sunshine"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 2
+    },
+    {
+      "id": "top-long",
+      "content": {
+        "topHeadline": "Find a brilliant new place to explore",
+        "topSupporting": "Ideas made for family days out.",
+        "bottomHeadline": "Play more often",
+        "bottomSupporting": "Melbourne discoveries, all in one place.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "graphicScale": "medium",
+        "topBackground": "teal",
+        "bottomBackground": "sunshine"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 2
+    },
+    {
+      "id": "both-long",
+      "content": {
+        "topHeadline": "Find somewhere new with the kids",
+        "topSupporting": "Ideas made for family days out.",
+        "bottomHeadline": "Make the most of a warm Melbourne afternoon",
+        "bottomSupporting": "Melbourne discoveries, all in one place.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "graphicScale": "medium",
+        "topBackground": "teal",
+        "bottomBackground": "sunshine"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 2
+    }
+  ],
+  "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."
+}

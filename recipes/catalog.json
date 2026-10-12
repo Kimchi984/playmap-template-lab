@@ -4,37 +4,42 @@
     {
       "id": "big-type",
       "label": "Big Type",
-      "version": 1,
-      "path": "recipes/big-type/v1/recipe.json",
-      "fixtures": "recipes/big-type/v1/fixtures.json"
+      "version": 2,
+      "path": "recipes/big-type/v2/recipe.json",
+      "fixtures": "recipes/big-type/v2/fixtures.json",
+      "group": "Single artwork"
     },
     {
       "id": "split",
       "label": "Split",
-      "version": 1,
-      "path": "recipes/split/v1/recipe.json",
-      "fixtures": "recipes/split/v1/fixtures.json"
+      "version": 2,
+      "path": "recipes/split/v2/recipe.json",
+      "fixtures": "recipes/split/v2/fixtures.json",
+      "group": "Single artwork"
     },
     {
       "id": "list",
       "label": "List",
-      "version": 2,
-      "path": "recipes/list/v2/recipe.json",
-      "fixtures": "recipes/list/v2/fixtures.json"
+      "version": 3,
+      "path": "recipes/list/v3/recipe.json",
+      "fixtures": "recipes/list/v3/fixtures.json",
+      "group": "Single artwork"
     },
     {
       "id": "editorial-cover",
       "label": "Editorial Cover",
-      "version": 1,
-      "path": "recipes/editorial-cover/v1/recipe.json",
-      "fixtures": "recipes/editorial-cover/v1/fixtures.json"
+      "version": 2,
+      "path": "recipes/editorial-cover/v2/recipe.json",
+      "fixtures": "recipes/editorial-cover/v2/fixtures.json",
+      "group": "Mixed post slides"
     },
     {
       "id": "curated-pick",
       "label": "Curated Pick",
-      "version": 1,
-      "path": "recipes/curated-pick/v1/recipe.json",
-      "fixtures": "recipes/curated-pick/v1/fixtures.json"
+      "version": 2,
+      "path": "recipes/curated-pick/v2/recipe.json",
+      "fixtures": "recipes/curated-pick/v2/fixtures.json",
+      "group": "Mixed post slides"
     }
   ]
 }

@@ -1,102 +1,57 @@
-import {TextMeasurer,requireFonts} from './rules/typography.js';
-import {renderList} from './rules/list.js';
-import {renderScaffold} from './lab/scaffold.js';
-const $=id=>document.getElementById(id);
-const qs=new URLSearchParams(location.search);
-let catalog,recipe,fixtureSet,meter,result;
-let saved={};try{saved=JSON.parse(localStorage.getItem('playmap-template-lab-state')||'{}')}catch{}
-const state={template:qs.get('template')||saved.template||'list',fixture:qs.get('fixture')||saved.fixture||'',artDirection:qs.get('artDirection')||saved.artDirection||'playful',displayFont:qs.get('displayFont')||saved.displayFont||'gabarito',headlineSize:qs.get('headlineSize')||saved.headlineSize||'default',columns:qs.get('columns')||saved.columns||'auto'};
-const embedded=JSON.parse(document.getElementById('lab-data')?.textContent||'null');
-async function fetchJson(path){if(embedded)return embedded[path];const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error(`${path}: HTTP ${r.status}`);return r.json()}
-function persist(){try{localStorage.setItem('playmap-template-lab-state',JSON.stringify(state))}catch{}}
-function options(){
-  $('designControls').replaceChildren();
-  for(const [key,spec] of Object.entries(recipe.designOptions)){
-    if(!['artDirection','displayFont','headlineSize','columns'].includes(key))continue;
-    const label=document.createElement('label');label.textContent=spec.label||({headlineSize:'Headline size',displayFont:'Display font',artDirection:'Art direction',columns:'Columns'}[key]);
-    const select=document.createElement('select');select.id=key;
-    for(const value of spec.values){const option=document.createElement('option');option.value=value;option.textContent=({ 'dm-sans':'DM Sans',gabarito:'Gabarito',auto:'Auto'}[value]||value[0].toUpperCase()+value.slice(1));select.append(option)}
-    if(!spec.values.includes(state[key]))state[key]=spec.default;
-    select.value=state[key];select.onchange=()=>{state[key]=select.value;render()};label.append(select);$('designControls').append(label);
-  }
-}
+import {renderRestored,prepareFonts} from './dist/restored.js';
+const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
+const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
+let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
+const names={gabarito:'Gabarito','dm-sans':'DM Sans',centre:'Centre','filled-circle':'Filled circle','outlined-circle':'Outlined circle',plain:'Plain',pill:'Pill / tab','last-word':'Last word',auto:'Auto',cycle:'Playmap cycle',none:'None',show:'Show',hide:'Hide','search-pill':'Search pill','bottom-right':'Lower right',bottom:'Bottom',warmLight:'Warm light',blueTeal:'Blue teal',poolBlue:'Pool blue',sunshine:'Sunshine','bleed-right':'Bleed right','bleed-top-right':'Bleed top right','bleed-bottom-right':'Bleed bottom right'};
+const name=v=>names[v]||v[0].toUpperCase()+v.slice(1);
+async function fetchJson(path){const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error(`${path}: HTTP ${r.status}`);return r.json()}
 async function loadTemplate(){
-  const entry=catalog.templates.find(x=>x.id===state.template)||catalog.templates.find(x=>x.id==='list');state.template=entry.id;
-  recipe=await fetchJson(entry.path);fixtureSet=await fetchJson(entry.fixtures);
-  $('fixture').replaceChildren();for(const f of fixtureSet.fixtures){const opt=document.createElement('option');opt.value=f.id;opt.textContent=f.label||f.id;$('fixture').append(opt)}
-  if(!fixtureSet.fixtures.some(x=>x.id===state.fixture))state.fixture=fixtureSet.fixtures[0].id;
-  options();render();
+ const entry=catalog.templates.find(x=>x.id===state.template)||catalog.templates.find(x=>x.id==='editorial-cover');state.template=entry.id;
+ recipe=await fetchJson(entry.path);fixtureSet=await fetchJson(entry.fixtures);
+ for(const value of Object.values(images))if(value)URL.revokeObjectURL(value);images={};listReport=null;
+ $('template').value=state.template;$('fixture').replaceChildren();
+ for(const f of fixtureSet.fixtures){const o=document.createElement('option');o.value=f.id;o.textContent=f.label||f.id;$('fixture').append(o)}
+ if(!fixtureSet.fixtures.some(f=>f.id===state.fixture))state.fixture=fixtureSet.fixtures[0].id;$('fixture').value=state.fixture;
+ for(const [key,o] of Object.entries(recipe.designOptions)){const q=qs.get(key);state[key]=o.values.includes(q)?q:o.default}
+ controls();render();
 }
-function checkRow(a,b,status='pass'){const row=document.createElement('div');row.className='check';const name=document.createElement('span');name.textContent=a;const value=document.createElement('span');value.className=status;value.textContent=b;row.append(name,value);return row}
-function paint(stage,c,design){return state.template==='list'?renderList(stage,c,design,recipe,meter):renderScaffold(stage,c,design,meter,state.template)}
-function parity(stage,res){
-  const head=stage.querySelector('.list-headline'),style=getComputedStyle(head);
-  const height=Math.abs(head.offsetHeight-res.headlineMetrics.height)<=1;
-  const fonts=style.fontFamily.includes(res.display.family)&&Number(style.fontWeight)===res.display.weight&&Math.abs(parseFloat(style.letterSpacing)-res.fontSize*res.display.tracking)<.1&&Math.abs(parseFloat(style.lineHeight)-res.fontSize*res.display.lineHeight)<.1&&Math.abs(head.clientWidth-Number(head.style.width.replace('px','')))<=1;
-  const rows=[...stage.querySelectorAll('.list-row-copy')];const rowHeights=rows.every((n,i)=>Math.abs(n.offsetHeight-(res.rows.entries[i].p.height+(res.rows.entries[i].s.height?7+res.rows.entries[i].s.height:0)+(res.rows.entries[i].t.height?5+res.rows.entries[i].t.height:0)))<=1);
-  return {height,fonts,rowHeights,pass:height&&fonts&&rowHeights};
+function controls(){
+ $('designControls').replaceChildren();
+ for(const [key,spec] of Object.entries(recipe.designOptions)){
+  const label=document.createElement('label');label.textContent=spec.label;const select=document.createElement('select');select.id=key;
+  for(const v of spec.values){const o=document.createElement('option');o.value=v;o.textContent=name(v);select.append(o)}
+  select.value=state[key];select.onchange=()=>{state[key]=select.value;render()};label.append(select);$('designControls').append(label);
+ }
+ $('assetControls').replaceChildren();const labels={hero:'Hero graphic',accent:'Accent graphic',topHero:'Top panel graphic',bottomHero:'Bottom panel graphic',motif:'Bottom motif',photo:'Photo'};
+ for(const key of Object.keys(recipe.assetSlots||{})){
+  const label=document.createElement('label');label.textContent=labels[key]+' · optional';const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp,image/svg+xml';input.id=key+'File';
+  input.onchange=()=>{if(images[key])URL.revokeObjectURL(images[key]);images[key]=input.files?.[0]?URL.createObjectURL(input.files[0]):'';render()};label.append(input);$('assetControls').append(label);
+ }
+ $('assetNote').hidden=!Object.keys(recipe.assetSlots||{}).length;
+}
+function url(){const q=new URLSearchParams({template:state.template,fixture:state.fixture,templateVersion:String(recipe.templateVersion)});for(const k of Object.keys(recipe.designOptions))q.set(k,state[k]);return location.origin+location.pathname+'?'+q}
+function row(label,value,kind='pass'){const n=document.createElement('div');n.className='check';const a=document.createElement('span');a.textContent=label;const b=document.createElement('span');b.textContent=value;b.className=kind;n.append(a,b);return n}
+function refreshChecks(){
+ const nodes=[...$('stage').querySelectorAll('.social-headline-measure')],headlines=[...$('stage').querySelectorAll('h2')],sizes=headlines.map(h=>Math.round(parseFloat(getComputedStyle(h).fontSize)));
+ const constrained=nodes.filter(n=>n.dataset.constrained==='true'),overflow=nodes.filter(n=>n.dataset.overflow==='true'),warnings=[];
+ if(constrained.length)warnings.push(`${constrained.length} text block(s) limited by available space; requested size could not be reached.`);
+ if(overflow.length)warnings.push('Some text cannot fit above its minimum size. Shorten the copy.');
+ if(state.template==='list'&&listReport){if(listReport.overflow)warnings.push('List exceeds the safe area. Shorten copy, use Compact or two columns.');for(const i of listReport.tooManyLines)warnings.push(`Item ${i+1} exceeds three lines.`)}
+ if(state.template==='curated-pick'&&!images[state.visualMode==='photo'?'photo':'hero'])warnings.push('No image supplied. The original image area stays empty; no filler graphic is invented.');
+ $('checks').replaceChildren(row('Baseline','Lovable source ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.join(' / ')+'px'),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
+ $('warnings').textContent=warnings.join(' ');$('warnings').hidden=!warnings.length;
 }
 function render(){
-  $('template').value=state.template;$('fixture').value=state.fixture;persist();
-  for(const key of Object.keys(recipe.designOptions))if($(key))$(key).value=state[key];
-  const f=fixtureSet.fixtures.find(x=>x.id===state.fixture);result=paint($('stage'),f.content,state);paint($('stageMini'),f.content,state);
-  $('compare').hidden=state.template!=='list';$('runMatrix').hidden=state.template!=='list';
-  $('comparison').hidden=state.template!=='list';
-  if(state.template==='list'){
-    for(const mode of recipe.artDirectionModes)paint($(`compare-${mode}`),f.content,{...state,artDirection:mode});
-  }
-  $('recipeMeta').replaceChildren();const title=document.createElement('strong');title.textContent=`${recipe.label} v${recipe.templateVersion} · ${recipe.status}`;$('recipeMeta').append(title);
-  const p=document.createElement('p');p.textContent=state.template==='list'?recipe.compositions[state.artDirection].dominantIdea:'Infrastructure scaffold. Visual art direction is not accepted.';$('recipeMeta').append(p);
-  const checks=[checkRow('Fonts','Real webfonts loaded')];
-  if(state.template==='list'){
-    const paired=parity($('stage'),result);checks.push(checkRow('Measurement / render parity',paired.pass?'PASS':'FAIL',paired.pass?'pass':'fail'),checkRow('Large ≥ Default ≥ Small',result.monotonic?'PASS':'FAIL',result.monotonic?'pass':'fail'),checkRow('Small / Default / Large',`${result.sizes.small} / ${result.sizes.default} / ${result.sizes.large}px`),checkRow('Requested → rendered',`${result.targets[state.headlineSize]} → ${result.fontSize}px`,result.targets[state.headlineSize]===result.fontSize?'pass':'warn'),checkRow('All item fields retained',`${f.content.items.length} items · secondary + third`, 'pass'),checkRow('Headline / rows / footer fit',`${result.headlineFits?'✓':'✕'} / ${result.rowFits?'✓':'✕'} / ${result.footerFits?'✓':'✕'}`,(result.headlineFits&&result.rowFits&&result.footerFits)?'pass':'fail'),checkRow('Primary / metadata / third',`${result.rows.fontSize} / ${result.rows.metaSize} / ${result.rows.thirdSize}px`),checkRow('Composition rule',result.rule),checkRow('Visual acceptance','Awaiting Alina','warn'));
-    $('warnings').textContent=result.warnings.join(' ');$('warnings').hidden=!result.warnings.length;
-    $('stage').dataset.parity=paired.pass;$('stage').dataset.fits=result.headlineFits&&result.rowFits&&result.footerFits;
-  }else{checks.push(checkRow('Visual acceptance','Scaffold only','warn'));$('warnings').hidden=true;}
-  $('checks').replaceChildren(...checks);$('testUrl').value=url();
-  if(!qs.has('viewport'))history.replaceState(null,'',url());
-  updateScale();
+ const current=++generation,f=fixtureSet.fixtures.find(x=>x.id===state.fixture);
+ renderRestored($('stage'),state.template,f.content,state,images,r=>{listReport=r;refreshChecks()});renderRestored($('stageMini'),state.template,f.content,state,images);
+ $('recipeMeta').textContent=`${recipe.label} v${recipe.templateVersion} · restored source baseline. ${['editorial-cover','curated-pick'].includes(state.template)?'Mixed-post slide recipe.':''}`;
+ $('testUrl').value=url();history.replaceState(null,'',url());updateScale();document.fonts.ready.then(()=>{if(current===generation)requestAnimationFrame(()=>{if(current===generation)refreshChecks()})});
 }
-function url(){const q=new URLSearchParams({...state,templateVersion:String(recipe.templateVersion)});return `${location.origin==='null'?'':location.origin}${location.pathname}?${q}`}
-function updateScale(){
-  for(const wrap of document.querySelectorAll('.preview-wrap')){
-    const stage=wrap.querySelector('.stage');if(!stage)continue;
-    const width=wrap.clientWidth;stage.style.transform=`scale(${width/1080})`;wrap.style.height=`${width*1.25}px`;
-  }
-}
-async function runMatrix(){
-  $('matrixResults').textContent='Running real DOM checks…';await new Promise(requestAnimationFrame);
-  const host=document.createElement('div');Object.assign(host.style,{position:'absolute',left:'-20000px',top:'0'});document.body.append(host);
-  const tests=[];const matrix=recipe.designOptions;
-  for(const f of fixtureSet.fixtures)for(const mode of matrix.artDirection.values)for(const font of matrix.displayFont.values)for(const columns of matrix.columns.values){
-    const sizes={},states=[];
-    for(const intent of matrix.headlineSize.values){
-      const stage=document.createElement('div');host.append(stage);
-      const d={...state,artDirection:mode,displayFont:font,headlineSize:intent,columns};
-      const r=renderList(stage,f.content,d,recipe,meter),p=parity(stage,r);sizes[intent]=r.fontSize;
-      states.push({intent,size:r.fontSize,parity:p.pass,fits:r.headlineFits&&r.rowFits&&r.footerFits,warnings:r.warnings});stage.remove();
-    }
-    const monotonic=sizes.large>=sizes.default&&sizes.default>=sizes.small;
-    tests.push({fixture:f.id,mode,font,columns,sizes,monotonic,states});
-  }
-  host.remove();const monotonic=tests.every(x=>x.monotonic),parityPass=tests.every(x=>x.states.every(s=>s.parity)),unfit=tests.flatMap(x=>x.states.filter(s=>!s.fits).map(s=>({...x,states:undefined,...s})));
-  const report={recipeVersion:recipe.templateVersion,typographyChecks:tests.length*3,triples:tests.length,monotonic,measurementParity:parityPass,infeasibleStates:unfit.length,tests};
-  $('matrixResults').textContent=`${tests.length} size triples / ${tests.length*3} rendered states. Monotonic: ${monotonic?'PASS':'FAIL'}. Typography parity: ${parityPass?'PASS':'FAIL'}. ${unfit.length} states honestly reported infeasible (includes deliberately invalid fixture and forced single-column density).`;
-  $('matrixResults').dataset.report=JSON.stringify(report);$('matrixResults').hidden=false;
-  $('downloadReport').hidden=false;$('downloadReport').onclick=()=>download(JSON.stringify(report,null,2),'list-test-report.json','application/json');
-}
-function download(text,name,mime){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:mime}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function updateScale(){for(const wrap of document.querySelectorAll('.preview-wrap')){const stage=wrap.querySelector('.stage');if(stage){stage.style.transform=`scale(${wrap.clientWidth/1080})`;wrap.style.height=wrap.clientWidth*1.25+'px'}}}
 $('template').onchange=()=>{state.template=$('template').value;state.fixture='';loadTemplate().catch(failure)};
 $('fixture').onchange=()=>{state.fixture=$('fixture').value;render()};
-$('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(url());$('copyLink').textContent='Copied'}catch{$('testUrl').select();$('copyLink').textContent='Select + copy URL'}setTimeout(()=>$('copyLink').textContent='Copy test link',1500)};
-$('compare').onclick=()=>{$('comparison').scrollIntoView({behavior:'smooth',block:'start'})};
+$('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(url());$('copyLink').textContent='Copied'}catch{$('testUrl').select();$('copyLink').textContent='Select + copy URL'}setTimeout(()=>$('copyLink').textContent='Copy test link',1200)};
 $('nativeSize').onclick=()=>{document.body.classList.toggle('native-view');updateScale()};
-$('phoneSize').onclick=()=>{const frame=$('phoneFrame');frame.hidden=!frame.hidden;if(!frame.hidden){const u=new URL(location.href);u.searchParams.set('viewport','phone-frame');frame.src=u.href;frame.scrollIntoView({behavior:'smooth',block:'start'})}};
-$('runMatrix').onclick=()=>runMatrix().catch(failure);
-function failure(e){$('status').textContent=e.message;$('status').className='fail';}
-if(qs.get('viewport')==='phone-frame')document.body.classList.add('phone-frame');
-window.addEventListener('resize',updateScale);new ResizeObserver(updateScale).observe($('work'));
-try{await requireFonts();meter=new TextMeasurer();catalog=await fetchJson('recipes/catalog.json');
- for(const entry of catalog.templates){const opt=document.createElement('option');opt.value=entry.id;opt.textContent=entry.label+(entry.id==='list'?' · v2 proof':' · scaffold');$('template').append(opt)}
- await loadTemplate();$('status').textContent='List proof · experimental · real fonts ready';
-}catch(e){failure(e)}
+function failure(e){$('status').textContent=e.message;$('status').className='fail'}
+new ResizeObserver(updateScale).observe($('work'));window.addEventListener('resize',updateScale);
+try{await prepareFonts();catalog=await fetchJson('recipes/catalog.json');for(const group of [...new Set(catalog.templates.map(x=>x.group))]){const g=document.createElement('optgroup');g.label=group;for(const entry of catalog.templates.filter(x=>x.group===group)){const opt=document.createElement('option');opt.value=entry.id;opt.textContent=entry.label;g.append(opt)}$('template').append(g)}await loadTemplate();$('status').textContent='Existing Playmap templates · improve one treatment at a time'}catch(e){failure(e)}

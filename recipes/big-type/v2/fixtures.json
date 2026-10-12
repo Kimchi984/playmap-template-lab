@@ -1,0 +1,47 @@
+{
+  "templateId": "big-type",
+  "templateVersion": 2,
+  "fixtures": [
+    {
+      "id": "short",
+      "content": {
+        "headline": "Go somewhere new",
+        "supporting": "Ideas made for family days out.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 2
+    },
+    {
+      "id": "long",
+      "content": {
+        "headline": "Need somewhere genuinely good to take the kids this weekend?",
+        "supporting": "Melbourne ideas that make leaving the house worth it.",
+        "cta": "Find it on theplaymap.com.au"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "teal",
+        "graphicScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 2
+    }
+  ],
+  "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."
+}

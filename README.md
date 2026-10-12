@@ -1,53 +1,38 @@
 # The Playmap Template Lab
 
-A framework-light, deterministic pre-product workbench for designing, stress-testing and accepting Playmap social templates before they are implemented in Lovable or a future standalone renderer.
+A lightweight static workbench for improving the existing Playmap templates step by step.
 
-## Core principle
+The active templates are restored directly from the Lovable renderer at commit
+`ec495d390df67643d9206f0d65f30902883f4271`, with specific Lab fitting corrections.
+Clean / Playful / Poster experiments are removed from the active interface. Their historical
+files are not accepted designs and must not be used as the baseline.
 
-**Templates encode art direction, not rectangles.**
+- Big Type and Split preserve their existing compositions with headline-font, emphasis,
+  palette and existing image-slot choices. Split headlines share a size.
+- List preserves its existing count/density/column/placement rules and four number styles.
+  Headline sizing is monotonic. All primary/secondary/third fields remain intact.
+- Editorial Cover and Curated Pick reuse their existing mixed-post slide components. Cover
+  lower graphics and Pick photo-focus/graphic-bleed treatments remain available.
+- Gabarito/DM Sans/Instrument Sans are real bundled fonts. Instrument Sans remains the wordmark.
 
-The Lab and production renderer consume the same versioned recipe manifests and fixtures. Complex fitting/layout algorithms remain in code and are referenced by stable rule IDs.
+## Shared contract
 
-## Workflow
+`recipes/catalog.json` identifies the active versioned recipe and fixture files. Controls read
+bounds/defaults from those manifests. Procedural rendering stays in the source components;
+registered rule IDs point to implementations. The production renderer has not been changed to
+consume these manifests. No accepted snapshots have been frozen.
 
-1. Define the template job and art-direction grammar.
-2. Edit the shared recipe manifest and fixtures.
-3. Stress-test short/medium/long and awkward cases in the Lab.
-4. Visually approve behaviour.
-5. Freeze the recipe version and accepted snapshots.
-6. Production renderer consumes the same recipe + fixtures.
-7. Agent-facing contracts are derived from the accepted recipe.
+## Development
 
-## Structure
+`npm ci`, `npm run build`, `npm test`. GitHub Pages deploys committed static files from main;
+no runtime API, authentication, database or Lovable integration is needed.
 
-- `recipes/<template>/v1/recipe.json` — shared template contract
-- `recipes/<template>/v1/fixtures.json` — representative + stress inputs
-- `rules/registry.json` — stable rule IDs and contracts
-- `index.html`, `app.js`, `styles.css` — lightweight Lab UI
+Production image assets are private. Image slots accept local preview-only files and never
+upload or include them in copied URLs. No fake stock or decorative stand-in is used when empty.
 
-Accepted versions should be immutable. Behaviour-changing updates create a new version.
+## Current gate
 
-## List proof v2 — prepared, not visually accepted
-
-List v1 remains preserved as scaffold history. The catalogue selects the experimental v2 contract.
-Its three composition IDs resolve in `rules/list.js`; typography lives in `rules/typography.js` and
-intent sizing in `rules/fitting.js`. Controls read allowed values from the active manifest.
-
-- Clean: paper editorial index, restrained teal tabs and fine rules.
-- Playful: teal expressive header, coloured route/rail, alternating numbered blocks on mint.
-- Poster: yellow count-led header, diagonal band, full-bleed teal body and oversized numerals.
-
-The candidate harness offers representative/awkward fixtures, a comparison strip, native-size view,
-grid preview, a 390px iframe viewport, test URLs and a real-DOM stress matrix with a downloadable
-report. Infeasible content must warn; a green unit test is not visual acceptance.
-
-Run `node --test tests/*.test.mjs` for policy/contract checks. Serve the root as a static site for
-real-font/DOM checks. The review HTML is a generated portable build of these exact modules and
-JSON files; it is not a separately maintained recipe.
-
-**Current verification:** four policy/contract tests and JavaScript syntax checks pass.
-**Outstanding:** independent browser fitting/parity, desktop/phone visuals, 13-item readability,
-art-direction judgement, publication to main and Alina's acceptance. No reference is frozen yet.
-
-**GitHub access:** restored on 12 October 2026 after re-authorisation. Publish this candidate to
-the existing repo/Pages and complete independent browser verification before acceptance.
+Build and five focused source/contract checks pass. Browser/visual QA is deferred at Alina's
+request to limit usage. Do not claim visual acceptance or bug-free rendering from those tests.
+Next design work: Cover image treatment first, then Curated Pick; incremental List softening
+and image/full-bleed experiments after the baseline is reviewed. No new global style modes.

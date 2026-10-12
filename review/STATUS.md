@@ -1,18 +1,14 @@
-# List proof checkpoint — 12 October 2026
+# Restoration checkpoint — 12 October 2026
 
-Live base: 0aa9add390c7844880fd000c814c6f4e53ead767.
-GitHub write access restored on 12 October 2026; candidate prepared for publication. Browser/visual proof remains pending.
-Shared architecture remains accepted. All v2 compositions remain experimental and visually
-unverified. No accepted reference snapshots exist. No Lovable calls; spend remains 117.9 credits.
+Alina rejected the List v2 art-direction candidate at cef9d83. All three compositions are
+rejected; they are not a design baseline. The subsequent conceptual Clean/Playful/Poster
+policies are not accepted implementation scope either.
 
-Verified live scaffold defect: representative List reports 38/38/38px and omits third fields.
-Prepared fix shares actual family/weight/tracking/line-height/optical-sizing/width between DOM
-measurement and render, waits for FontFaceSet.load, and uses one intent-independent fit ceiling.
+Current direction: restore existing Lovable source templates, fix known fitting bugs, then
+improve individual bounded treatments. Cover is the current design priority; Curated Pick
+must remain available as the existing mixed-post slide recipe.
 
-Required QA uses the existing authorised HTTPS GitHub Pages site. Local file URLs are not used.
-Do not call this a successful List proof before desktop/mobile, real DOM matrix and visual review.
-
-Resume: restore candidate changes, verify remote main has
-not moved, publish List candidate in understandable Git history, run real DOM stress matrix,
-inspect each art direction + short/long/multiline/13-item fixtures in both fonts and all intents,
-fix observed defects, then ask Alina for visual acceptance. Other templates remain scaffolds.
+The restoration uses source commit ec495d390df67643d9206f0d65f30902883f4271. Active List is v3;
+Big Type, Split, Editorial Cover and Curated Pick are v2. Bundled fonts and source components
+replace the approximate scaffold. Five focused tests pass. Visual acceptance is pending;
+browser checks remain deferred per Alina's usage preference. Production/Lovable unchanged.

@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "curated-pick",
+  "templateVersion": 2,
+  "status": "lab",
+  "label": "Curated Pick",
+  "job": "Give one recommended place/event enough visual and practical information to stand alone as a slide.",
+  "dominantVisualIdea": "Existing Playmap Curated Pick composition, restored from source. Improve one treatment at a time.",
+  "contentSlots": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 100
+    },
+    "hook": {
+      "type": "string",
+      "required": true,
+      "role": "support",
+      "maxLength": 120
+    },
+    "detail": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 120
+    },
+    "location": {
+      "type": "string",
+      "required": false,
+      "role": "metadata",
+      "maxLength": 40
+    },
+    "price": {
+      "type": "string",
+      "required": true,
+      "role": "metadata",
+      "maxLength": 24
+    }
+  },
+  "designOptions": {
+    "displayFont": {
+      "type": "enum",
+      "label": "Headline font",
+      "values": [
+        "gabarito",
+        "dm-sans"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "label": "Headline size",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "label": "Headline alignment",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    },
+    "accentEnding": {
+      "type": "enum",
+      "label": "Headline emphasis",
+      "values": [
+        "none",
+        "last-word"
+      ],
+      "default": "none"
+    },
+    "accentColour": {
+      "type": "enum",
+      "label": "Emphasis colour",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue",
+        "white"
+      ],
+      "default": "sunshine"
+    },
+    "wordmark": {
+      "type": "enum",
+      "label": "Wordmark",
+      "values": [
+        "show",
+        "hide"
+      ],
+      "default": "show"
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue"
+      ],
+      "default": "warmLight"
+    },
+    "visualMode": {
+      "type": "enum",
+      "label": "Image treatment",
+      "values": [
+        "photo",
+        "graphic"
+      ],
+      "default": "photo"
+    },
+    "photoFocus": {
+      "type": "enum",
+      "label": "Photo focus",
+      "values": [
+        "top",
+        "center",
+        "bottom"
+      ],
+      "default": "center"
+    },
+    "graphicPlacement": {
+      "type": "enum",
+      "label": "Graphic bleed",
+      "values": [
+        "bleed-right",
+        "bleed-top-right",
+        "bleed-bottom-right"
+      ],
+      "default": "bleed-right"
+    }
+  },
+  "artDirectionModes": [],
+  "rules": {
+    "layout": "lovable-restored-layout-v1",
+    "measurement": "restored-real-font-measurement-v1",
+    "headlineFitting": "restored-monotonic-headline-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "source-baseline-preserved"
+  ],
+  "sourceBaseline": {
+    "project": "The Playmap",
+    "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+    "component": "source/components/admin/SocialArtwork.tsx"
+  },
+  "assetSlots": {
+    "hero": {
+      "role": "hero",
+      "optional": true,
+      "scope": "local-preview"
+    },
+    "photo": {
+      "role": "photo",
+      "optional": true,
+      "scope": "local-preview"
+    }
+  },
+  "acceptance": {
+    "visuals": "source-based restoration; Alina review pending",
+    "noNewModes": true
+  }
+}

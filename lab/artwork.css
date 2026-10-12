@@ -1,0 +1,10 @@
+@import "tailwindcss" source(none);
+@source "../source/components";
+@source "./restored.tsx";
+:root {--social-font-display:"Gabarito Variable",sans-serif;--social-font-support:"DM Sans Variable",sans-serif}
+.social-artwork-root,.social-artwork-stage{width:1080px;height:1350px}
+.social-artwork-root{position:relative;overflow:hidden;font-family:var(--social-font-support)}
+.social-artwork-stage{position:relative;overflow:hidden}
+.social-artwork-headline,.social-headline-measure{overflow-wrap:normal;word-break:normal;white-space:pre-wrap;font-family:var(--social-font-display);font-weight:900;letter-spacing:-.04em;line-height:.86}
+.social-headline-measure{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none}
+.social-artwork-logo [aria-label="the playmap"]{color:inherit!important}

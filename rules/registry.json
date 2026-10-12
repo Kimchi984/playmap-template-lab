@@ -64,6 +64,36 @@
       "kind": "layout",
       "contract": "Yellow count-led header, diagonal band, teal body, oversized numerals and two-column rhythm.",
       "implementation": "rules/list.js"
+    },
+    "lovable-restored-layout-v1": {
+      "kind": "layout",
+      "contract": "Preserve source composition from ec495d3; image and numbering choices remain bounded.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "restored-real-font-measurement-v1": {
+      "kind": "fitting",
+      "contract": "Bundled real fonts, exact rendered typography, explicit font readiness before fitting.",
+      "implementation": "source/lib/labFitting.ts"
+    },
+    "restored-monotonic-headline-v1": {
+      "kind": "fitting",
+      "contract": "Identical geometry and shared typography fit capacity across all size intents; Large >= Default >= Small.",
+      "implementation": "source/lib/labFitting.ts"
+    },
+    "restored-split-shared-headline-v1": {
+      "kind": "layout",
+      "contract": "One headline size for both Split panels; natural wraps and separate supporting-copy fit.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "restored-list-header-connected-v1": {
+      "kind": "layout",
+      "contract": "Source header-connected layout, footer and actual motif safety.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "restored-list-content-fit-v1": {
+      "kind": "fitting",
+      "contract": "Source count/density/column metrics, 0.8 floor and per-item line warnings.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
     }
   }
 }

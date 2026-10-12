@@ -1,0 +1,55 @@
+{
+  "templateId": "curated-pick",
+  "templateVersion": 2,
+  "fixtures": [
+    {
+      "id": "short",
+      "content": {
+        "name": "CERES Community Park",
+        "hook": "Chooks, gardens and a creek to explore",
+        "detail": "Grab a babycino at the café after.",
+        "location": "Brunswick East",
+        "price": "Free"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "warmLight",
+        "visualMode": "photo",
+        "photoFocus": "center",
+        "graphicPlacement": "bleed-right"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 2
+    },
+    {
+      "id": "long",
+      "content": {
+        "name": "Mornington Peninsula Railway Adventure",
+        "hook": "A proper train day with plenty to see before and after the ride",
+        "detail": "Allow enough time to explore before boarding.",
+        "location": "Moorooduc",
+        "price": "From $18"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "warmLight",
+        "visualMode": "photo",
+        "photoFocus": "center",
+        "graphicPlacement": "bleed-right"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 2
+    }
+  ],
+  "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."
+}
