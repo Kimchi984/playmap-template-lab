@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {measureFittedText} from '../.test-build/fitting.mjs';
-import {makeSpec} from '../.test-build/restored.mjs';
+import {makeSpec,coverFrameGeometry,firstVisibleRow,bottomFrameVisibleTop} from '../.test-build/restored.mjs';
 // A synthetic metric source tests sizing policy only. Real-font visual/DOM QA remains deferred.
 function metricNode(){return {style:{},dataset:{},textContent:'',get scrollWidth(){const w=parseFloat(this.style.width),s=parseFloat(this.style.fontSize);return this.style.whiteSpace==='nowrap'?Math.max(w,this.textContent.length*s*.5):w},get scrollHeight(){const s=parseFloat(this.style.fontSize),w=parseFloat(this.style.width),lh=Number(this.style.lineHeight);return this.textContent.split('\n').reduce((sum,line)=>sum+Math.max(1,Math.ceil(line.length*s*.5/w)),0)*s*lh}}}
 test('restored fitting preserves geometry and monotonic intent across headline stress cases',()=>{
@@ -27,4 +27,16 @@ test('cover and pick remain mixed-post slide recipes with original image choices
 test('active shared manifests expose individual options and no rejected art-direction modes',()=>{
  const catalog=JSON.parse(fs.readFileSync('recipes/catalog.json','utf8')),registry=JSON.parse(fs.readFileSync('rules/registry.json','utf8'));
  for(const entry of catalog.templates){const r=JSON.parse(fs.readFileSync(entry.path,'utf8')),f=JSON.parse(fs.readFileSync(entry.fixtures,'utf8'));assert.equal(r.designOptions.artDirection,undefined);assert.deepEqual(r.artDirectionModes,[]);assert.equal(r.sourceBaseline.commit,'ec495d390df67643d9206f0d65f30902883f4271');for(const id of Object.values(r.rules))assert.ok(registry.rules[id]);for(const fixture of f.fixtures){assert.equal(fixture.expectedRecipeVersion,r.templateVersion);for(const [key,value] of Object.entries(fixture.design))assert.ok(r.designOptions[key].values.includes(value))}}
+});
+
+test('transparent frames anchor to canvas edges without square fitting or aspect-ratio distortion',()=>{
+ const bottom=coverFrameGeometry('full-bleed-bottom','small');assert.equal(bottom.width,1080);assert.equal(bottom.left,0);assert.equal(bottom.bottom,0);assert.equal(bottom.height,'auto');
+ const corner=coverFrameGeometry('top-right','large');assert.equal(corner.right,0);assert.equal(corner.top,0);assert.equal(corner.height,'auto');assert.ok(corner.width>coverFrameGeometry('top-right','small').width);
+ const both=makeSpec('editorial-cover',{headline:'Plans'},{heroPlacement:'full-bleed-bottom',cornerPlacement:'top-right',cornerScale:'large'},{hero:'blob:bottom',accent:'blob:corner'});
+ assert.equal(both.spec.curated.slides[0].hero.placement,'full-bleed-bottom');assert.equal(both.spec.curated.slides[0].corner.placement,'top-right');assert.equal(both.spec.curated.slides[0].accents.length,0);
+});
+test('copy safety uses visible alpha but preserves transparent frame geometry',()=>{
+ const pixels=new Uint8ClampedArray(4*4*4);pixels[(2*4+1)*4+3]=255;
+ assert.equal(firstVisibleRow(pixels,4,4),2);assert.equal(firstVisibleRow(pixels,4,4,2,4),null);
+ assert.equal(bottomFrameVisibleTop(1080,1350,675),675);assert.equal(bottomFrameVisibleTop(1080,1350,null),1350);
 });

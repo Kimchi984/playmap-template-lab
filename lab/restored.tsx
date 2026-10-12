@@ -37,7 +37,10 @@ export function makeSpec(id:string,c:any,d:any,images:any={}){
   if(id==='editorial-cover'){
     const slide=createEditorialCover('lab-cover');slide.background=d.background||'sunshine';slide.kicker=support(c.kicker);slide.headline=text(c.headline,d);slide.supporting=support(c.supporting);
     slide.hero={assetId:hero,scale:d.graphicScale||'large',placement:d.heroPlacement||'bottom-right'};
-    if(accent)slide.accents=[{id:'accent',kind:'accent',assetId:accent,scale:'medium',x:840,y:238}];
+    if(accent){
+      if(d.cornerPlacement==='small-accent')slide.accents=[{id:'accent',kind:'accent',assetId:accent,scale:d.cornerScale||'medium',x:840,y:238}];
+      else slide.corner={assetId:accent,scale:d.cornerScale||'medium',placement:d.cornerPlacement||'top-right'};
+    }
     spec.recipe='curated-picks';spec.curated={slides:[slide]};
   }
   if(id==='curated-pick'){
@@ -60,3 +63,5 @@ export function renderRestored(host:HTMLElement,id:string,c:any,d:any,images:any
   let root=roots.get(host);if(!root){root=createRoot(host);roots.set(host,root)}
   flushSync(()=>root!.render(<SocialArtwork spec={spec} assets={assets} onListFit={onListFit}/>));
 }
+
+export {coverFrameGeometry,firstVisibleRow,bottomFrameVisibleTop} from '../source/lib/socialImagePlacement';

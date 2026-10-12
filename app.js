@@ -2,7 +2,7 @@ import {renderRestored,prepareFonts} from './dist/restored.js';
 const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
 const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
 let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
-const names={gabarito:'Gabarito','dm-sans':'DM Sans',centre:'Centre','filled-circle':'Filled circle','outlined-circle':'Outlined circle',plain:'Plain',pill:'Pill / tab','last-word':'Last word',auto:'Auto',cycle:'Playmap cycle',none:'None',show:'Show',hide:'Hide','search-pill':'Search pill','bottom-right':'Lower right',bottom:'Bottom',warmLight:'Warm light',blueTeal:'Blue teal',poolBlue:'Pool blue',sunshine:'Sunshine','bleed-right':'Bleed right','bleed-top-right':'Bleed top right','bleed-bottom-right':'Bleed bottom right'};
+const names={gabarito:'Gabarito','dm-sans':'DM Sans',centre:'Centre','filled-circle':'Filled circle','outlined-circle':'Outlined circle',plain:'Plain',pill:'Pill / tab','last-word':'Last word',auto:'Auto',cycle:'Playmap cycle',none:'None',show:'Show',hide:'Hide','search-pill':'Search pill','bottom-right':'Contained lower right',bottom:'Contained bottom','full-bleed-bottom':'Full-width bottom — preserve transparency','top-right':'Top-right corner','full-frame':'Full-width overlay','small-accent':'Small accent',warmLight:'Warm light',blueTeal:'Blue teal',poolBlue:'Pool blue',sunshine:'Sunshine','bleed-right':'Bleed right','bleed-top-right':'Bleed top right','bleed-bottom-right':'Bleed bottom right'};
 const name=v=>names[v]||v[0].toUpperCase()+v.slice(1);
 async function fetchJson(path){const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error(`${path}: HTTP ${r.status}`);return r.json()}
 async function loadTemplate(){
@@ -24,7 +24,7 @@ function controls(){
  }
  $('assetControls').replaceChildren();const labels={hero:'Hero graphic',accent:'Accent graphic',topHero:'Top panel graphic',bottomHero:'Bottom panel graphic',motif:'Bottom motif',photo:'Photo'};
  for(const key of Object.keys(recipe.assetSlots||{})){
-  const label=document.createElement('label');label.textContent=labels[key]+' · optional';const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp,image/svg+xml';input.id=key+'File';
+  const label=document.createElement('label');label.textContent=(recipe.assetSlots[key].label||labels[key])+' · optional';const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp,image/svg+xml';input.id=key+'File';
   input.onchange=()=>{if(images[key])URL.revokeObjectURL(images[key]);images[key]=input.files?.[0]?URL.createObjectURL(input.files[0]):'';render()};label.append(input);$('assetControls').append(label);
  }
  $('assetNote').hidden=!Object.keys(recipe.assetSlots||{}).length;
@@ -42,6 +42,7 @@ function refreshChecks(){
  $('warnings').textContent=warnings.join(' ');$('warnings').hidden=!warnings.length;
 }
 function render(){
+ for(const [key,o] of Object.entries(recipe.designOptions)){if(o.disabledWhen&&$(key))$(key).disabled=Object.entries(o.disabledWhen).some(([control,values])=>values.includes(state[control]))}
  const current=++generation,f=fixtureSet.fixtures.find(x=>x.id===state.fixture);
  renderRestored($('stage'),state.template,f.content,state,images,r=>{listReport=r;refreshChecks()});renderRestored($('stageMini'),state.template,f.content,state,images);
  $('recipeMeta').textContent=`${recipe.label} v${recipe.templateVersion} · restored source baseline. ${['editorial-cover','curated-pick'].includes(state.template)?'Mixed-post slide recipe.':''}`;

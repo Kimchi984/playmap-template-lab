@@ -3,8 +3,8 @@ import { defaultListSpec, type SocialListSpec } from "./socialList";
 
 /** Post = parent; slides[] is heterogeneous and each slide names its own template.
  * Editorial Cover replaces the retired Curated-only cover (see migratePostSlide). */
-export type EditorialCoverHeroPlacement = "bottom-right" | "bottom";
-export const EDITORIAL_COVER_HERO_PLACEMENTS: readonly EditorialCoverHeroPlacement[] = ["bottom-right", "bottom"];
+export type EditorialCoverHeroPlacement = "bottom-right" | "bottom" | "full-bleed-bottom";
+export const EDITORIAL_COVER_HERO_PLACEMENTS: readonly EditorialCoverHeroPlacement[] = ["bottom-right", "bottom", "full-bleed-bottom"];
 export type EditorialCoverSlideSpec = {
   template: "editorial-cover"; id: string; background: SocialBackgroundKey;
   kicker: SocialTextBlock; headline: SocialTextBlock; supporting: SocialTextBlock;
@@ -12,6 +12,8 @@ export type EditorialCoverSlideSpec = {
   hero: { assetId: string | null; scale: SocialGraphicScale; placement: EditorialCoverHeroPlacement };
   /** Freeform decorative accents only (kind "accent"), max SOCIAL_OVERLAY_LIMIT. */
   accents: SocialGraphicOverlay[];
+  /** Optional frame artwork anchored to the real canvas corner. */
+  corner?: { assetId: string | null; scale: SocialGraphicScale; placement: "top-right" | "full-frame" };
 };
 /** Retired shape, read only by the migration adapter. */
 export type LegacyCuratedCoverSlide = {

@@ -94,6 +94,11 @@
       "kind": "fitting",
       "contract": "Source count/density/column metrics, 0.8 floor and per-item line warnings.",
       "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "cover-transparent-frame-v1": {
+      "kind": "graphics",
+      "contract": "Bottom composition uses canvas width + natural height, bottom=0; corner uses right=0/top=0, natural height and bounded width. Preserve transparent frame; never square-fit, stretch or trim it.",
+      "implementation": "source/lib/socialImagePlacement.ts"
     }
   }
 }

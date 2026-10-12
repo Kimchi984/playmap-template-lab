@@ -1,0 +1,53 @@
+{
+  "templateId": "editorial-cover",
+  "templateVersion": 3,
+  "fixtures": [
+    {
+      "id": "short",
+      "content": {
+        "kicker": "5 FAMILY ADVENTURES",
+        "headline": "Spring is calling",
+        "supporting": "Five easy ideas for getting outside."
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "graphicScale": "large",
+        "heroPlacement": "full-bleed-bottom",
+        "cornerPlacement": "top-right",
+        "cornerScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 3
+    },
+    {
+      "id": "long",
+      "content": {
+        "kicker": "5 FAMILY ADVENTURES FOR SPRING",
+        "headline": "Melbourne’s best picks for little explorers",
+        "supporting": "Saved by parents, tested by kids"
+      },
+      "design": {
+        "displayFont": "gabarito",
+        "headlineSize": "default",
+        "alignment": "left",
+        "accentEnding": "none",
+        "accentColour": "sunshine",
+        "wordmark": "show",
+        "background": "sunshine",
+        "graphicScale": "large",
+        "heroPlacement": "full-bleed-bottom",
+        "cornerPlacement": "top-right",
+        "cornerScale": "medium"
+      },
+      "referenceSnapshot": null,
+      "expectedRecipeVersion": 3
+    }
+  ],
+  "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."
+}

@@ -24,3 +24,7 @@ Production is unchanged and does not yet consume these Lab manifests. Baseline r
 source-derived, not a claim of accepted screenshot parity. Visual QA is deferred per Alina.
 Private production assets are not copied into the public repository. Local image inputs stay
 in memory and are not uploaded, persisted, or included in state URLs.
+
+Cover v3 adds frame placements in socialImagePlacement.ts: full-width bottom and independent
+top-right/full-frame corner. Alpha bounds determine bottom copy safety while original
+transparent files and aspect ratios remain unchanged.

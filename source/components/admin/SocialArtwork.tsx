@@ -22,6 +22,7 @@ export const SOCIAL_ARTWORK_WIDTH = 1080;
 export const SOCIAL_ARTWORK_HEIGHT = 1350;
 type Fit = { fontSize: number; height: number; target?: number; constrained?: boolean; overflow?: boolean };
 import { measureFittedText } from "@/lib/labFitting";
+import { coverFrameGeometry, measureBottomFrame } from "@/lib/socialImagePlacement";
 
 function useHeadlineFit(text: string, boxWidth: number, boxMaxHeight: number, minSize: number, boxMaxSize: number, lineHeight: number, size: SocialTextSize = "default", display = false, weight = 700) {
   const role = display ? "display" : "support";
@@ -274,19 +275,29 @@ function EditorialCover({ slide, spec, assets }: { slide: EditorialCoverSlideSpe
   const hero = slide.hero.assetId ? assets.find((a) => a.id === slide.hero.assetId) ?? null : null;
   const heroSize = EDITORIAL_COVER_HERO_SIZES[slide.hero.scale];
   const bottom = slide.hero.placement === "bottom";
+  const fullWidthBottom = slide.hero.placement === "full-bleed-bottom";
+  const [bottomFrame, setBottomFrame] = useState<{url:string;top:number} | null>(null);
+  const heroImage = useRef<HTMLImageElement>(null);
+  useLayoutEffect(()=>{
+    const image=heroImage.current;if(!fullWidthBottom||!hero||!image?.complete||!image.naturalWidth)return;
+    try{const top=measureBottomFrame(image);if(top!==null)setBottomFrame(current=>current?.url===hero.url&&current.top===top?current:{url:hero.url,top});}catch{ /* Use original safety fallback when pixels cannot be read. */ }
+  },[fullWidthBottom,hero?.url]);
+  const corner = slide.corner?.assetId ? assets.find(a => a.id === slide.corner?.assetId) ?? null : null;
   const width = SOCIAL_ARTWORK_WIDTH - 84 * 2;
   const kicker = normaliseSocialText(slide.kicker.text);
   const headline = normaliseSocialText(slide.headline.text, "Our top picks");
   const support = normaliseSocialText(slide.supporting.text);
   // Copy column keeps the full width; only its height yields to the lower hero zone.
-  const maxHeight = (hero ? 1350 - heroSize - 40 : 1150) - 300 - (support ? 140 : 0);
-  const fit = useHeadlineFit(headline, width, Math.max(260, maxHeight), 48, DISPLAY_CEILINGS.editorial, displayTypography(slide.headline.style.size).lineHeight, slide.headline.style.size, true);
+  const imageTop = fullWidthBottom && bottomFrame?.url === hero?.url ? bottomFrame.top : 1350 - heroSize;
+  const maxHeight = (hero ? imageTop - 40 : 1150) - 300 - (support ? 140 : 0);
+  const fit = useHeadlineFit(headline, width, Math.max(fullWidthBottom ? 80 : 260, maxHeight), 48, DISPLAY_CEILINGS.editorial, displayTypography(slide.headline.style.size).lineHeight, slide.headline.style.size, true);
   const kickerColour = textColour(slide.kicker.style, slide.background);
   const align = socialTextAlign(slide.kicker.style);
   return <div className="social-artwork-stage" style={{ backgroundColor: SOCIAL_PALETTE[slide.background].value }}>
     <Brand background={slide.background} spec={spec} />
     <HiddenMeasure measureRef={fit.measureRef} typography={fit.typography} text={headline} width={width} />
-    {hero ? <img src={hero.url} alt="" aria-hidden className="absolute z-10 object-contain" style={bottom ? { width: heroSize * 1.3, height: heroSize, left: (SOCIAL_ARTWORK_WIDTH - heroSize * 1.3) / 2, bottom: -30, objectPosition: "center bottom" } : { width: heroSize, height: heroSize, right: -40, bottom: -20, objectPosition: "right bottom" }} /> : null}
+    {hero ? <img ref={heroImage} src={hero.url} alt="" aria-hidden className="absolute z-10 object-contain" onLoad={event=>{if(!fullWidthBottom)return;try{const top=measureBottomFrame(event.currentTarget);if(top!==null)setBottomFrame(current=>current?.url===hero.url&&current.top===top?current:{url:hero.url,top});}catch{ /* Cross-origin frames retain the original safe fallback; no pixel access bypass. */ }}} style={fullWidthBottom ? coverFrameGeometry("full-bleed-bottom", slide.hero.scale) : bottom ? { width: heroSize * 1.3, height: heroSize, left: (SOCIAL_ARTWORK_WIDTH - heroSize * 1.3) / 2, bottom: -30, objectPosition: "center bottom" } : { width: heroSize, height: heroSize, right: -40, bottom: -20, objectPosition: "right bottom" }} /> : null}
+    {corner && slide.corner ? <img src={corner.url} alt="" aria-hidden className="pointer-events-none absolute z-10" style={coverFrameGeometry(slide.corner.placement, slide.corner.scale)} /> : null}
     <div className="absolute z-20" style={{ left: 84, right: 84, top: 200 }}>
       {kicker ? <div style={{ textAlign: align, transform: `translateY(${TEXT_NUDGE_PX[slide.kicker.style.nudge]}px)` }}><span className="inline-block rounded-full font-bold uppercase leading-none tracking-[0.06em]" style={{ backgroundColor: kickerColour, color: SOCIAL_PALETTE[slide.background].value, fontSize: 34 * TEXT_SIZE_MULTIPLIER[slide.kicker.style.size], padding: "14px 28px", maxWidth: width }}><SocialDisplayText text={kicker} colour={SOCIAL_PALETTE[slide.background].value} style={slide.kicker.style} /></span></div> : null}
       <h2 className="social-artwork-headline mt-[36px]" style={{ width, textAlign: socialTextAlign(slide.headline.style), color: textColour(slide.headline.style, slide.background), fontSize: fit.fit.fontSize, ...displayTypography(slide.headline.style.size), transform: `translateY(${TEXT_NUDGE_PX[slide.headline.style.nudge]}px)` }}><SocialDisplayText text={headline} colour={textColour(slide.headline.style, slide.background)} style={slide.headline.style} /></h2>
