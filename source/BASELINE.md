@@ -47,3 +47,10 @@ number styles/colour, explicit price-edge alignment and an optional image-only a
 under actual measured copy in lower frames. Manifest visibility hides lower-only width
 controls in the upper treatment. Browser-service verification for these refinements is
 blocked as documented in review/STATUS.md; source/build checks are not visual acceptance.
+
+
+V6 supersedes the oversized V5 third line and broad image mask: smaller strong List third
+text, calmer Pick type ladder, optional plain/tag price and numbering, and a feathered
+copy-local backdrop. List fitting now restarts when fixture identity settles even if the
+header geometry stays unchanged. Source-derived compositions remain, with focused Lab
+refinements; these are not production changes or frozen visual acceptance.

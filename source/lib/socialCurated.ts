@@ -44,7 +44,7 @@ export type CuratedPickSlideSpec = {
   visual?: { assetId: string | null; fit: 'cover' | 'contain' | 'frame'; focus: CuratedPhotoFocus; background: SocialBackgroundKey; scale?: SocialGraphicScale };
 };
 
-/** Bounded number treatments share the same anchor and never alter copy geometry. */
+/** Visible number treatments share an anchor; the optional None releases copy spacing. */
 export function curatedNumberTreatment(style: CuratedPickSlideSpec['numberStyle'], colour: CuratedPickSlideSpec['numberColour'], background: SocialBackgroundKey, below: boolean) {
   if(style === 'none') return null;
   const foreground = SOCIAL_PALETTE[background].foreground === 'white' ? '#FFFFFF' : '#0F7C78';

@@ -157,3 +157,54 @@ third-line fit in 1/2-column and 13-item cases, image width interaction, fade wi
 illustrations, and both price edges/number treatments. Alina's original playground file
 23557.png is not locally available; do not claim exact-image verification from screenshots.
 No Lovable calls/changes; cumulative renderer spend stays 117.9 credits.
+
+
+## V6 hierarchy and optional-field correction — 13 October 2026 (Sydney)
+
+Supersedes v5 readability refinements. Alina says the third List line became larger than
+secondary; Pick price needs a plain/empty option, numbering needs sensible proportions
+and optionality, copy hierarchy is chaotic, and the fade needs actual-copy anchoring.
+Retain the liked List/Pick compositions while treating these refinements as review candidates.
+
+List v6 uses base third sizes 29/26/23 below secondary 34/30/27, retaining 600 weight and .95
+opacity. Fourteen checks pass, including primary > secondary > third for every density,
+count 3–13, one/two columns and .8–1 fitting scale. Hidden and visible reusable rows agree.
+Browser verification caught a fitting lifecycle defect: a new fixture whose header geometry
+matched the old fixture could leave scale 1 rows and an old PASS result. The effect now
+includes settled fixture identity; it clears the old report and reruns fitting.
+
+Pick v6 defaults to plain price, retains filled tag and offers None. Empty price is valid
+in the shared content contract and reserves no metadata space. Number None is also allowed;
+it removes the element and releases the space before copy. Pill/plain/outlined fonts are
+style-owned; circle fonts 36/48 inside 72/96px diameters with a 3px ring. Plain numbering aligns
+left. Existing palette/automatic contrast choice remains.
+
+Hierarchy: dominant headline, hook 36/600, detail 30/500, suburb and price 28/600. Price variants
+reserve their actual height. The lower image itself is no longer masked: optional feathered
+background-colour scrim sits behind the measured copy rectangle, padded 32px horizontally,
+24px above and 48px below. It follows copy position/height and optional fields, leaving image
+outside that region intact. This is a local readability candidate, not blanket acceptance
+of arbitrary image collisions. Original images remain unchanged.
+
+Published renderer 72ec500b2c652d8fbb6d440249f4d6498d044461, Pages successful. Hosted checks:
+- Main/grid two-column six-item sizes 41/28/24; one-column settled 36/23/20 with all last-row
+  fields present. Six→thirteen transition now settles to .9 scale, sizes 31/21/18; left/right
+  columns 720/591px fit the 720px available area, retaining 7+6 items. PASS matches geometry.
+- Plain right-aligned upper price reaches the text right edge; no-price fixture produces
+  zero price containers. No number produces zero numbered elements and moves lower copy
+  from 286 to 176. Checks exercised both treatment controls and real font rendering.
+- Actual original 23540.png and 23543.png chooser uploads verify frame preservation and local
+  backdrop behaviour. Representative lower title 130px; hook 36, detail 30, suburb/price 28.
+  Copy bottom 731 produces backdrop top 262/height517; optional fields reposition/resize it.
+  The original playground 23557.png is unavailable, so this is not exact-asset verification.
+- 390px iframe viewport checked with actual 23540.png, no number and plain price; artwork 351×438.75px. This is browser viewport evidence, not a physical-device test.
+- Build, 14 focused checks and diff check pass. Browser service recovered after v5 timeouts.
+
+New stable rule IDs: list-readable-third-v2, curated-number-options-v2,
+curated-optional-price-v1, curated-copy-hierarchy-v1, curated-copy-protection-v2.
+Price optionality, None choices and fixtures are manifest-owned; added no-price/no-number
+fixtures and carried the stress fixtures into v6. Active List/Pick v6; Cover v5 and Big
+Type/Split v2 unchanged. No accepted reference snapshots frozen; production does not yet
+consume these manifests. Next: Alina reviews v6 hierarchy, circle/pill scale and copy-local
+backdrop strength with her own illustration. Dense-copy/overlap warnings still require
+judgement. No Lovable calls/changes; spend remains 117.9 credits.

@@ -61,3 +61,17 @@ Curated Pick v4 retains the upper-panel option and adds a lower composed frame. 
 option keeps the source aspect ratio/transparency and has bounded canvas widths. Stronger
 suburb and price typography is measured separately; fit warnings and density guidance are
 distinct. Nothing is omitted automatically to make a stress fixture look acceptable.
+
+
+## Current refinement: List v6 and Pick v6
+
+List keeps the liked hierarchy, with a stronger third line that remains smaller than the
+secondary line at every supported density/count/column/fit scale. V5 oversized third text
+is superseded. Pick offers plain price, filled tag or none; empty price is valid. Numbering
+can be omitted, and each style now has its own font size and padding. Metadata no longer
+outscales the hook: hook36, detail30, suburb/price28, beneath the dominant headline.
+
+The lower-frame image stays unmasked. Optional copy protection is now a feathered scrim
+behind actual measured copy bounds, rather than an image-wide alpha fade. It follows copy
+position and height, including changes from optional number/price. Manifest controls and
+shared rule IDs own the contract; see review/STATUS.md for actual verification and caveats.
