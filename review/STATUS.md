@@ -8,8 +8,8 @@ Current direction: restore existing Lovable source templates, fix known fitting 
 improve individual bounded treatments. Cover is the current design priority; Curated Pick
 must remain available as the existing mixed-post slide recipe.
 
-The restoration uses source commit ec495d390df67643d9206f0d65f30902883f4271. Active List is v3;
-Big Type, Split and Curated Pick are v2; Editorial Cover is v4. All visual acceptance is pending.
+The restoration uses source commit ec495d390df67643d9206f0d65f30902883f4271. Historical restoration started with List v3, Big Type/Split/Pick v2 and Cover v4.
+Current versions and qualified acceptance are recorded in the newest section below.
 
 ## Cover upload regression verification
 
@@ -66,3 +66,56 @@ This remains one experimental Curated Pick candidate, not a frozen/accepted reci
 The second treatment is deliberately pending review. Cover expanded copy is also experimental;
 its default appearance has qualified approval. No production/Lovable changes or spend; 117.9
 credits cumulative. Next: Alina reviews the same candidate with a photo and illustration.
+
+
+## List v4 and Curated Pick v4 — 13 October 2026 (Sydney)
+
+Alina retains the visual-above Pick as one useful option, especially with less copy and a
+suitable full-area visual. It is not accepted as a general Playmap baseline. The second
+candidate puts copy above a bottom-anchored composed illustration frame; the original
+transparent padding and aspect ratio remain intact. The same upload slot supports either
+medium, with explicit frame/crop/contain choices. Larger suburb text and a content-sized
+price tag give practical information stronger visual weight. Dense copy remains visible
+and gets a separate density warning; it is not advertised as a successful visual merely
+because it fits.
+
+List v4 keeps the restored composition. Item names now use 700/900 weights, and numbers
+use 900 with larger numerals. Plain numerals on light fields use the dark foreground.
+Headline height is allocated after measuring minimum-scale rows from the exact same
+ListRows markup. Body fitting restarts when the actual header geometry changes. Footer
+choices explicitly select CTA, graphic or none: an inactive upload neither renders nor
+reserves space. The list zone no longer silently hides overflowing rows.
+
+Renderer verified: 97588f889dad9c008d27524636dfb859d51a6b2b, Pages deployment succeeded.
+- Hosted Gabarito Small/Default/Large sizes: six-item 101/112/116px; short 101/112/130px;
+  awkward long 82/82/82px; explicit multiline 101/112/126px. Constrained targets warn.
+- DM Sans six-item 101/108/108px; actual font family matches measurement.
+- Main and grid geometry match. Lab preview note CSS formerly added margins to artwork
+  paragraphs in the grid; it is now scoped to the notes outside the artwork.
+- Settled six-item geometry: body top 438, height 718, ending at safe bottom 1156; the
+  secondary and third lines of item 6 are present above the CTA.
+- 13-item auto columns retain all fields (7 + 6 rows), scale .85, no safe-area overflow.
+  This remains a dense post: the grid carries its headline/list idea, not readable small print.
+- Actual 23540.png chooser upload verifies the second Pick at 900px natural-width frame,
+  anchored at bottom; title 130px, suburb/price 42px. No automatic image-type switch.
+- Stress Pick retains all fields and reports a 9-line copy-heavy state. Switching back to
+  visual-above selects crop fit without changing semantic content.
+- Both candidates inspected in the real hosted Lab at desktop and in a 390px iframe
+  viewport; the phone artwork is 351 × 438.75px. This is not physical-device testing.
+- Immediate control-switch screenshots can catch intermediate List scale/placement before
+  its measurements settle. Verify settled geometry; a render-readiness indicator remains
+  a possible Lab improvement. No new accepted reference snapshots are frozen.
+- Build and 11 focused checks pass. Source PNG and photo remain local QA assets, not repo files.
+
+Shared manifests are active List v4/Pick v4/Cover v5/Big Type v2/Split v2. New rule IDs:
+list-headline-budget-v1, list-exclusive-footer-v1, list-strong-type-v1,
+curated-two-compositions-v1, curated-strong-metadata-v1, curated-copy-density-v1.
+List carries the eight representative/stress fixtures forward. Pick adds a short, one-hook
+fixture with optional detail absent. Allowed dependent fit values/defaults come from the
+manifest; the UI does not define another template contract.
+
+Next: Alina reviews the second Pick with an appropriate composed illustration and the
+stronger List hierarchy. Treat these visual changes as candidates until that review;
+keep the first Pick option and liked Cover default. Dense copy, arbitrary frame/image
+collisions and lower-frame full-width overlap remain content-specific diagnostics.
+Production/Lovable unchanged; cumulative Lovable renderer spend remains 117.9 credits.

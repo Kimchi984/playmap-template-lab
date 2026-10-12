@@ -131,7 +131,7 @@
       },
       "referenceSnapshot": null,
       "expectedRecipeVersion": 4,
-      "label": "Short · lower composed frame"
+      "label": "Short · one supporting line"
     }
   ],
   "note": "Design fixtures only. Uploads are local previews and never committed or included in URLs. Test the same composition with a real photo and transparent illustration."
