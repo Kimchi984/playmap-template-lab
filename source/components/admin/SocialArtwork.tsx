@@ -253,6 +253,7 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
       const next = listVerticalLayout(headerBottom, listHeight, list.position, motifHeight,footerHeight);
       setPlacement((current) => current.top === next.top && current.availableHeight === next.availableHeight && current.safeBottom === next.safeBottom && current.overflow === next.overflow ? current : next);
       if (fitState.key !== contentKey || fitState.headerBottom !== headerBottom) {
+        lastReport.current = null;
         setFitState({key:contentKey,scale:1,headerBottom});
         return;
       }
@@ -273,7 +274,7 @@ function ListArtwork({ spec, list: slideList, assets, onListFit }: { spec: Pick<
     measure();
     void document.fonts.ready.then(measure);
     return () => { cancelled = true; observer.disconnect(); };
-  }, [contentKey, scale, fitState.headerBottom, list.position, motifAsset, motifSlot.scale]);
+  }, [contentKey, scale, fitState.key, fitState.headerBottom, list.position, motifAsset, motifSlot.scale]);
   const s = (value: number) => Math.round(value * scale);
   const bodyText = textColour(defaultTextStyle(), list.background);
   const width = columnWidth(columns);

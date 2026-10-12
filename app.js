@@ -1,4 +1,4 @@
-import {renderRestored,prepareFonts} from './dist/restored.js?v=fa707ad2314a';
+import {renderRestored,prepareFonts} from './dist/restored.js?v=357b8f6af108';
 const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
 const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
 let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
@@ -77,7 +77,7 @@ function render(){
 }
 function updateScale(){for(const wrap of document.querySelectorAll('.preview-wrap')){const stage=wrap.querySelector('.stage');if(stage){stage.style.transform=`scale(${wrap.clientWidth/1080})`;wrap.style.height=wrap.clientWidth*1.25+'px'}}}
 $('template').onchange=()=>{state.template=$('template').value;state.fixture='';loadTemplate().catch(failure)};
-$('fixture').onchange=()=>{state.fixture=$('fixture').value;render()};
+$('fixture').onchange=()=>{state.fixture=$('fixture').value;listReport=null;render()};
 $('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(url());$('copyLink').textContent='Copied'}catch{$('testUrl').select();$('copyLink').textContent='Select + copy URL'}setTimeout(()=>$('copyLink').textContent='Copy test link',1200)};
 let checksFrame;
 const scheduleChecks=()=>{cancelAnimationFrame(checksFrame);checksFrame=requestAnimationFrame(refreshChecks)};
