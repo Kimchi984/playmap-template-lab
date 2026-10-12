@@ -63,7 +63,7 @@ function refreshChecks(){
  if(overflow.length)warnings.push('Some text cannot fit above its minimum size. Shorten the copy.');
  if(state.template==='list'&&listReport){if(listReport.overflow)warnings.push('List exceeds the safe area. Shorten copy, use Compact or two columns.');for(const i of listReport.tooManyLines)warnings.push(`Item ${i+1} exceeds three lines.`)}
  if(state.template==='curated-pick'&&!images[state.visualMode==='photo'?'photo':'hero'])warnings.push('No image supplied. The original image area stays empty; no filler graphic is invented.');
- $('checks').replaceChildren(row('Baseline','Lovable source ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.length?sizes.join(' / ')+'px':'Not rendered',sizes.length?'pass':'fail'),...(state.template==='editorial-cover'?[row('Local graphics',`${$('stage').querySelectorAll('img').length} / ${Object.values(images).filter(Boolean).length} present`)]:[]),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
+ $('checks').replaceChildren(row('Baseline','Lovable source ec495d3'),row('Fonts','Bundled real fonts'),row('Rendered headline',sizes.length?sizes.join(' / ')+'px':'Not rendered',sizes.length?'pass':'fail'),...(state.template==='editorial-cover'?[row('Local graphics',`${[...$('stage').querySelectorAll('img')].filter(n=>n.complete&&n.naturalWidth).length} / ${Object.values(images).filter(Boolean).length} loaded`)]:[]),...(state.template==='split'?[row('Shared Split size',sizes.length===2&&sizes[0]===sizes[1]?'PASS':'Pending',sizes.length===2&&sizes[0]===sizes[1]?'pass':'warn')]:[]),...(state.template==='list'&&listReport?[row('List fit scale',String(listReport.scale)),row('List fits',listReport.overflow?'Needs adjustment':'PASS',listReport.overflow?'fail':'pass')]:[]),row('Visual acceptance','Awaiting review','warn'));
  $('warnings').textContent=warnings.join(' ');$('warnings').hidden=!warnings.length;
 }
 function render(){
@@ -77,7 +77,11 @@ function updateScale(){for(const wrap of document.querySelectorAll('.preview-wra
 $('template').onchange=()=>{state.template=$('template').value;state.fixture='';loadTemplate().catch(failure)};
 $('fixture').onchange=()=>{state.fixture=$('fixture').value;render()};
 $('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(url());$('copyLink').textContent='Copied'}catch{$('testUrl').select();$('copyLink').textContent='Select + copy URL'}setTimeout(()=>$('copyLink').textContent='Copy test link',1200)};
-$('stage').addEventListener('load',()=>requestAnimationFrame(refreshChecks),true);
+let checksFrame;
+const scheduleChecks=()=>{cancelAnimationFrame(checksFrame);checksFrame=requestAnimationFrame(refreshChecks)};
+new MutationObserver(scheduleChecks).observe($('stage'),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['style','data-constrained','data-overflow','data-font-size']});
+$('stage').addEventListener('load',scheduleChecks,true);
+$('stage').addEventListener('error',scheduleChecks,true);
 $('nativeSize').onclick=()=>{document.body.classList.toggle('native-view');updateScale()};
 function failure(e){$('status').textContent=e.message;$('status').className='fail'}
 new ResizeObserver(updateScale).observe($('work'));window.addEventListener('resize',updateScale);
