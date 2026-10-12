@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "list",
+  "templateVersion": 2,
+  "status": "lab",
+  "label": "List",
+  "job": "Turn a curated set of family activities/events into a highly scannable social post.",
+  "dominantVisualIdea": "Strong editorial headline followed by a rhythmic numbered list that remains useful at feed size.",
+  "contentSlots": {
+    "headline": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 100,
+      "newlines": "preserve"
+    },
+    "subheading": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 50
+    },
+    "items": {
+      "type": "object[]",
+      "required": true,
+      "role": "content",
+      "minItems": 3,
+      "maxItems": 13,
+      "fields": {
+        "primary": {
+          "type": "string",
+          "required": true,
+          "role": "support"
+        },
+        "secondary": {
+          "type": "string",
+          "required": false,
+          "role": "metadata"
+        },
+        "third": {
+          "type": "string",
+          "required": false,
+          "role": "metadata"
+        }
+      }
+    },
+    "cta": {
+      "type": "string",
+      "required": false,
+      "role": "cta",
+      "maxLength": 90
+    }
+  },
+  "designOptions": {
+    "artDirection": {
+      "type": "enum",
+      "values": [
+        "clean",
+        "playful",
+        "poster"
+      ],
+      "default": "playful",
+      "label": "Art direction"
+    },
+    "displayFont": {
+      "type": "enum",
+      "values": [
+        "dm-sans",
+        "gabarito"
+      ],
+      "default": "gabarito",
+      "label": "Display font"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default",
+      "label": "Headline size"
+    },
+    "columns": {
+      "type": "enum",
+      "values": [
+        "auto",
+        "1",
+        "2"
+      ],
+      "default": "auto",
+      "label": "Columns"
+    }
+  },
+  "artDirectionModes": [
+    "clean",
+    "playful",
+    "poster"
+  ],
+  "rules": {
+    "headlineFitting": "headline-fit-monotonic-v2",
+    "listFitting": "list-content-fit-v2",
+    "verticalPlacement": "list-header-connected-placement-v2",
+    "measurement": "real-font-measurement-v2",
+    "artDirection": "list-composition-v2"
+  },
+  "invariants": [
+    "real-font-loaded",
+    "measurement-render-parity",
+    "text-size-monotonic",
+    "content-complete",
+    "list-readability-floor",
+    "safe-boundaries",
+    "grid-size-human-review"
+  ],
+  "acceptance": {
+    "architecture": "accepted",
+    "visuals": "experimental \u2014 awaiting Alina",
+    "referenceSnapshots": "not frozen"
+  },
+  "compositions": {
+    "clean": {
+      "layoutRule": "list-clean-composition-v2",
+      "dominantIdea": "An editorial index: dark type on paper, restrained number tabs and fine rules.",
+      "hierarchy": "Headline \u2192 item names \u2192 metadata.",
+      "spacing": "Header-connected list, generous margins and calm vertical rhythm.",
+      "numberTreatment": "Small two-digit index on a teal tab.",
+      "headlineBehaviour": "Full width, left aligned, measured natural wrapping.",
+      "graphicBehaviour": "Fine rules only.",
+      "density": "One column normally; two beyond eight items."
+    },
+    "playful": {
+      "layoutRule": "list-playful-composition-v2",
+      "dominantIdea": "Expressive teal header with a coloured route, leading into an offset paper list.",
+      "hierarchy": "High contrast headline with accent ending; bold items anchored by coloured numbers.",
+      "spacing": "Alternating bounded offsets in one column; fixed safe gutters in two.",
+      "numberTreatment": "Large colourful blocks create a structural colour rhythm.",
+      "headlineBehaviour": "Larger type, reserved route gutter, coloured final word.",
+      "graphicBehaviour": "Flat route arrow owns the header gutter; a pink rail connects into the list.",
+      "density": "One column normally; two beyond eight items."
+    },
+    "poster": {
+      "layoutRule": "list-poster-composition-v2",
+      "dominantIdea": "A yellow typographic header with a bleeding count, over a teal numbered poster.",
+      "hierarchy": "Oversized headline/count \u2192 oversized number rhythm \u2192 useful names/metadata.",
+      "spacing": "Asymmetric header and stretched number rhythm in the body.",
+      "numberTreatment": "Oversized plain numerals; the count bleeds at the left edge of the header.",
+      "headlineBehaviour": "Highest scale, left count gutter and naturally wrapped text.",
+      "graphicBehaviour": "Diagonal pink band and full-bleed teal body; orange footer.",
+      "density": "Two columns from five items, supported above explicit readability floors."
+    }
+  },
+  "graphicCapabilities": {
+    "roles": [
+      "structural-route",
+      "number-rhythm",
+      "background-band"
+    ],
+    "behaviour": "Owned by each composition rule; no arbitrary placement."
+  },
+  "limits": {
+    "headlineFloorPx": 56,
+    "itemPrimaryFloorPx": 32,
+    "metadataFloorPx": 21,
+    "thirdFloorPx": 20,
+    "onFailure": "Report infeasible; never hide semantic rows or shrink below the floor."
+  }
+}

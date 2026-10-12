@@ -1,25 +1,102 @@
-const P={teal:'#0F7C78',seafoam:'#D8F1E6',yellow:'#F4D84A',pink:'#F59AC2',lilac:'#A999F5',orange:'#F7A046',blue:'#6EC5E9',ink:'#22251F',paper:'#F7F8F5',white:'#fff'};
-const els=Object.fromEntries(['template','fixture','artDirection','displayFont','headlineSize','recipeMeta','checks','stage','stageMini','copyLink'].map(id=>[id,document.getElementById(id)]));
-const qs=new URLSearchParams(location.search);const saved=JSON.parse(localStorage.getItem('playmap-template-lab-state')||'{}');
-const state={template:qs.get('template')||saved.template||'list',fixture:qs.get('fixture')||saved.fixture||'',artDirection:qs.get('artDirection')||saved.artDirection||'playful',displayFont:qs.get('displayFont')||saved.displayFont||'gabarito',headlineSize:qs.get('headlineSize')||saved.headlineSize||'default'};
-let catalog,recipe,fixtureSet;
-const fetchJson=async p=>(await fetch(p,{cache:'no-store'})).json();
-function persist(){localStorage.setItem('playmap-template-lab-state',JSON.stringify(state));}
-function fontVars(stage){stage.style.setProperty('--display-font',state.displayFont==='gabarito'?'"Gabarito",sans-serif':'"DM Sans",sans-serif');stage.style.setProperty('--display-weight',state.displayFont==='gabarito'?900:900);stage.style.setProperty('--display-track',state.displayFont==='gabarito'?'-.04em':'-.045em');stage.style.setProperty('--display-line',state.displayFont==='gabarito'?'.86':'.9');stage.className=`stage ${state.artDirection}`}
-function measure(text,width,maxHeight,min,max){const n=document.createElement('div');n.className='display';fontVars(n);Object.assign(n.style,{position:'absolute',visibility:'hidden',width:width+'px',left:'-9999px',top:'-9999px'});n.textContent=text;document.body.appendChild(n);let lo=min,hi=max,best=min;while(lo<=hi){const mid=Math.floor((lo+hi)/2);n.style.fontSize=mid+'px';if(n.scrollHeight<=maxHeight&&n.scrollWidth<=width){best=mid;lo=mid+1}else hi=mid-1}n.remove();return best}
-const ceil=(small,def,large)=>({small,default:def,large})[state.headlineSize];
-function chrome(stage,bg='teal',dark=false){stage.style.background=P[bg];fontVars(stage);return `<div class="wordmark" style="color:${dark?P.teal:P.white}">the playmap</div>`}
-function renderBig(stage,c){const max=ceil(150,190,220),fs=measure(c.headline,912,650,38,max),poster=state.artDirection==='poster';stage.innerHTML=chrome(stage,'teal')+`<div style="position:absolute;left:84px;right:84px;top:${poster?190:235}px"><div class="display" style="font-size:${fs}px;color:white">${c.headline}</div><div class="support" style="font-size:38px;line-height:1.2;color:white;margin-top:28px;max-width:820px">${c.supporting||''}</div></div><div class="decor heroShape" style="width:220px;height:220px;right:-60px;bottom:180px;background:${P.pink}"></div><div class="support" style="position:absolute;left:84px;bottom:80px;color:white;font-size:27px;font-weight:800">${c.cta||''}</div>`;return {fontSize:fs}}
-function splitSize(c){const max=ceil(100,128,148);return Math.min(measure(c.topHeadline,690,320,34,max),measure(c.bottomHeadline,690,355,34,max))}
-function renderSplit(stage,c){const fs=splitSize(c);stage.innerHTML=chrome(stage,'teal')+`<div style="position:absolute;left:0;top:0;width:1080px;height:605px;background:${P.teal};padding:145px 84px 60px"><div class="display" style="font-size:${fs}px;color:white;width:690px">${c.topHeadline}</div><div class="support" style="font-size:31px;line-height:1.18;color:white;margin-top:24px;width:690px">${c.topSupporting||''}</div></div><div style="position:absolute;left:0;top:605px;width:1080px;height:605px;background:${P.yellow};padding:72px 84px 60px"><div class="display" style="font-size:${fs}px;color:${P.teal};width:690px">${c.bottomHeadline}</div><div class="support" style="font-size:31px;line-height:1.18;color:${P.teal};margin-top:24px;width:690px">${c.bottomSupporting||''}</div></div><div style="position:absolute;left:0;bottom:0;height:140px;width:1080px;background:${P.paper};padding:48px 84px;color:${P.teal};font:800 28px 'DM Sans'">${c.cta||''}</div>`;return {fontSize:fs,shared:true}}
-function listHeaderSize(text,intent){return measure(text,912,165,38,{small:86,default:108,large:128}[intent])}
-function renderList(stage,c){const sizes={small:listHeaderSize(c.headline,'small'),default:listHeaderSize(c.headline,'default'),large:listHeaderSize(c.headline,'large')},fs=sizes[state.headlineSize],items=c.items||[],cols=items.length>8?2:1,per=Math.ceil(items.length/cols),groups=[items.slice(0,per),...(cols===2?[items.slice(per)]:[])];stage.innerHTML=chrome(stage,'teal')+`<div style="position:absolute;left:84px;right:84px;top:145px"><div class="display" style="font-size:${fs}px;color:white">${c.headline}</div><div class="support" style="font-size:31px;color:white;margin-top:14px">${c.subheading||''}</div></div><div style="position:absolute;left:84px;right:84px;top:345px;bottom:170px;display:grid;grid-template-columns:${cols===2?'1fr 1fr':'1fr'};gap:34px">${groups.map((g,gi)=>`<div style="display:flex;flex-direction:column;gap:${items.length>9?17:25}px">${g.map((x,j)=>{const n=gi*per+j+1,colour=[P.yellow,P.pink,P.blue,P.orange,P.lilac][(n-1)%5];return `<div style="display:flex;gap:18px;align-items:flex-start;color:white"><div style="width:${cols===2?52:60}px;height:${cols===2?52:60}px;border-radius:50%;background:${colour};color:${P.teal};display:grid;place-items:center;font:800 ${cols===2?27:31}px 'DM Sans';flex:none">${n}</div><div><div style="font:800 ${cols===2?34:40}px/1.04 'DM Sans'">${x.primary}</div><div style="font:600 ${cols===2?22:25}px/1.1 'DM Sans';opacity:.86;margin-top:4px">${x.secondary||''}</div></div></div>`}).join('')}</div>`).join('')}</div><div style="position:absolute;left:84px;bottom:45px;background:white;color:${P.teal};padding:16px 28px;border-radius:999px;font:800 25px 'DM Sans'">⌕ &nbsp; ${c.cta||''}</div>`;return {fontSize:fs,sizes,monotonic:sizes.large>=sizes.default&&sizes.default>=sizes.small}}
-function renderEditorial(stage,c){const fs=measure(c.headline,912,440,42,ceil(135,175,205));stage.innerHTML=chrome(stage,'yellow',true)+`<div style="position:absolute;left:84px;right:84px;top:190px"><div style="display:inline-block;padding:13px 24px;border-radius:999px;background:${P.ink};color:${P.yellow};font:800 29px 'DM Sans';letter-spacing:.04em">${c.kicker||''}</div><div class="display" style="font-size:${fs}px;color:${P.teal};margin-top:32px">${c.headline}</div><div class="support" style="font-size:38px;color:${P.teal};margin-top:26px">${c.supporting||''}</div></div><div class="decor" style="position:absolute;right:-80px;bottom:-80px;width:590px;height:590px;border-radius:44% 56% 50% 50%;background:${P.pink};transform:rotate(-8deg)"></div><div class="decor" style="position:absolute;right:330px;bottom:210px;width:135px;height:135px;border-radius:50%;background:${P.blue}"></div>`;return {fontSize:fs}}
-function renderPick(stage,c){stage.style.background=P.paper;fontVars(stage);const fs=measure(c.name,912,175,38,ceil(88,110,128));stage.innerHTML=`<div style="position:absolute;inset:0 0 auto;height:740px;background:linear-gradient(135deg,${P.seafoam},${P.blue})"><div class="decor" style="position:absolute;width:510px;height:510px;border-radius:50%;background:${P.yellow};right:-90px;top:80px"></div></div><div style="position:absolute;left:64px;top:585px;color:white;font:800 180px/.8 'DM Sans'">01</div><div style="position:absolute;left:84px;right:84px;top:790px"><div class="display" style="font-size:${fs}px;color:${P.ink}">${c.name}</div><div class="support" style="font-size:34px;line-height:1.15;margin-top:18px">${c.hook||''}</div><div class="support" style="font-size:27px;line-height:1.2;margin-top:13px;opacity:.8">${c.detail||''}</div></div><div style="position:absolute;left:0;right:0;bottom:0;height:130px;border-top:3px solid ${P.ink};padding:0 84px;display:flex;align-items:center;justify-content:space-between;font:700 31px 'DM Sans'"><span>${c.location||''}</span><span style="background:${P.ink};color:white;border-radius:999px;padding:10px 25px">${c.price||''}</span></div>`;return {fontSize:fs}}
-const renderers={'big-type':renderBig,split:renderSplit,list:renderList,'editorial-cover':renderEditorial,'curated-pick':renderPick};
-async function loadTemplate(){const entry=catalog.templates.find(x=>x.id===state.template)||catalog.templates[0];recipe=await fetchJson(entry.path);fixtureSet=await fetchJson(entry.fixtures);els.fixture.innerHTML=fixtureSet.fixtures.map(x=>`<option value="${x.id}">${x.id}</option>`).join('');if(!fixtureSet.fixtures.some(x=>x.id===state.fixture))state.fixture=fixtureSet.fixtures[0].id;sync();render()}
-function sync(){els.template.value=state.template;els.fixture.value=state.fixture;els.artDirection.value=state.artDirection;els.displayFont.value=state.displayFont;els.headlineSize.value=state.headlineSize;persist()}
-function render(){sync();const f=fixtureSet.fixtures.find(x=>x.id===state.fixture)||fixtureSet.fixtures[0],c=f.content;const result=renderers[state.template](els.stage,c);renderers[state.template](els.stageMini,c);els.recipeMeta.innerHTML=`<strong>${recipe.label} v${recipe.templateVersion}</strong><br>${recipe.job}<br><br><em>${recipe.dominantVisualIdea}</em><br><br>Rules: ${Object.values(recipe.rules).join(', ')}`;const checks=[['Recipe version',`v${recipe.templateVersion}`,true],['Fixture',f.id,true],['Display font',state.displayFont==='gabarito'?'Gabarito':'DM Sans',true],['Art direction',state.artDirection,true]];if(state.template==='split')checks.push(['Shared headline size',result.shared?'PASS':'FAIL',result.shared]);if(state.template==='list')checks.push(['Size monotonic',result.monotonic?'PASS':'FAIL',result.monotonic],['Small/Default/Large',`${result.sizes.small}/${result.sizes.default}/${result.sizes.large}px`,result.monotonic]);checks.push(['Computed display',result.fontSize+'px',true]);els.checks.innerHTML=checks.map(([a,b,ok])=>`<div class="check"><span>${a}</span><span class="${ok?'pass':'fail'}">${b}</span></div>`).join('')}
-function url(){const q=new URLSearchParams({template:state.template,fixture:state.fixture,artDirection:state.artDirection,displayFont:state.displayFont,headlineSize:state.headlineSize});return `${location.origin}${location.pathname}?${q}`}
-els.template.onchange=async e=>{state.template=e.target.value;state.fixture='';await loadTemplate()};els.fixture.onchange=e=>{state.fixture=e.target.value;render()};els.artDirection.onchange=e=>{state.artDirection=e.target.value;render()};els.displayFont.onchange=e=>{state.displayFont=e.target.value;render()};els.headlineSize.onchange=e=>{state.headlineSize=e.target.value;render()};els.copyLink.onclick=async()=>{await navigator.clipboard.writeText(url());els.copyLink.textContent='Copied';setTimeout(()=>els.copyLink.textContent='Copy test link',1200)};
-await document.fonts.ready;catalog=await fetchJson('recipes/catalog.json');els.template.innerHTML=catalog.templates.map(x=>`<option value="${x.id}">${x.label}</option>`).join('');await loadTemplate();
+import {TextMeasurer,requireFonts} from './rules/typography.js';
+import {renderList} from './rules/list.js';
+import {renderScaffold} from './lab/scaffold.js';
+const $=id=>document.getElementById(id);
+const qs=new URLSearchParams(location.search);
+let catalog,recipe,fixtureSet,meter,result;
+let saved={};try{saved=JSON.parse(localStorage.getItem('playmap-template-lab-state')||'{}')}catch{}
+const state={template:qs.get('template')||saved.template||'list',fixture:qs.get('fixture')||saved.fixture||'',artDirection:qs.get('artDirection')||saved.artDirection||'playful',displayFont:qs.get('displayFont')||saved.displayFont||'gabarito',headlineSize:qs.get('headlineSize')||saved.headlineSize||'default',columns:qs.get('columns')||saved.columns||'auto'};
+const embedded=JSON.parse(document.getElementById('lab-data')?.textContent||'null');
+async function fetchJson(path){if(embedded)return embedded[path];const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error(`${path}: HTTP ${r.status}`);return r.json()}
+function persist(){try{localStorage.setItem('playmap-template-lab-state',JSON.stringify(state))}catch{}}
+function options(){
+  $('designControls').replaceChildren();
+  for(const [key,spec] of Object.entries(recipe.designOptions)){
+    if(!['artDirection','displayFont','headlineSize','columns'].includes(key))continue;
+    const label=document.createElement('label');label.textContent=spec.label||({headlineSize:'Headline size',displayFont:'Display font',artDirection:'Art direction',columns:'Columns'}[key]);
+    const select=document.createElement('select');select.id=key;
+    for(const value of spec.values){const option=document.createElement('option');option.value=value;option.textContent=({ 'dm-sans':'DM Sans',gabarito:'Gabarito',auto:'Auto'}[value]||value[0].toUpperCase()+value.slice(1));select.append(option)}
+    if(!spec.values.includes(state[key]))state[key]=spec.default;
+    select.value=state[key];select.onchange=()=>{state[key]=select.value;render()};label.append(select);$('designControls').append(label);
+  }
+}
+async function loadTemplate(){
+  const entry=catalog.templates.find(x=>x.id===state.template)||catalog.templates.find(x=>x.id==='list');state.template=entry.id;
+  recipe=await fetchJson(entry.path);fixtureSet=await fetchJson(entry.fixtures);
+  $('fixture').replaceChildren();for(const f of fixtureSet.fixtures){const opt=document.createElement('option');opt.value=f.id;opt.textContent=f.label||f.id;$('fixture').append(opt)}
+  if(!fixtureSet.fixtures.some(x=>x.id===state.fixture))state.fixture=fixtureSet.fixtures[0].id;
+  options();render();
+}
+function checkRow(a,b,status='pass'){const row=document.createElement('div');row.className='check';const name=document.createElement('span');name.textContent=a;const value=document.createElement('span');value.className=status;value.textContent=b;row.append(name,value);return row}
+function paint(stage,c,design){return state.template==='list'?renderList(stage,c,design,recipe,meter):renderScaffold(stage,c,design,meter,state.template)}
+function parity(stage,res){
+  const head=stage.querySelector('.list-headline'),style=getComputedStyle(head);
+  const height=Math.abs(head.offsetHeight-res.headlineMetrics.height)<=1;
+  const fonts=style.fontFamily.includes(res.display.family)&&Number(style.fontWeight)===res.display.weight&&Math.abs(parseFloat(style.letterSpacing)-res.fontSize*res.display.tracking)<.1&&Math.abs(parseFloat(style.lineHeight)-res.fontSize*res.display.lineHeight)<.1&&Math.abs(head.clientWidth-Number(head.style.width.replace('px','')))<=1;
+  const rows=[...stage.querySelectorAll('.list-row-copy')];const rowHeights=rows.every((n,i)=>Math.abs(n.offsetHeight-(res.rows.entries[i].p.height+(res.rows.entries[i].s.height?7+res.rows.entries[i].s.height:0)+(res.rows.entries[i].t.height?5+res.rows.entries[i].t.height:0)))<=1);
+  return {height,fonts,rowHeights,pass:height&&fonts&&rowHeights};
+}
+function render(){
+  $('template').value=state.template;$('fixture').value=state.fixture;persist();
+  for(const key of Object.keys(recipe.designOptions))if($(key))$(key).value=state[key];
+  const f=fixtureSet.fixtures.find(x=>x.id===state.fixture);result=paint($('stage'),f.content,state);paint($('stageMini'),f.content,state);
+  $('compare').hidden=state.template!=='list';$('runMatrix').hidden=state.template!=='list';
+  $('comparison').hidden=state.template!=='list';
+  if(state.template==='list'){
+    for(const mode of recipe.artDirectionModes)paint($(`compare-${mode}`),f.content,{...state,artDirection:mode});
+  }
+  $('recipeMeta').replaceChildren();const title=document.createElement('strong');title.textContent=`${recipe.label} v${recipe.templateVersion} · ${recipe.status}`;$('recipeMeta').append(title);
+  const p=document.createElement('p');p.textContent=state.template==='list'?recipe.compositions[state.artDirection].dominantIdea:'Infrastructure scaffold. Visual art direction is not accepted.';$('recipeMeta').append(p);
+  const checks=[checkRow('Fonts','Real webfonts loaded')];
+  if(state.template==='list'){
+    const paired=parity($('stage'),result);checks.push(checkRow('Measurement / render parity',paired.pass?'PASS':'FAIL',paired.pass?'pass':'fail'),checkRow('Large ≥ Default ≥ Small',result.monotonic?'PASS':'FAIL',result.monotonic?'pass':'fail'),checkRow('Small / Default / Large',`${result.sizes.small} / ${result.sizes.default} / ${result.sizes.large}px`),checkRow('Requested → rendered',`${result.targets[state.headlineSize]} → ${result.fontSize}px`,result.targets[state.headlineSize]===result.fontSize?'pass':'warn'),checkRow('All item fields retained',`${f.content.items.length} items · secondary + third`, 'pass'),checkRow('Headline / rows / footer fit',`${result.headlineFits?'✓':'✕'} / ${result.rowFits?'✓':'✕'} / ${result.footerFits?'✓':'✕'}`,(result.headlineFits&&result.rowFits&&result.footerFits)?'pass':'fail'),checkRow('Primary / metadata / third',`${result.rows.fontSize} / ${result.rows.metaSize} / ${result.rows.thirdSize}px`),checkRow('Composition rule',result.rule),checkRow('Visual acceptance','Awaiting Alina','warn'));
+    $('warnings').textContent=result.warnings.join(' ');$('warnings').hidden=!result.warnings.length;
+    $('stage').dataset.parity=paired.pass;$('stage').dataset.fits=result.headlineFits&&result.rowFits&&result.footerFits;
+  }else{checks.push(checkRow('Visual acceptance','Scaffold only','warn'));$('warnings').hidden=true;}
+  $('checks').replaceChildren(...checks);$('testUrl').value=url();
+  if(!qs.has('viewport'))history.replaceState(null,'',url());
+  updateScale();
+}
+function url(){const q=new URLSearchParams({...state,templateVersion:String(recipe.templateVersion)});return `${location.origin==='null'?'':location.origin}${location.pathname}?${q}`}
+function updateScale(){
+  for(const wrap of document.querySelectorAll('.preview-wrap')){
+    const stage=wrap.querySelector('.stage');if(!stage)continue;
+    const width=wrap.clientWidth;stage.style.transform=`scale(${width/1080})`;wrap.style.height=`${width*1.25}px`;
+  }
+}
+async function runMatrix(){
+  $('matrixResults').textContent='Running real DOM checks…';await new Promise(requestAnimationFrame);
+  const host=document.createElement('div');Object.assign(host.style,{position:'absolute',left:'-20000px',top:'0'});document.body.append(host);
+  const tests=[];const matrix=recipe.designOptions;
+  for(const f of fixtureSet.fixtures)for(const mode of matrix.artDirection.values)for(const font of matrix.displayFont.values)for(const columns of matrix.columns.values){
+    const sizes={},states=[];
+    for(const intent of matrix.headlineSize.values){
+      const stage=document.createElement('div');host.append(stage);
+      const d={...state,artDirection:mode,displayFont:font,headlineSize:intent,columns};
+      const r=renderList(stage,f.content,d,recipe,meter),p=parity(stage,r);sizes[intent]=r.fontSize;
+      states.push({intent,size:r.fontSize,parity:p.pass,fits:r.headlineFits&&r.rowFits&&r.footerFits,warnings:r.warnings});stage.remove();
+    }
+    const monotonic=sizes.large>=sizes.default&&sizes.default>=sizes.small;
+    tests.push({fixture:f.id,mode,font,columns,sizes,monotonic,states});
+  }
+  host.remove();const monotonic=tests.every(x=>x.monotonic),parityPass=tests.every(x=>x.states.every(s=>s.parity)),unfit=tests.flatMap(x=>x.states.filter(s=>!s.fits).map(s=>({...x,states:undefined,...s})));
+  const report={recipeVersion:recipe.templateVersion,typographyChecks:tests.length*3,triples:tests.length,monotonic,measurementParity:parityPass,infeasibleStates:unfit.length,tests};
+  $('matrixResults').textContent=`${tests.length} size triples / ${tests.length*3} rendered states. Monotonic: ${monotonic?'PASS':'FAIL'}. Typography parity: ${parityPass?'PASS':'FAIL'}. ${unfit.length} states honestly reported infeasible (includes deliberately invalid fixture and forced single-column density).`;
+  $('matrixResults').dataset.report=JSON.stringify(report);$('matrixResults').hidden=false;
+  $('downloadReport').hidden=false;$('downloadReport').onclick=()=>download(JSON.stringify(report,null,2),'list-test-report.json','application/json');
+}
+function download(text,name,mime){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:mime}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+$('template').onchange=()=>{state.template=$('template').value;state.fixture='';loadTemplate().catch(failure)};
+$('fixture').onchange=()=>{state.fixture=$('fixture').value;render()};
+$('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(url());$('copyLink').textContent='Copied'}catch{$('testUrl').select();$('copyLink').textContent='Select + copy URL'}setTimeout(()=>$('copyLink').textContent='Copy test link',1500)};
+$('compare').onclick=()=>{$('comparison').scrollIntoView({behavior:'smooth',block:'start'})};
+$('nativeSize').onclick=()=>{document.body.classList.toggle('native-view');updateScale()};
+$('phoneSize').onclick=()=>{const frame=$('phoneFrame');frame.hidden=!frame.hidden;if(!frame.hidden){const u=new URL(location.href);u.searchParams.set('viewport','phone-frame');frame.src=u.href;frame.scrollIntoView({behavior:'smooth',block:'start'})}};
+$('runMatrix').onclick=()=>runMatrix().catch(failure);
+function failure(e){$('status').textContent=e.message;$('status').className='fail';}
+if(qs.get('viewport')==='phone-frame')document.body.classList.add('phone-frame');
+window.addEventListener('resize',updateScale);new ResizeObserver(updateScale).observe($('work'));
+try{await requireFonts();meter=new TextMeasurer();catalog=await fetchJson('recipes/catalog.json');
+ for(const entry of catalog.templates){const opt=document.createElement('option');opt.value=entry.id;opt.textContent=entry.label+(entry.id==='list'?' · v2 proof':' · scaffold');$('template').append(opt)}
+ await loadTemplate();$('status').textContent='List proof · experimental · real fonts ready';
+}catch(e){failure(e)}

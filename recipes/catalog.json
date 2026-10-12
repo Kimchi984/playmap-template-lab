@@ -1,10 +1,40 @@
 {
   "schemaVersion": "0.1",
   "templates": [
-    {"id":"big-type","label":"Big Type","version":1,"path":"recipes/big-type/v1/recipe.json","fixtures":"recipes/big-type/v1/fixtures.json"},
-    {"id":"split","label":"Split","version":1,"path":"recipes/split/v1/recipe.json","fixtures":"recipes/split/v1/fixtures.json"},
-    {"id":"list","label":"List","version":1,"path":"recipes/list/v1/recipe.json","fixtures":"recipes/list/v1/fixtures.json"},
-    {"id":"editorial-cover","label":"Editorial Cover","version":1,"path":"recipes/editorial-cover/v1/recipe.json","fixtures":"recipes/editorial-cover/v1/fixtures.json"},
-    {"id":"curated-pick","label":"Curated Pick","version":1,"path":"recipes/curated-pick/v1/recipe.json","fixtures":"recipes/curated-pick/v1/fixtures.json"}
+    {
+      "id": "big-type",
+      "label": "Big Type",
+      "version": 1,
+      "path": "recipes/big-type/v1/recipe.json",
+      "fixtures": "recipes/big-type/v1/fixtures.json"
+    },
+    {
+      "id": "split",
+      "label": "Split",
+      "version": 1,
+      "path": "recipes/split/v1/recipe.json",
+      "fixtures": "recipes/split/v1/fixtures.json"
+    },
+    {
+      "id": "list",
+      "label": "List",
+      "version": 2,
+      "path": "recipes/list/v2/recipe.json",
+      "fixtures": "recipes/list/v2/fixtures.json"
+    },
+    {
+      "id": "editorial-cover",
+      "label": "Editorial Cover",
+      "version": 1,
+      "path": "recipes/editorial-cover/v1/recipe.json",
+      "fixtures": "recipes/editorial-cover/v1/fixtures.json"
+    },
+    {
+      "id": "curated-pick",
+      "label": "Curated Pick",
+      "version": 1,
+      "path": "recipes/curated-pick/v1/recipe.json",
+      "fixtures": "recipes/curated-pick/v1/fixtures.json"
+    }
   ]
 }

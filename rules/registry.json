@@ -1,11 +1,69 @@
 {
   "schemaVersion": "0.1",
   "rules": {
-    "real-font-measurement-v1": {"kind":"fitting","contract":"Measure with the same font family, weight, tracking and line-height used for rendering."},
-    "headline-fit-monotonic-v1": {"kind":"fitting","contract":"For identical content and geometry, Large >= Default >= Small. A larger intent must never render smaller."},
-    "split-shared-headline-v1": {"kind":"layout","contract":"Both equal-status Split panels use one shared computed headline size; longer copy wraps naturally."},
-    "list-content-fit-v1": {"kind":"fitting","contract":"Fit list content within the approved scale floor and preserve overflow/line warnings."},
-    "list-header-connected-placement-v1": {"kind":"layout","contract":"List starts from measured header bottom plus bounded offset; it is never independently vertically centred."},
-    "playmap-art-direction-v1": {"kind":"art-direction","contract":"Map Clean/Playful/Poster to deterministic hierarchy, composition and graphic behaviour per template."}
+    "real-font-measurement-v1": {
+      "kind": "fitting",
+      "contract": "Measure with the same font family, weight, tracking and line-height used for rendering."
+    },
+    "headline-fit-monotonic-v1": {
+      "kind": "fitting",
+      "contract": "For identical content and geometry, Large >= Default >= Small. A larger intent must never render smaller."
+    },
+    "split-shared-headline-v1": {
+      "kind": "layout",
+      "contract": "Both equal-status Split panels use one shared computed headline size; longer copy wraps naturally."
+    },
+    "list-content-fit-v1": {
+      "kind": "fitting",
+      "contract": "Fit list content within the approved scale floor and preserve overflow/line warnings."
+    },
+    "list-header-connected-placement-v1": {
+      "kind": "layout",
+      "contract": "List starts from measured header bottom plus bounded offset; it is never independently vertically centred."
+    },
+    "playmap-art-direction-v1": {
+      "kind": "art-direction",
+      "contract": "Map Clean/Playful/Poster to deterministic hierarchy, composition and graphic behaviour per template."
+    },
+    "real-font-measurement-v2": {
+      "kind": "fitting",
+      "contract": "FontFaceSet.load must succeed; same full typography specification and native width on visible and untransformed hidden DOM.",
+      "implementation": "rules/typography.js"
+    },
+    "headline-fit-monotonic-v2": {
+      "kind": "fitting",
+      "contract": "One content/geometry fit capacity for all intents. Large >= Default >= Small. Constrained targets warn. Fixed typography across intents.",
+      "implementation": "rules/fitting.js"
+    },
+    "list-content-fit-v2": {
+      "kind": "fitting",
+      "contract": "All primary/secondary/third content measured. Shrink primary from 46 to 32px; metadata >=21 and third >=20. Infeasible rows warn, no truncation/omission advertised as success.",
+      "implementation": "rules/list.js"
+    },
+    "list-header-connected-placement-v2": {
+      "kind": "layout",
+      "contract": "Rows begin after actual measured headline/subheading bottom plus the composition-owned gap.",
+      "implementation": "rules/list.js"
+    },
+    "list-composition-v2": {
+      "kind": "art-direction",
+      "contract": "Resolve a List-specific registered composition from the shared recipe.",
+      "implementation": "rules/list.js"
+    },
+    "list-clean-composition-v2": {
+      "kind": "layout",
+      "contract": "Paper editorial index, fine rules, restrained tabs.",
+      "implementation": "rules/list.js"
+    },
+    "list-playful-composition-v2": {
+      "kind": "layout",
+      "contract": "Teal expressive header, structural route/rail, offset colourful blocks on paper.",
+      "implementation": "rules/list.js"
+    },
+    "list-poster-composition-v2": {
+      "kind": "layout",
+      "contract": "Yellow count-led header, diagonal band, teal body, oversized numerals and two-column rhythm.",
+      "implementation": "rules/list.js"
+    }
   }
 }
