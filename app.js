@@ -1,4 +1,4 @@
-import {renderRestored,prepareFonts} from './dist/restored.js';
+import {renderRestored,prepareFonts} from './dist/restored.js?v=4f4160f58554';
 const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
 const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
 let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
