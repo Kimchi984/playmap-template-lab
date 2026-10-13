@@ -384,6 +384,6 @@
     "frame": "Visual below defaults to a bottom-anchored 720/900/1080px-wide original frame at natural height. Transparency/padding stay intact. No photo-panel clipping. Overlap warns without resizing copy.",
     "copyProtection": "Optional feathered background-colour scrim behind the actual lower copy bounds. Image itself stays unmasked. It follows measured text height, copy position and optional metadata."
   },
-  "labNote": "Plain number shares the headline typography and copy stack",
+  "labNote": "Plain number keeps its original placement and matches headline scale",
   "revisionNote": "Plain number keeps its original anchor and matches headline scale; title fits independently"
 }

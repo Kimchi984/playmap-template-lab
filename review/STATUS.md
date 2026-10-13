@@ -234,3 +234,27 @@ remain active. Plain-number typography is a review candidate, not a frozen accep
 Production integration remains outstanding. Next: Alina reviews this plain numbering in
 both compositions, then continue only the specific refinements she identifies. No Lovable
 calls/changes; spend remains 117.9 credits.
+
+
+## Pick v8 placement correction — 13 October 2026 (Sydney)
+
+Alina clarified that alignment meant size/style, not joining the title. V7's position and
+joint-fitting change is rejected. Plain number now matches the independently fitted
+headline typography while remaining outside its copy stack at the original anchor.
+Upper: left 84/top 548/height 96, copy top 700. Lower: left 84/top 176/height 72, copy top 286.
+The fixed anchors centre the larger numeral. Title measurement uses title text alone.
+None/colour, pill/circle, price options and all other templates remain unchanged.
+
+Renderer 4ff3c8fcb8498bda090af20735914552a30aa2f7 deployed successfully. Hosted upper:
+number/title both Gabarito 136px/900, tracking -5.44px, line height 116.96px; number outside
+h2, hidden measure contains only CERES Community Park. Lower: both 130px/900, tracking
+-5.2px, line height 111.8px, original anchor/copy positions confirmed. Fonts loaded.
+Main and grid screenshots inspected in both views; this focused pass used no image uploads
+and did not repeat phone/font matrices. Exact illustration overlap remains for visual review.
+Build, 15 checks and diff check pass.
+
+Active Pick v8, List v6, Cover v5, Big Type/Split v2. Shared v8 fixtures retain prior content
+cases and matching version metadata. Rules curated-number-options-v4 and
+curated-independent-number-scale-v1 record the corrected behaviour. V7 remains historical,
+not accepted. No reference snapshots frozen or production integration. Next: Alina reviews
+number scale in the restored placement in both views. No Lovable changes/calls; 117.9 credits.
