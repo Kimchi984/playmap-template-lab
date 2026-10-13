@@ -1,0 +1,1153 @@
+{
+  "releaseVersion": "1.0.0",
+  "templates": [
+    {
+      "templateId": "big-type",
+      "templateVersion": 2,
+      "contentSlots": {
+        "headline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 140
+        },
+        "supporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 90
+        },
+        "cta": {
+          "type": "string",
+          "required": false,
+          "role": "cta",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "teal"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Graphic scale",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium"
+        }
+      },
+      "assetSlots": {
+        "hero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview"
+        },
+        "accent": {
+          "role": "accent",
+          "optional": true,
+          "scope": "local-preview"
+        }
+      },
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "source-baseline-preserved"
+      ]
+    },
+    {
+      "templateId": "split",
+      "templateVersion": 2,
+      "contentSlots": {
+        "topHeadline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 90
+        },
+        "topSupporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 80
+        },
+        "bottomHeadline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 90
+        },
+        "bottomSupporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 80
+        },
+        "cta": {
+          "type": "string",
+          "required": false,
+          "role": "cta",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Graphic scale",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium"
+        },
+        "topBackground": {
+          "type": "enum",
+          "label": "Top background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "teal"
+        },
+        "bottomBackground": {
+          "type": "enum",
+          "label": "Bottom background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "sunshine"
+        }
+      },
+      "assetSlots": {
+        "topHero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview"
+        },
+        "bottomHero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview"
+        }
+      },
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "sharedHeadline": "restored-split-shared-headline-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "source-baseline-preserved"
+      ]
+    },
+    {
+      "templateId": "list",
+      "templateVersion": 6,
+      "contentSlots": {
+        "headline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 80
+        },
+        "subheading": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 50
+        },
+        "items": {
+          "type": "object[]",
+          "required": true,
+          "role": "content",
+          "minItems": 3,
+          "maxItems": 13,
+          "fields": {
+            "primary": {
+              "required": true
+            },
+            "secondary": {
+              "required": false
+            },
+            "third": {
+              "required": false
+            }
+          }
+        },
+        "cta": {
+          "type": "string",
+          "required": false,
+          "role": "cta",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "teal"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Graphic scale",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "disabledWhen": {
+            "footerMode": [
+              "plain",
+              "search-pill",
+              "none"
+            ]
+          }
+        },
+        "columns": {
+          "type": "enum",
+          "label": "Columns",
+          "values": [
+            "auto",
+            "1",
+            "2"
+          ],
+          "default": "auto"
+        },
+        "numberStyle": {
+          "type": "enum",
+          "label": "Number style",
+          "values": [
+            "filled-circle",
+            "outlined-circle",
+            "plain",
+            "pill"
+          ],
+          "default": "filled-circle"
+        },
+        "numberColour": {
+          "type": "enum",
+          "label": "Number colour",
+          "values": [
+            "cycle",
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "cycle"
+        },
+        "density": {
+          "type": "enum",
+          "label": "List density",
+          "values": [
+            "spacious",
+            "standard",
+            "compact"
+          ],
+          "default": "standard"
+        },
+        "position": {
+          "type": "enum",
+          "label": "List position",
+          "values": [
+            "higher",
+            "auto",
+            "lower"
+          ],
+          "default": "auto"
+        },
+        "primaryWeight": {
+          "type": "enum",
+          "label": "Item-name weight",
+          "values": [
+            "medium",
+            "bold"
+          ],
+          "default": "bold",
+          "valueLabels": {
+            "medium": "Semibold",
+            "bold": "Extra bold"
+          }
+        },
+        "footerMode": {
+          "type": "enum",
+          "label": "Footer",
+          "values": [
+            "plain",
+            "search-pill",
+            "graphic",
+            "none"
+          ],
+          "default": "search-pill",
+          "valueLabels": {
+            "plain": "CTA · plain",
+            "search-pill": "CTA · pill",
+            "graphic": "Graphic footer",
+            "none": "No footer"
+          }
+        }
+      },
+      "assetSlots": {
+        "motif": {
+          "role": "bottom_motif",
+          "optional": true,
+          "scope": "local-preview",
+          "label": "Graphic footer image",
+          "disabledWhen": {
+            "footerMode": [
+              "plain",
+              "search-pill",
+              "none"
+            ]
+          }
+        }
+      },
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "listPlacement": "restored-list-header-connected-v1",
+        "listFitting": "restored-list-content-fit-v1",
+        "headlineAllocation": "list-headline-budget-v1",
+        "footerChoice": "list-exclusive-footer-v1",
+        "itemHierarchy": "list-strong-type-v1",
+        "thirdLine": "list-readable-third-v2"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "header-connected-items",
+        "no-silent-row-clipping",
+        "exclusive-cta-or-graphic-footer",
+        "primary-larger-than-secondary-larger-than-third"
+      ]
+    },
+    {
+      "templateId": "editorial-cover",
+      "templateVersion": 5,
+      "contentSlots": {
+        "kicker": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 70
+        },
+        "headline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 120
+        },
+        "supporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "copySpace": {
+          "type": "enum",
+          "label": "Copy space",
+          "values": [
+            "image-reserved",
+            "expanded"
+          ],
+          "valueLabels": {
+            "image-reserved": "Leave room for the main image",
+            "expanded": "More room for copy"
+          },
+          "default": "image-reserved"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "sunshine"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Main graphic size",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "large",
+          "disabledWhen": {
+            "heroPlacement": [
+              "full-bleed-bottom"
+            ]
+          }
+        },
+        "heroPlacement": {
+          "type": "enum",
+          "label": "Main graphic placement",
+          "values": [
+            "full-bleed-bottom",
+            "bottom",
+            "bottom-right"
+          ],
+          "default": "full-bleed-bottom"
+        },
+        "cornerPlacement": {
+          "type": "enum",
+          "label": "Additional graphic placement",
+          "values": [
+            "top-right",
+            "top-left",
+            "bottom-right",
+            "bottom-left",
+            "full-frame",
+            "small-accent"
+          ],
+          "default": "top-right",
+          "valueLabels": {
+            "top-right": "Top right",
+            "top-left": "Top left",
+            "bottom-right": "Bottom right",
+            "bottom-left": "Bottom left",
+            "full-frame": "Full-width overlay",
+            "small-accent": "Small accent"
+          }
+        },
+        "cornerScale": {
+          "type": "enum",
+          "label": "Additional graphic size",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "disabledWhen": {
+            "cornerPlacement": [
+              "full-frame"
+            ]
+          }
+        }
+      },
+      "assetSlots": {
+        "hero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview",
+          "label": "Main graphic"
+        },
+        "accent": {
+          "role": "accent",
+          "optional": true,
+          "scope": "local-preview",
+          "label": "Additional graphic"
+        }
+      },
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "frameGraphics": "cover-stable-graphics-v2",
+        "copySpace": "cover-copy-space-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "source-baseline-preserved",
+        "optional-uploads-independent",
+        "copy-stable-across-uploads"
+      ]
+    },
+    {
+      "templateId": "curated-pick",
+      "templateVersion": 8,
+      "contentSlots": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 100
+        },
+        "hook": {
+          "type": "string",
+          "required": true,
+          "role": "support",
+          "maxLength": 120
+        },
+        "detail": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 120
+        },
+        "location": {
+          "type": "string",
+          "required": false,
+          "role": "metadata",
+          "maxLength": 40
+        },
+        "price": {
+          "type": "string",
+          "required": false,
+          "role": "metadata",
+          "maxLength": 24
+        }
+      },
+      "designOptions": {
+        "treatment": {
+          "type": "enum",
+          "label": "Composition",
+          "values": [
+            "visual-above",
+            "visual-below"
+          ],
+          "valueLabels": {
+            "visual-above": "Visual above · panel",
+            "visual-below": "Visual below · composed frame"
+          },
+          "default": "visual-above"
+        },
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "sunshine"
+        },
+        "imageFit": {
+          "type": "enum",
+          "label": "Image fit",
+          "values": [
+            "cover",
+            "contain",
+            "frame"
+          ],
+          "valueLabels": {
+            "cover": "Fill area · crop to fit",
+            "contain": "Fit whole image · preserve padding",
+            "frame": "Composed frame · natural aspect ratio"
+          },
+          "default": "cover",
+          "defaultBy": {
+            "control": "treatment",
+            "values": {
+              "visual-above": "cover",
+              "visual-below": "frame"
+            }
+          },
+          "valuesBy": {
+            "control": "treatment",
+            "values": {
+              "visual-above": [
+                "cover",
+                "contain"
+              ],
+              "visual-below": [
+                "frame",
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        },
+        "imageFocus": {
+          "type": "enum",
+          "label": "Image focus",
+          "values": [
+            "top",
+            "center",
+            "bottom"
+          ],
+          "valueLabels": {
+            "top": "Top",
+            "center": "Centre",
+            "bottom": "Bottom"
+          },
+          "default": "center",
+          "disabledWhen": {
+            "imageFit": [
+              "frame"
+            ]
+          }
+        },
+        "visualBackground": {
+          "type": "enum",
+          "label": "Image area background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "seafoam",
+          "disabledWhen": {
+            "imageFit": [
+              "frame"
+            ]
+          }
+        },
+        "visualScale": {
+          "type": "enum",
+          "label": "Image width",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "visibleWhen": {
+            "treatment": [
+              "visual-below"
+            ]
+          },
+          "help": "Lower treatment only. Changes the whole image width and preserves its proportions.",
+          "valueLabels": {
+            "small": "Small · inset",
+            "medium": "Medium · generous",
+            "large": "Large · full width"
+          }
+        },
+        "numberStyle": {
+          "type": "enum",
+          "label": "Number style",
+          "values": [
+            "pill",
+            "plain",
+            "outlined-circle",
+            "none"
+          ],
+          "valueLabels": {
+            "pill": "Filled pill",
+            "plain": "Plain · headline scale",
+            "outlined-circle": "Outlined circle",
+            "none": "No number"
+          },
+          "default": "pill"
+        },
+        "numberColour": {
+          "type": "enum",
+          "label": "Number colour",
+          "values": [
+            "auto",
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "valueLabels": {
+            "auto": "Auto · contrast"
+          },
+          "default": "auto",
+          "disabledWhen": {
+            "numberStyle": [
+              "none"
+            ]
+          }
+        },
+        "priceAlignment": {
+          "type": "enum",
+          "label": "Price alignment",
+          "values": [
+            "left",
+            "right"
+          ],
+          "valueLabels": {
+            "left": "Left · below suburb",
+            "right": "Right · flush with text edge"
+          },
+          "default": "right",
+          "defaultBy": {
+            "control": "treatment",
+            "values": {
+              "visual-above": "right",
+              "visual-below": "left"
+            }
+          },
+          "disabledWhen": {
+            "priceTreatment": [
+              "none"
+            ]
+          }
+        },
+        "overlapTreatment": {
+          "type": "enum",
+          "label": "Image behind copy",
+          "values": [
+            "soft-fade",
+            "none"
+          ],
+          "valueLabels": {
+            "soft-fade": "Soft backdrop · follows copy",
+            "none": "Full colour · no fade"
+          },
+          "default": "soft-fade",
+          "visibleWhen": {
+            "treatment": [
+              "visual-below"
+            ],
+            "imageFit": [
+              "frame"
+            ]
+          },
+          "help": "A feathered backdrop follows the actual text area, leaving the rest of the image clear."
+        },
+        "priceTreatment": {
+          "type": "enum",
+          "label": "Price treatment",
+          "values": [
+            "plain",
+            "tag",
+            "none"
+          ],
+          "valueLabels": {
+            "plain": "Plain text",
+            "tag": "Filled tag",
+            "none": "No price"
+          },
+          "default": "plain"
+        }
+      },
+      "assetSlots": {
+        "visual": {
+          "role": "visual",
+          "optional": false,
+          "scope": "local-preview",
+          "label": "Image · photo or illustration"
+        }
+      },
+      "rules": {
+        "layout": "curated-two-compositions-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "contentFitting": "curated-complete-copy-fit-v1",
+        "metadata": "curated-strong-metadata-v1",
+        "copyDensity": "curated-copy-density-v1",
+        "numberTreatment": "curated-number-options-v4",
+        "pricePlacement": "curated-optional-price-v1",
+        "copyProtection": "curated-copy-protection-v2",
+        "copyHierarchy": "curated-copy-hierarchy-v1",
+        "plainNumberScale": "curated-independent-number-scale-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "media-independent-composition",
+        "image-fit-does-not-move-copy",
+        "all-fields-preserved-or-overflow-reported"
+      ]
+    }
+  ]
+}

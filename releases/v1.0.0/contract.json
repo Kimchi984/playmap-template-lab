@@ -1,0 +1,2302 @@
+{
+  "releaseVersion": "1.0.0",
+  "schemaVersion": "0.1",
+  "recipes": [
+    {
+      "schemaVersion": "0.1",
+      "templateId": "big-type",
+      "templateVersion": 2,
+      "status": "lab",
+      "label": "Big Type",
+      "job": "One dominant editorial statement with restrained support and optional graphic accents.",
+      "dominantVisualIdea": "Existing Playmap Big Type composition, restored from source. Improve one treatment at a time.",
+      "contentSlots": {
+        "headline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 140
+        },
+        "supporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 90
+        },
+        "cta": {
+          "type": "string",
+          "required": false,
+          "role": "cta",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "teal"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Graphic scale",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium"
+        }
+      },
+      "artDirectionModes": [],
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "source-baseline-preserved"
+      ],
+      "sourceBaseline": {
+        "project": "The Playmap",
+        "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+        "component": "source/components/admin/SocialArtwork.tsx"
+      },
+      "assetSlots": {
+        "hero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview"
+        },
+        "accent": {
+          "role": "accent",
+          "optional": true,
+          "scope": "local-preview"
+        }
+      },
+      "acceptance": {
+        "visuals": "source-based restoration; Alina review pending",
+        "noNewModes": true
+      }
+    },
+    {
+      "schemaVersion": "0.1",
+      "templateId": "split",
+      "templateVersion": 2,
+      "status": "lab",
+      "label": "Split",
+      "job": "Two equal-status ideas or contrasts that read as one social composition.",
+      "dominantVisualIdea": "Existing Playmap Split composition, restored from source. Improve one treatment at a time.",
+      "contentSlots": {
+        "topHeadline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 90
+        },
+        "topSupporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 80
+        },
+        "bottomHeadline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 90
+        },
+        "bottomSupporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 80
+        },
+        "cta": {
+          "type": "string",
+          "required": false,
+          "role": "cta",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Graphic scale",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium"
+        },
+        "topBackground": {
+          "type": "enum",
+          "label": "Top background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "teal"
+        },
+        "bottomBackground": {
+          "type": "enum",
+          "label": "Bottom background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "sunshine"
+        }
+      },
+      "artDirectionModes": [],
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "sharedHeadline": "restored-split-shared-headline-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "source-baseline-preserved"
+      ],
+      "sourceBaseline": {
+        "project": "The Playmap",
+        "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+        "component": "source/components/admin/SocialArtwork.tsx"
+      },
+      "assetSlots": {
+        "topHero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview"
+        },
+        "bottomHero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview"
+        }
+      },
+      "acceptance": {
+        "visuals": "source-based restoration; Alina review pending",
+        "noNewModes": true
+      }
+    },
+    {
+      "schemaVersion": "0.1",
+      "templateId": "list",
+      "templateVersion": 6,
+      "status": "lab",
+      "label": "List",
+      "job": "Turn a curated set of family activities/events into a highly scannable social post.",
+      "dominantVisualIdea": "Existing Playmap List composition, restored from source. Improve one treatment at a time.",
+      "contentSlots": {
+        "headline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 80
+        },
+        "subheading": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 50
+        },
+        "items": {
+          "type": "object[]",
+          "required": true,
+          "role": "content",
+          "minItems": 3,
+          "maxItems": 13,
+          "fields": {
+            "primary": {
+              "required": true
+            },
+            "secondary": {
+              "required": false
+            },
+            "third": {
+              "required": false
+            }
+          }
+        },
+        "cta": {
+          "type": "string",
+          "required": false,
+          "role": "cta",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "teal"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Graphic scale",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "disabledWhen": {
+            "footerMode": [
+              "plain",
+              "search-pill",
+              "none"
+            ]
+          }
+        },
+        "columns": {
+          "type": "enum",
+          "label": "Columns",
+          "values": [
+            "auto",
+            "1",
+            "2"
+          ],
+          "default": "auto"
+        },
+        "numberStyle": {
+          "type": "enum",
+          "label": "Number style",
+          "values": [
+            "filled-circle",
+            "outlined-circle",
+            "plain",
+            "pill"
+          ],
+          "default": "filled-circle"
+        },
+        "numberColour": {
+          "type": "enum",
+          "label": "Number colour",
+          "values": [
+            "cycle",
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "cycle"
+        },
+        "density": {
+          "type": "enum",
+          "label": "List density",
+          "values": [
+            "spacious",
+            "standard",
+            "compact"
+          ],
+          "default": "standard"
+        },
+        "position": {
+          "type": "enum",
+          "label": "List position",
+          "values": [
+            "higher",
+            "auto",
+            "lower"
+          ],
+          "default": "auto"
+        },
+        "primaryWeight": {
+          "type": "enum",
+          "label": "Item-name weight",
+          "values": [
+            "medium",
+            "bold"
+          ],
+          "default": "bold",
+          "valueLabels": {
+            "medium": "Semibold",
+            "bold": "Extra bold"
+          }
+        },
+        "footerMode": {
+          "type": "enum",
+          "label": "Footer",
+          "values": [
+            "plain",
+            "search-pill",
+            "graphic",
+            "none"
+          ],
+          "default": "search-pill",
+          "valueLabels": {
+            "plain": "CTA · plain",
+            "search-pill": "CTA · pill",
+            "graphic": "Graphic footer",
+            "none": "No footer"
+          }
+        }
+      },
+      "artDirectionModes": [],
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "listPlacement": "restored-list-header-connected-v1",
+        "listFitting": "restored-list-content-fit-v1",
+        "headlineAllocation": "list-headline-budget-v1",
+        "footerChoice": "list-exclusive-footer-v1",
+        "itemHierarchy": "list-strong-type-v1",
+        "thirdLine": "list-readable-third-v2"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "header-connected-items",
+        "no-silent-row-clipping",
+        "exclusive-cta-or-graphic-footer",
+        "primary-larger-than-secondary-larger-than-third"
+      ],
+      "sourceBaseline": {
+        "project": "The Playmap",
+        "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+        "component": "source/components/admin/SocialArtwork.tsx"
+      },
+      "assetSlots": {
+        "motif": {
+          "role": "bottom_motif",
+          "optional": true,
+          "scope": "local-preview",
+          "label": "Graphic footer image",
+          "disabledWhen": {
+            "footerMode": [
+              "plain",
+              "search-pill",
+              "none"
+            ]
+          }
+        }
+      },
+      "acceptance": {
+        "visuals": "V4 hierarchy liked; V5 third line too large. V6 keeps stronger contrast/weight and restores secondary > third.",
+        "noNewModes": true
+      },
+      "labNote": "Liked List hierarchy · readable third line below secondary"
+    },
+    {
+      "schemaVersion": "0.1",
+      "templateId": "editorial-cover",
+      "templateVersion": 5,
+      "status": "lab",
+      "label": "Editorial Cover",
+      "job": "Open a multi-slide post with a high-energy editorial hook and strong visual premise.",
+      "dominantVisualIdea": "Existing Playmap Editorial Cover composition, restored from source. Improve one treatment at a time.",
+      "contentSlots": {
+        "kicker": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 70
+        },
+        "headline": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 120
+        },
+        "supporting": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 90
+        }
+      },
+      "designOptions": {
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "copySpace": {
+          "type": "enum",
+          "label": "Copy space",
+          "values": [
+            "image-reserved",
+            "expanded"
+          ],
+          "valueLabels": {
+            "image-reserved": "Leave room for the main image",
+            "expanded": "More room for copy"
+          },
+          "default": "image-reserved"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "sunshine"
+        },
+        "graphicScale": {
+          "type": "enum",
+          "label": "Main graphic size",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "large",
+          "disabledWhen": {
+            "heroPlacement": [
+              "full-bleed-bottom"
+            ]
+          }
+        },
+        "heroPlacement": {
+          "type": "enum",
+          "label": "Main graphic placement",
+          "values": [
+            "full-bleed-bottom",
+            "bottom",
+            "bottom-right"
+          ],
+          "default": "full-bleed-bottom"
+        },
+        "cornerPlacement": {
+          "type": "enum",
+          "label": "Additional graphic placement",
+          "values": [
+            "top-right",
+            "top-left",
+            "bottom-right",
+            "bottom-left",
+            "full-frame",
+            "small-accent"
+          ],
+          "default": "top-right",
+          "valueLabels": {
+            "top-right": "Top right",
+            "top-left": "Top left",
+            "bottom-right": "Bottom right",
+            "bottom-left": "Bottom left",
+            "full-frame": "Full-width overlay",
+            "small-accent": "Small accent"
+          }
+        },
+        "cornerScale": {
+          "type": "enum",
+          "label": "Additional graphic size",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "disabledWhen": {
+            "cornerPlacement": [
+              "full-frame"
+            ]
+          }
+        }
+      },
+      "artDirectionModes": [],
+      "rules": {
+        "layout": "lovable-restored-layout-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "frameGraphics": "cover-stable-graphics-v2",
+        "copySpace": "cover-copy-space-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "source-baseline-preserved",
+        "optional-uploads-independent",
+        "copy-stable-across-uploads"
+      ],
+      "sourceBaseline": {
+        "project": "The Playmap",
+        "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+        "component": "source/components/admin/SocialArtwork.tsx"
+      },
+      "assetSlots": {
+        "hero": {
+          "role": "hero",
+          "optional": true,
+          "scope": "local-preview",
+          "label": "Main graphic"
+        },
+        "accent": {
+          "role": "accent",
+          "optional": true,
+          "scope": "local-preview",
+          "label": "Additional graphic"
+        }
+      },
+      "acceptance": {
+        "visuals": "Alina likes v4 Cover appearance. Default preserves that composition; expanded copy is experimental.",
+        "noNewModes": true
+      },
+      "graphicCapabilities": {
+        "main": "Full canvas width, bottom anchored, intrinsic aspect ratio; or original contained lower placements.",
+        "additional": "Optional graphic with four corner anchors, full-width overlay or original small accent. Independent of main graphic.",
+        "copy": "Explicit image reservation or expanded copy. Adding/removing/uploading graphics never changes the selected copy area. Overlap warns.",
+        "sourceFiles": "Unmodified. No automatic crop, flip, stretching or remote upload."
+      },
+      "labNote": "Liked Cover composition · expanded copy under review"
+    },
+    {
+      "schemaVersion": "0.1",
+      "templateId": "curated-pick",
+      "templateVersion": 8,
+      "status": "lab",
+      "label": "Curated Pick",
+      "job": "Give one recommended place/event enough visual and practical information to stand alone as a slide.",
+      "dominantVisualIdea": "Retain the visual-above panel option; add type above a bottom-anchored composed frame. Media fit is independent of layout. Location and price have clear visual weight.",
+      "contentSlots": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "role": "display",
+          "maxLength": 100
+        },
+        "hook": {
+          "type": "string",
+          "required": true,
+          "role": "support",
+          "maxLength": 120
+        },
+        "detail": {
+          "type": "string",
+          "required": false,
+          "role": "support",
+          "maxLength": 120
+        },
+        "location": {
+          "type": "string",
+          "required": false,
+          "role": "metadata",
+          "maxLength": 40
+        },
+        "price": {
+          "type": "string",
+          "required": false,
+          "role": "metadata",
+          "maxLength": 24
+        }
+      },
+      "designOptions": {
+        "treatment": {
+          "type": "enum",
+          "label": "Composition",
+          "values": [
+            "visual-above",
+            "visual-below"
+          ],
+          "valueLabels": {
+            "visual-above": "Visual above · panel",
+            "visual-below": "Visual below · composed frame"
+          },
+          "default": "visual-above"
+        },
+        "displayFont": {
+          "type": "enum",
+          "label": "Headline font",
+          "values": [
+            "gabarito",
+            "dm-sans"
+          ],
+          "default": "gabarito"
+        },
+        "headlineSize": {
+          "type": "enum",
+          "label": "Headline size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "alignment": {
+          "type": "enum",
+          "label": "Headline alignment",
+          "values": [
+            "left",
+            "centre"
+          ],
+          "default": "left"
+        },
+        "accentEnding": {
+          "type": "enum",
+          "label": "Headline emphasis",
+          "values": [
+            "none",
+            "last-word"
+          ],
+          "default": "none"
+        },
+        "accentColour": {
+          "type": "enum",
+          "label": "Emphasis colour",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "default": "sunshine"
+        },
+        "wordmark": {
+          "type": "enum",
+          "label": "Wordmark",
+          "values": [
+            "show",
+            "hide"
+          ],
+          "default": "show"
+        },
+        "background": {
+          "type": "enum",
+          "label": "Background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "sunshine"
+        },
+        "imageFit": {
+          "type": "enum",
+          "label": "Image fit",
+          "values": [
+            "cover",
+            "contain",
+            "frame"
+          ],
+          "valueLabels": {
+            "cover": "Fill area · crop to fit",
+            "contain": "Fit whole image · preserve padding",
+            "frame": "Composed frame · natural aspect ratio"
+          },
+          "default": "cover",
+          "defaultBy": {
+            "control": "treatment",
+            "values": {
+              "visual-above": "cover",
+              "visual-below": "frame"
+            }
+          },
+          "valuesBy": {
+            "control": "treatment",
+            "values": {
+              "visual-above": [
+                "cover",
+                "contain"
+              ],
+              "visual-below": [
+                "frame",
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        },
+        "imageFocus": {
+          "type": "enum",
+          "label": "Image focus",
+          "values": [
+            "top",
+            "center",
+            "bottom"
+          ],
+          "valueLabels": {
+            "top": "Top",
+            "center": "Centre",
+            "bottom": "Bottom"
+          },
+          "default": "center",
+          "disabledWhen": {
+            "imageFit": [
+              "frame"
+            ]
+          }
+        },
+        "visualBackground": {
+          "type": "enum",
+          "label": "Image area background",
+          "values": [
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue"
+          ],
+          "default": "seafoam",
+          "disabledWhen": {
+            "imageFit": [
+              "frame"
+            ]
+          }
+        },
+        "visualScale": {
+          "type": "enum",
+          "label": "Image width",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium",
+          "visibleWhen": {
+            "treatment": [
+              "visual-below"
+            ]
+          },
+          "help": "Lower treatment only. Changes the whole image width and preserves its proportions.",
+          "valueLabels": {
+            "small": "Small · inset",
+            "medium": "Medium · generous",
+            "large": "Large · full width"
+          }
+        },
+        "numberStyle": {
+          "type": "enum",
+          "label": "Number style",
+          "values": [
+            "pill",
+            "plain",
+            "outlined-circle",
+            "none"
+          ],
+          "valueLabels": {
+            "pill": "Filled pill",
+            "plain": "Plain · headline scale",
+            "outlined-circle": "Outlined circle",
+            "none": "No number"
+          },
+          "default": "pill"
+        },
+        "numberColour": {
+          "type": "enum",
+          "label": "Number colour",
+          "values": [
+            "auto",
+            "teal",
+            "blueTeal",
+            "warmLight",
+            "aqua",
+            "seafoam",
+            "sunshine",
+            "pink",
+            "lilac",
+            "orange",
+            "poolBlue",
+            "white"
+          ],
+          "valueLabels": {
+            "auto": "Auto · contrast"
+          },
+          "default": "auto",
+          "disabledWhen": {
+            "numberStyle": [
+              "none"
+            ]
+          }
+        },
+        "priceAlignment": {
+          "type": "enum",
+          "label": "Price alignment",
+          "values": [
+            "left",
+            "right"
+          ],
+          "valueLabels": {
+            "left": "Left · below suburb",
+            "right": "Right · flush with text edge"
+          },
+          "default": "right",
+          "defaultBy": {
+            "control": "treatment",
+            "values": {
+              "visual-above": "right",
+              "visual-below": "left"
+            }
+          },
+          "disabledWhen": {
+            "priceTreatment": [
+              "none"
+            ]
+          }
+        },
+        "overlapTreatment": {
+          "type": "enum",
+          "label": "Image behind copy",
+          "values": [
+            "soft-fade",
+            "none"
+          ],
+          "valueLabels": {
+            "soft-fade": "Soft backdrop · follows copy",
+            "none": "Full colour · no fade"
+          },
+          "default": "soft-fade",
+          "visibleWhen": {
+            "treatment": [
+              "visual-below"
+            ],
+            "imageFit": [
+              "frame"
+            ]
+          },
+          "help": "A feathered backdrop follows the actual text area, leaving the rest of the image clear."
+        },
+        "priceTreatment": {
+          "type": "enum",
+          "label": "Price treatment",
+          "values": [
+            "plain",
+            "tag",
+            "none"
+          ],
+          "valueLabels": {
+            "plain": "Plain text",
+            "tag": "Filled tag",
+            "none": "No price"
+          },
+          "default": "plain"
+        }
+      },
+      "artDirectionModes": [],
+      "rules": {
+        "layout": "curated-two-compositions-v1",
+        "measurement": "restored-real-font-measurement-v1",
+        "headlineFitting": "restored-monotonic-headline-v1",
+        "contentFitting": "curated-complete-copy-fit-v1",
+        "metadata": "curated-strong-metadata-v1",
+        "copyDensity": "curated-copy-density-v1",
+        "numberTreatment": "curated-number-options-v4",
+        "pricePlacement": "curated-optional-price-v1",
+        "copyProtection": "curated-copy-protection-v2",
+        "copyHierarchy": "curated-copy-hierarchy-v1",
+        "plainNumberScale": "curated-independent-number-scale-v1"
+      },
+      "invariants": [
+        "real-font-measurement",
+        "text-size-monotonic",
+        "media-independent-composition",
+        "image-fit-does-not-move-copy",
+        "all-fields-preserved-or-overflow-reported"
+      ],
+      "sourceBaseline": {
+        "project": "The Playmap",
+        "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+        "component": "source/components/admin/SocialArtwork.tsx"
+      },
+      "assetSlots": {
+        "visual": {
+          "role": "visual",
+          "optional": false,
+          "scope": "local-preview",
+          "label": "Image · photo or illustration"
+        }
+      },
+      "acceptance": {
+        "visuals": "V7 placement change rejected: size/style alignment did not mean joining the headline. V8 restores the original separate number anchor and title geometry, matching plain number display typography and fitted size only.",
+        "noNewModes": true
+      },
+      "graphicCapabilities": {
+        "visual": "One upload for any image. Fit and focus are explicit; no source-type detection or automatic layout switch. Original pixels unchanged.",
+        "empty": "Image area remains empty and the Lab warns; no invented filler.",
+        "wordmark": "Wordmark setting is honoured with every uploaded medium.",
+        "frame": "Visual below defaults to a bottom-anchored 720/900/1080px-wide original frame at natural height. Transparency/padding stay intact. No photo-panel clipping. Overlap warns without resizing copy.",
+        "copyProtection": "Optional feathered background-colour scrim behind the actual lower copy bounds. Image itself stays unmasked. It follows measured text height, copy position and optional metadata."
+      },
+      "labNote": "Plain number keeps its original placement and matches headline scale",
+      "revisionNote": "Plain number keeps its original anchor and matches headline scale; title fits independently"
+    }
+  ],
+  "fixtures": [
+    {
+      "templateId": "big-type",
+      "templateVersion": 2,
+      "fixtures": [
+        {
+          "id": "short",
+          "content": {
+            "headline": "Go somewhere new",
+            "supporting": "Ideas made for family days out.",
+            "cta": "Find it on theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 2
+        },
+        {
+          "id": "long",
+          "content": {
+            "headline": "Need somewhere genuinely good to take the kids this weekend?",
+            "supporting": "Melbourne ideas that make leaving the house worth it.",
+            "cta": "Find it on theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 2
+        }
+      ],
+      "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."
+    },
+    {
+      "templateId": "split",
+      "templateVersion": 2,
+      "fixtures": [
+        {
+          "id": "balanced",
+          "content": {
+            "topHeadline": "Go somewhere new",
+            "topSupporting": "Ideas made for family days out.",
+            "bottomHeadline": "Play more often",
+            "bottomSupporting": "Melbourne discoveries, all in one place.",
+            "cta": "Find it on theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "graphicScale": "medium",
+            "topBackground": "teal",
+            "bottomBackground": "sunshine"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 2
+        },
+        {
+          "id": "top-long",
+          "content": {
+            "topHeadline": "Find a brilliant new place to explore",
+            "topSupporting": "Ideas made for family days out.",
+            "bottomHeadline": "Play more often",
+            "bottomSupporting": "Melbourne discoveries, all in one place.",
+            "cta": "Find it on theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "graphicScale": "medium",
+            "topBackground": "teal",
+            "bottomBackground": "sunshine"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 2
+        },
+        {
+          "id": "both-long",
+          "content": {
+            "topHeadline": "Find somewhere new with the kids",
+            "topSupporting": "Ideas made for family days out.",
+            "bottomHeadline": "Make the most of a warm Melbourne afternoon",
+            "bottomSupporting": "Melbourne discoveries, all in one place.",
+            "cta": "Find it on theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "graphicScale": "medium",
+            "topBackground": "teal",
+            "bottomBackground": "sunshine"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 2
+        }
+      ],
+      "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."
+    },
+    {
+      "templateId": "list",
+      "templateVersion": 6,
+      "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally.",
+      "fixtures": [
+        {
+          "id": "six",
+          "label": "Representative · 6 items",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "6 things to do with kids this weekend",
+            "subheading": "Melbourne · 17–18 October",
+            "items": [
+              {
+                "primary": "Lantern Parade",
+                "secondary": "Sat 17 Oct · Fitzroy",
+                "third": "Free"
+              },
+              {
+                "primary": "Teddy Bears’ Picnic",
+                "secondary": "Sun 18 Oct · Elwood",
+                "third": "Bring your bear"
+              },
+              {
+                "primary": "Splash Park Opening",
+                "secondary": "Sat 17 Oct · Werribee",
+                "third": "Free"
+              },
+              {
+                "primary": "Kids’ Bike Day",
+                "secondary": "Sun 18 Oct · Brunswick",
+                "third": "Bikes + helmets"
+              },
+              {
+                "primary": "Dino Discovery Trail",
+                "secondary": "All weekend · Carlton",
+                "third": "Bookings required"
+              },
+              {
+                "primary": "Pumpkin Patch Fun",
+                "secondary": "All weekend · Diggers Rest",
+                "third": "From $12"
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        },
+        {
+          "id": "long-headline",
+          "label": "Awkward long headline",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "What’s actually worth doing with the kids around Melbourne this weekend?",
+            "subheading": "Melbourne · 17–18 October",
+            "items": [
+              {
+                "primary": "Lantern Parade",
+                "secondary": "Sat 17 Oct · Fitzroy",
+                "third": "Free"
+              },
+              {
+                "primary": "Teddy Bears’ Picnic",
+                "secondary": "Sun 18 Oct · Elwood",
+                "third": "Bring your bear"
+              },
+              {
+                "primary": "Splash Park Opening",
+                "secondary": "Sat 17 Oct · Werribee",
+                "third": "Free"
+              },
+              {
+                "primary": "Kids’ Bike Day",
+                "secondary": "Sun 18 Oct · Brunswick",
+                "third": "Bikes + helmets"
+              },
+              {
+                "primary": "Dino Discovery Trail",
+                "secondary": "All weekend · Carlton",
+                "third": "Bookings required"
+              },
+              {
+                "primary": "Pumpkin Patch Fun",
+                "secondary": "All weekend · Diggers Rest",
+                "third": "From $12"
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        },
+        {
+          "id": "short",
+          "label": "Short headline",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "Weekend sorted.",
+            "subheading": "Melbourne · 17–18 October",
+            "items": [
+              {
+                "primary": "Lantern Parade",
+                "secondary": "Sat 17 Oct · Fitzroy",
+                "third": "Free"
+              },
+              {
+                "primary": "Teddy Bears’ Picnic",
+                "secondary": "Sun 18 Oct · Elwood",
+                "third": "Bring your bear"
+              },
+              {
+                "primary": "Splash Park Opening",
+                "secondary": "Sat 17 Oct · Werribee",
+                "third": "Free"
+              },
+              {
+                "primary": "Kids’ Bike Day",
+                "secondary": "Sun 18 Oct · Brunswick",
+                "third": "Bikes + helmets"
+              },
+              {
+                "primary": "Dino Discovery Trail",
+                "secondary": "All weekend · Carlton",
+                "third": "Bookings required"
+              },
+              {
+                "primary": "Pumpkin Patch Fun",
+                "secondary": "All weekend · Diggers Rest",
+                "third": "From $12"
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        },
+        {
+          "id": "multiline",
+          "label": "Explicit multiline headline",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "Little people.\nBig weekend.",
+            "subheading": "Melbourne · 17–18 October",
+            "items": [
+              {
+                "primary": "Lantern Parade",
+                "secondary": "Sat 17 Oct · Fitzroy",
+                "third": "Free"
+              },
+              {
+                "primary": "Teddy Bears’ Picnic",
+                "secondary": "Sun 18 Oct · Elwood",
+                "third": "Bring your bear"
+              },
+              {
+                "primary": "Splash Park Opening",
+                "secondary": "Sat 17 Oct · Werribee",
+                "third": "Free"
+              },
+              {
+                "primary": "Kids’ Bike Day",
+                "secondary": "Sun 18 Oct · Brunswick",
+                "third": "Bikes + helmets"
+              },
+              {
+                "primary": "Dino Discovery Trail",
+                "secondary": "All weekend · Carlton",
+                "third": "Bookings required"
+              },
+              {
+                "primary": "Pumpkin Patch Fun",
+                "secondary": "All weekend · Diggers Rest",
+                "third": "From $12"
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        },
+        {
+          "id": "thirteen",
+          "label": "Maximum · 13 realistic items",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "13 family plans, sorted.",
+            "subheading": "Melbourne · 17–18 October",
+            "items": [
+              {
+                "primary": "Lantern Parade",
+                "secondary": "Sat 17 Oct · Fitzroy",
+                "third": "Free"
+              },
+              {
+                "primary": "Teddy Bears’ Picnic",
+                "secondary": "Sun 18 Oct · Elwood",
+                "third": "Bring your bear"
+              },
+              {
+                "primary": "Splash Park Opening",
+                "secondary": "Sat 17 Oct · Werribee",
+                "third": "Free"
+              },
+              {
+                "primary": "Kids’ Bike Day",
+                "secondary": "Sun 18 Oct · Brunswick",
+                "third": "Bikes + helmets"
+              },
+              {
+                "primary": "Dino Discovery Trail",
+                "secondary": "All weekend · Carlton",
+                "third": "Bookings required"
+              },
+              {
+                "primary": "Pumpkin Patch Fun",
+                "secondary": "All weekend · Diggers Rest",
+                "third": "From $12"
+              },
+              {
+                "primary": "Touch a Truck",
+                "secondary": "Sat + Sun · Port Melbourne",
+                "third": "Free"
+              },
+              {
+                "primary": "Family Makers’ Market",
+                "secondary": "Sun 18 Oct · South Melbourne",
+                "third": "Free entry"
+              },
+              {
+                "primary": "Garden Adventure",
+                "secondary": "Sat 17 Oct · Cranbourne"
+              },
+              {
+                "primary": "Storytime in the Park",
+                "secondary": "Sun 18 Oct · St Kilda",
+                "third": "Free"
+              },
+              {
+                "primary": "Mini Railway Rides",
+                "secondary": "Sun 18 Oct · Box Hill",
+                "third": "From $5"
+              },
+              {
+                "primary": "Junior Ranger Walk",
+                "secondary": "Sat 17 Oct · Dandenong Ranges",
+                "third": "Bookings required"
+              },
+              {
+                "primary": "Messy Play Morning",
+                "secondary": "Sun 18 Oct · Cheltenham",
+                "third": "Ages 2–5"
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        },
+        {
+          "id": "mixed-names",
+          "label": "Short + long names / optional fields absent",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "Small people. Big plans.",
+            "subheading": "",
+            "items": [
+              {
+                "primary": "Zoo",
+                "secondary": "Parkville"
+              },
+              {
+                "primary": "The Very Curious Little Makers’ Workshop",
+                "secondary": "Sun 18 Oct · South Melbourne",
+                "third": "Bookings required"
+              },
+              {
+                "primary": "Trucks"
+              },
+              {
+                "primary": "Melbourne Museum’s Dinosaur Discovery Trail",
+                "third": "Ages 3–8"
+              },
+              {
+                "primary": "Picnic",
+                "secondary": "Elwood",
+                "third": "Free"
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        },
+        {
+          "id": "five",
+          "label": "Representative · 5 items",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "5 good reasons to get outside",
+            "subheading": "Melbourne · 17–18 October",
+            "items": [
+              {
+                "primary": "Lantern Parade",
+                "secondary": "Sat 17 Oct · Fitzroy",
+                "third": "Free"
+              },
+              {
+                "primary": "Teddy Bears’ Picnic",
+                "secondary": "Sun 18 Oct · Elwood",
+                "third": "Bring your bear"
+              },
+              {
+                "primary": "Splash Park Opening",
+                "secondary": "Sat 17 Oct · Werribee",
+                "third": "Free"
+              },
+              {
+                "primary": "Kids’ Bike Day",
+                "secondary": "Sun 18 Oct · Brunswick",
+                "third": "Bikes + helmets"
+              },
+              {
+                "primary": "Dino Discovery Trail",
+                "secondary": "All weekend · Carlton",
+                "third": "Bookings required"
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        },
+        {
+          "id": "infeasible",
+          "label": "Deliberately infeasible · should warn",
+          "expectedRecipeVersion": 6,
+          "content": {
+            "headline": "A weekend with a lot to say",
+            "subheading": "Melbourne · 17–18 October",
+            "items": [
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              },
+              {
+                "primary": "ExtraordinarilyLongUnbrokenActivityNameWhichCannotFitIntoAnyColumnSafely",
+                "secondary": "This fixture must warn, never claim it fits."
+              }
+            ],
+            "cta": "Find your next day out at theplaymap.com.au"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "teal",
+            "graphicScale": "medium",
+            "columns": "auto",
+            "numberStyle": "filled-circle",
+            "numberColour": "cycle",
+            "density": "standard",
+            "position": "auto",
+            "primaryWeight": "bold",
+            "footerMode": "search-pill"
+          },
+          "referenceSnapshot": null
+        }
+      ]
+    },
+    {
+      "templateId": "editorial-cover",
+      "templateVersion": 5,
+      "fixtures": [
+        {
+          "id": "short",
+          "content": {
+            "kicker": "5 FAMILY ADVENTURES",
+            "headline": "Spring is calling",
+            "supporting": "Five easy ideas for getting outside."
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "graphicScale": "large",
+            "heroPlacement": "full-bleed-bottom",
+            "cornerPlacement": "top-right",
+            "cornerScale": "medium",
+            "copySpace": "image-reserved"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 5
+        },
+        {
+          "id": "long",
+          "content": {
+            "kicker": "5 FAMILY ADVENTURES FOR SPRING",
+            "headline": "Melbourne’s best picks for little explorers",
+            "supporting": "Saved by parents, tested by kids"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "graphicScale": "large",
+            "heroPlacement": "full-bleed-bottom",
+            "cornerPlacement": "top-right",
+            "cornerScale": "medium",
+            "copySpace": "image-reserved"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 5
+        },
+        {
+          "id": "no-secondary",
+          "content": {
+            "headline": "Go outside"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "graphicScale": "large",
+            "heroPlacement": "full-bleed-bottom",
+            "cornerPlacement": "top-right",
+            "cornerScale": "medium",
+            "copySpace": "image-reserved"
+          },
+          "expectedRecipeVersion": 5,
+          "referenceSnapshot": null
+        },
+        {
+          "id": "expanded-copy",
+          "content": {
+            "kicker": "5 FAMILY ADVENTURES FOR SPRING",
+            "headline": "Melbourne’s best picks for little explorers",
+            "supporting": "Saved by parents, tested by kids"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "graphicScale": "large",
+            "heroPlacement": "full-bleed-bottom",
+            "cornerPlacement": "top-right",
+            "cornerScale": "medium",
+            "copySpace": "expanded"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 5,
+          "label": "Long headline · copy-space test"
+        }
+      ],
+      "note": "Design fixtures, not live recommendations. Image fields stay empty unless supplied locally."
+    },
+    {
+      "templateId": "curated-pick",
+      "templateVersion": 8,
+      "fixtures": [
+        {
+          "id": "short",
+          "content": {
+            "name": "CERES Community Park",
+            "hook": "Chooks, gardens and a creek to explore",
+            "detail": "Grab a babycino at the café after.",
+            "location": "Brunswick East",
+            "price": "Free"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "treatment": "visual-above",
+            "imageFit": "cover",
+            "imageFocus": "center",
+            "visualBackground": "seafoam",
+            "visualScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 8
+        },
+        {
+          "id": "long",
+          "content": {
+            "name": "Mornington Peninsula Railway Adventure",
+            "hook": "A proper train day with plenty to see before and after the ride",
+            "detail": "Allow enough time to explore before boarding.",
+            "location": "Moorooduc",
+            "price": "From $18"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "treatment": "visual-above",
+            "imageFit": "cover",
+            "imageFocus": "center",
+            "visualBackground": "seafoam",
+            "visualScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 8
+        },
+        {
+          "id": "no-detail",
+          "label": "Short · no optional detail/location",
+          "content": {
+            "name": "CERES Community Park",
+            "hook": "Chooks, gardens and a creek to explore",
+            "price": "Free"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "treatment": "visual-above",
+            "imageFit": "cover",
+            "imageFocus": "center",
+            "visualBackground": "seafoam",
+            "visualScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 8
+        },
+        {
+          "id": "stress",
+          "label": "Long title, hook and metadata · stress",
+          "content": {
+            "name": "A very long recommended family adventure with little explorers around Melbourne",
+            "hook": "A deliberately long hook to test how all the supporting copy fits with a long place name and a full metadata line.",
+            "detail": "Bring snacks and allow extra time to explore together before heading home.",
+            "location": "A deliberately long suburb and meeting point",
+            "price": "From $18 per person"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "treatment": "visual-above",
+            "imageFit": "cover",
+            "imageFocus": "center",
+            "visualBackground": "seafoam",
+            "visualScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 8
+        },
+        {
+          "id": "frame-short",
+          "content": {
+            "name": "CERES Community Park",
+            "hook": "Chooks, gardens and a creek to explore",
+            "detail": "",
+            "location": "Brunswick East",
+            "price": "Free"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "treatment": "visual-below",
+            "imageFit": "frame",
+            "imageFocus": "center",
+            "visualBackground": "seafoam",
+            "visualScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 8,
+          "label": "Short · one supporting line"
+        },
+        {
+          "id": "no-price",
+          "content": {
+            "name": "CERES Community Park",
+            "hook": "Chooks, gardens and a creek to explore",
+            "detail": "Grab a babycino at the café after.",
+            "location": "Brunswick East",
+            "price": ""
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "treatment": "visual-above",
+            "imageFit": "cover",
+            "imageFocus": "center",
+            "visualBackground": "seafoam",
+            "visualScale": "medium"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 8,
+          "label": "No price · missing optional metadata"
+        },
+        {
+          "id": "no-number",
+          "content": {
+            "name": "CERES Community Park",
+            "hook": "Chooks, gardens and a creek to explore",
+            "detail": "Grab a babycino at the café after.",
+            "location": "Brunswick East",
+            "price": "Free"
+          },
+          "design": {
+            "displayFont": "gabarito",
+            "headlineSize": "default",
+            "alignment": "left",
+            "accentEnding": "none",
+            "accentColour": "sunshine",
+            "wordmark": "show",
+            "background": "sunshine",
+            "treatment": "visual-above",
+            "imageFit": "cover",
+            "imageFocus": "center",
+            "visualBackground": "seafoam",
+            "visualScale": "medium",
+            "numberStyle": "none"
+          },
+          "referenceSnapshot": null,
+          "expectedRecipeVersion": 8,
+          "label": "No number · optional numbering"
+        }
+      ],
+      "note": "Design fixtures only. Uploads are local previews and never committed or included in URLs. Test the same composition with a real photo and transparent illustration."
+    }
+  ],
+  "rules": {
+    "cover-copy-space-v1": {
+      "kind": "layout",
+      "contract": "Explicit copy allocation: preserve v4 lower image reservation or use expanded height. Asset state never selects copy allocation. Overlap is diagnostic only.",
+      "implementation": "source/lib/socialImagePlacement.ts"
+    },
+    "cover-stable-graphics-v2": {
+      "kind": "graphics",
+      "contract": "Main and optional additional graphic preserve independent uploads and intrinsic aspect ratios. Four corner anchors are available. Copy uses the source lower-zone reservation across empty/loading/loaded/removed states. Pixel overlap is diagnostic only, never a headline-fit input.",
+      "implementation": "source/lib/socialImagePlacement.ts"
+    },
+    "curated-complete-copy-fit-v1": {
+      "kind": "fitting",
+      "contract": "Measure hook/detail/complete metadata with their visible typography. Reserve their actual height before fitting the title. Retain every field; warn on minimum-size or whole-copy overflow.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-copy-density-v1": {
+      "kind": "diagnostic",
+      "contract": "Fit and visual density are separate: more than 7 copy lines or more than 3 title lines warns, while every field remains visible.",
+      "implementation": "app.js"
+    },
+    "curated-copy-hierarchy-v1": {
+      "kind": "typography",
+      "contract": "Headline dominant; hook36/600; detail30/500; suburb and price28/600. Supporting and metadata roles have bounded minimum sizes; overflow warns.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-copy-protection-v2": {
+      "kind": "graphics",
+      "contract": "Feathered background-colour scrim follows actual copy top/bottom and horizontal bounds with modest padding. Image remains full-colour outside this local region. No pixel analysis or asset measurements drive copy fitting.",
+      "implementation": "source/lib/socialCurated.ts"
+    },
+    "curated-independent-number-scale-v1": {
+      "kind": "typography",
+      "contract": "Fit only the title with loaded real-font metrics. Plain number reuses the resulting display font family, font size, weight, tracking and line height in its original 72/96px centred anchor. Number does not add a title line or reduce headline fitting capacity.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-number-options-v4": {
+      "kind": "layout",
+      "contract": "Plain, pill and circle keep original composition-owned number anchors. Plain is not part of the title or copy stack. None releases number spacing and colour choices remain.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-optional-price-v1": {
+      "kind": "layout",
+      "contract": "Empty or hidden price reserves no space. Plain price or filled tag aligns to the chosen copy edge. Reserve exact variant metadata height before fitting headline.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-strong-metadata-v1": {
+      "kind": "typography",
+      "contract": "Measure the suburb and price independently at matching 42px target support typography; use a high-contrast price tag. Reserve actual metadata-row height before title fitting.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-two-compositions-v1": {
+      "kind": "layout",
+      "contract": "Visual-above panel remains available; visual-below has dominant upper copy and bottom-anchored composed artwork. Neither medium nor load state selects layout. Frame fitting preserves natural aspect ratio/transparency.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "list-exclusive-footer-v1": {
+      "kind": "layout",
+      "contract": "The chosen footer is CTA, graphic or none. An inactive uploaded graphic cannot reserve space or overlap a CTA. If minimum-scale rows do not fit, report overflow and do not silently clip them at the list zone.",
+      "implementation": "lab/restored.tsx"
+    },
+    "list-headline-budget-v1": {
+      "kind": "fitting",
+      "contract": "Measure the same list rows at the minimum allowed scale with loaded fonts. Allocate headline height from real remaining geometry; this capacity is shared across size intents. Items follow measured header height.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "list-readable-third-v2": {
+      "kind": "typography",
+      "contract": "Retain strong 600/.95 third line but use 29/26/23 base sizes below secondary34/30/27. Every count/column/fit scale must keep primary > secondary > third.",
+      "implementation": "source/lib/socialList.ts"
+    },
+    "list-strong-type-v1": {
+      "kind": "typography",
+      "contract": "Item weights 700/900; number weight 900 with stronger numerals. Plain numbers use the foreground on light palettes for legibility.",
+      "implementation": "source/lib/socialList.ts"
+    },
+    "lovable-restored-layout-v1": {
+      "kind": "layout",
+      "contract": "Preserve source composition from ec495d3; image and numbering choices remain bounded.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "restored-list-content-fit-v1": {
+      "kind": "fitting",
+      "contract": "Source count/density/column metrics, 0.8 floor and per-item line warnings.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "restored-list-header-connected-v1": {
+      "kind": "layout",
+      "contract": "Source header-connected layout, footer and actual motif safety.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "restored-monotonic-headline-v1": {
+      "kind": "fitting",
+      "contract": "Identical geometry and shared typography fit capacity across all size intents; Large >= Default >= Small.",
+      "implementation": "source/lib/labFitting.ts"
+    },
+    "restored-real-font-measurement-v1": {
+      "kind": "fitting",
+      "contract": "Bundled real fonts, exact rendered typography, explicit font readiness before fitting.",
+      "implementation": "source/lib/labFitting.ts"
+    },
+    "restored-split-shared-headline-v1": {
+      "kind": "layout",
+      "contract": "One headline size for both Split panels; natural wraps and separate supporting-copy fit.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    }
+  }
+}

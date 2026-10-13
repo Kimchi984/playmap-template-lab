@@ -1,4 +1,4 @@
-import {renderRestored,prepareFonts} from './dist/restored.js?v=0adff71f718d';
+import {renderRecipe,prepareFonts} from './dist/restored.js?v=c48ca4dfd272';
 const $=id=>document.getElementById(id),qs=new URLSearchParams(location.search);
 const state={template:qs.get('template')||'editorial-cover',fixture:qs.get('fixture')||''};
 let catalog,recipe,fixtureSet,images={},generation=0,listReport=null;
@@ -71,7 +71,7 @@ function render(){
  for(const [key,o] of Object.entries(recipe.designOptions)){if(o.valuesBy&&$(key)){const allowed=o.valuesBy.values[state[o.valuesBy.control]]||o.values;if(!allowed.includes(state[key]))state[key]=o.defaultBy?.values[state[o.defaultBy.control]]||allowed[0];$(key).replaceChildren(...allowed.map(v=>{const option=document.createElement('option');option.value=v;option.textContent=o.valueLabels?.[v]||name(v);return option}));}if($(key)){$(key).value=state[key];$(key).parentElement.hidden=o.visibleWhen?Object.entries(o.visibleWhen).some(([control,values])=>!values.includes(state[control])):false;}if(o.disabledWhen&&$(key))$(key).disabled=Object.entries(o.disabledWhen).some(([control,values])=>values.includes(state[control]))}
  for(const [key,o] of Object.entries(recipe.assetSlots||{}))if(o.disabledWhen&&$(key+'File'))$(key+'File').disabled=Object.entries(o.disabledWhen).some(([control,values])=>values.includes(state[control]));
  const current=++generation,f=fixtureSet.fixtures.find(x=>x.id===state.fixture);
- renderRestored($('stage'),state.template,f.content,state,images,r=>{listReport=r;refreshChecks()});renderRestored($('stageMini'),state.template,f.content,state,images);
+ const design=Object.fromEntries(Object.keys(recipe.designOptions).map(k=>[k,state[k]]));renderRecipe($('stage'),recipe,f.content,design,images,r=>{listReport=r;refreshChecks()});renderRecipe($('stageMini'),recipe,f.content,design,images);
  $('recipeMeta').textContent=`${recipe.label} v${recipe.templateVersion} · ${recipe.labNote||'restored source baseline'}. ${['editorial-cover','curated-pick'].includes(state.template)?'Mixed-post slide recipe.':''}`;
  $('testUrl').value=url();history.replaceState(null,'',url());updateScale();document.fonts.ready.then(()=>{if(current===generation)requestAnimationFrame(()=>{if(current===generation)refreshChecks()})});
 }

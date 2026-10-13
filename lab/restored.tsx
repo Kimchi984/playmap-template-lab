@@ -1,4 +1,5 @@
 import React from 'react';
+import {resolveDesign,type RecipeManifest} from '../renderer/contract';
 import {createRoot, type Root} from 'react-dom/client';
 import {flushSync} from 'react-dom';
 import {SocialArtwork} from '../source/components/admin/SocialArtwork';
@@ -78,3 +79,8 @@ export {coverFrameGeometry,coverHeadlineHeight} from '../source/lib/socialImageP
 export {curatedCopyProtectionBox,curatedNumberTreatment} from "../source/lib/socialCurated";
 export {listMetrics} from "../source/lib/socialList";
 export {SocialArtwork} from "../source/components/admin/SocialArtwork";
+
+/** Recipe-driven public bridge; legacy makeSpec remains for old production documents. */
+export function renderRecipe(host:HTMLElement,recipe:RecipeManifest,c:any,d:any,images:any={},onListFit?:(r:any)=>void){
+  return renderRestored(host,recipe.templateId,c,resolveDesign(recipe,d),images,onListFit);
+}

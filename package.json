@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node scripts/test-restored.mjs"
+    "test": "node scripts/test-restored.mjs",
+    "export:renderer": "node scripts/export-renderer.mjs",
+    "test:contract": "node scripts/test-contract.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

@@ -258,3 +258,37 @@ cases and matching version metadata. Rules curated-number-options-v4 and
 curated-independent-number-scale-v1 record the corrected behaviour. V7 remains historical,
 not accepted. No reference snapshots frozen or production integration. Next: Alina reviews
 number scale in the restored placement in both views. No Lovable changes/calls; 117.9 credits.
+
+
+## Shared renderer handover v1.0.0 — 13 October 2026 (Sydney)
+
+Alina said the work was ready for a first version and authorised the shareable handover.
+This closes the missed packaging step after that request. No additional design iteration.
+Active baseline: Big Type/Split v2, List v6, Cover v5 and Pick v8. Big Type/Split are retained
+source baselines; reviewed incremental List/Cover/Pick refinements are locked for integration
+preparation. Expanded Cover allocation and arbitrary dense-copy/image collisions remain
+experimental. Historical rejected modes and Pick v7 placement are excluded from the bundle.
+
+releases/v1.0.0 contains the npm tarball, portable ESM renderer/CSS, canonical recipe/fixture
+bundle, derived capabilities, exact dependency versions and SHA-256 baseline fingerprints.
+The Lab and package share renderRecipe + the actual renderer/measurement code. Generic
+manifest-driven input/default resolution is reusable; unknown pins/choices reject, optional
+price is valid, copy guides warn without truncation, unsupported List count rejects. Saved
+inputs pin templateId/templateVersion. Corrected stale List v6 fixture-set version metadata
+from 4 to 6; fixture contents and layouts are unchanged.
+
+Validation: build, 15 existing checks, six public-contract/fingerprint checks pass; all 24
+fixtures pass the public API. Extracted tarball consumer successfully bundles renderer,
+contract JSON, CSS and real fonts. No browser matrix repeated because no layout/style
+change was introduced. Production adapter remains unapplied; no Lovable calls or credits.
+
+Reference snapshot freeze is NOT complete: existing viewport/UI screenshots are QA evidence,
+not exact native artwork + private asset provenance. Missing-image Pick output is not an
+accepted complete composition. Baseline-lock.json keeps this outstanding explicitly.
+Also preserve export settling/image-decode requirements, isolate compiled reset CSS, move
+module-wide font selection to instance state before a mixed-font gallery, retain existing
+curated-post numbering for multi-slide assembly, and port shared app.js diagnostics.
+
+Next: capture native accepted reference artwork with exact privately resolved assets, then
+prepare the existing production renderer adapter and verify fixture parity independently.
+No production publication is inferred from packaging approval. Spend remains 117.9 credits.

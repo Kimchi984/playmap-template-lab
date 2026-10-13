@@ -1,0 +1,104 @@
+{
+  "releaseVersion": "1.0.0",
+  "reviewedDesignSourceCommit": "2c1abf2c45d6480d0360f03c6fdcd8e3274d99ae",
+  "approval": "Alina: ready for first version, then lets do it (13 October 2026, Sydney)",
+  "status": "reviewed-design-baseline-packaged",
+  "dependencyVersions": {
+    "@fontsource-variable/dm-sans": "5.3.0",
+    "@fontsource-variable/gabarito": "5.3.0",
+    "@fontsource-variable/instrument-sans": "5.3.0",
+    "lucide-react": "0.468.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "templates": [
+    {
+      "templateId": "big-type",
+      "templateVersion": 2,
+      "recipeSha256": "44b185a7ce9128e08e309249cc27999a5e961c5317b72b377610bed430fb4c74",
+      "fixturesSha256": "514518cb7009ff5202f3998bbd29b554e3936502481ad8e54264d013351593ab",
+      "reviewScope": "retained source baseline"
+    },
+    {
+      "templateId": "split",
+      "templateVersion": 2,
+      "recipeSha256": "e2103dd1a24b1342ce4bf0a5d53e85a08dfa71deb520f55e16cd3379b3fb5ca8",
+      "fixturesSha256": "4110eb23eb78589c56d2cf1326fb5969b3186ad10ec5def33a98910bff47d285",
+      "reviewScope": "retained source baseline"
+    },
+    {
+      "templateId": "list",
+      "templateVersion": 6,
+      "recipeSha256": "c2d8172c3be5f8efc8f9efc242513329eba304bf40b1cd3eb3a7bce68f36c13f",
+      "fixturesSha256": "49f78e0bfd7c527bf11901e85ec7874c71f6a6991f4cc4540ed722bd49358159",
+      "reviewScope": "reviewed incremental Lab refinements"
+    },
+    {
+      "templateId": "editorial-cover",
+      "templateVersion": 5,
+      "recipeSha256": "74801e19d541bb74641793783e0d0c7bf8378e1c0d523eac4cffaccd8f42f37b",
+      "fixturesSha256": "ef281ef4072d6e9c06f310a54f5c6bf850cf3fff3a2cdd6cf54bf6be0b622ca3",
+      "reviewScope": "reviewed incremental Lab refinements"
+    },
+    {
+      "templateId": "curated-pick",
+      "templateVersion": 8,
+      "recipeSha256": "4439c24e254080bf4773643608e3285bebdb6c80335e7c3f465ad1fe7c0bd542",
+      "fixturesSha256": "a53a875548a61b9ddc0c89d69c31f4a83b5d579bd323280b0011b03cf9a89b1d",
+      "reviewScope": "reviewed incremental Lab refinements"
+    }
+  ],
+  "sourceSha256": {
+    "app.js": "d7ff3bb0a173e8a0cae1909f4ff531f830b6dba91a12337bad5a558933ac994e",
+    "lab/artwork.css": "7b953ef55f8e38fe7e69e59d73672018ddba6c61ba6f27b45be02799fa9c4b1f",
+    "lab/restored.tsx": "853ff76f58fe193c6eefeab8b69ea929cc95f3f66fbee82ee2bafeac37cddba6",
+    "package-lock.json": "11aa47525cfc1d5af60d112a59769ef202a1c1658e68a7f5ea96f5e2e3c6ab23",
+    "recipes/big-type/v2/fixtures.json": "514518cb7009ff5202f3998bbd29b554e3936502481ad8e54264d013351593ab",
+    "recipes/big-type/v2/recipe.json": "44b185a7ce9128e08e309249cc27999a5e961c5317b72b377610bed430fb4c74",
+    "recipes/catalog.json": "883bd8d313ff3297c3b27c13f42fbad68e453fc8bb610ca03d5506f5abc00fb2",
+    "recipes/curated-pick/v8/fixtures.json": "a53a875548a61b9ddc0c89d69c31f4a83b5d579bd323280b0011b03cf9a89b1d",
+    "recipes/curated-pick/v8/recipe.json": "4439c24e254080bf4773643608e3285bebdb6c80335e7c3f465ad1fe7c0bd542",
+    "recipes/editorial-cover/v5/fixtures.json": "ef281ef4072d6e9c06f310a54f5c6bf850cf3fff3a2cdd6cf54bf6be0b622ca3",
+    "recipes/editorial-cover/v5/recipe.json": "74801e19d541bb74641793783e0d0c7bf8378e1c0d523eac4cffaccd8f42f37b",
+    "recipes/list/v6/fixtures.json": "49f78e0bfd7c527bf11901e85ec7874c71f6a6991f4cc4540ed722bd49358159",
+    "recipes/list/v6/recipe.json": "c2d8172c3be5f8efc8f9efc242513329eba304bf40b1cd3eb3a7bce68f36c13f",
+    "recipes/split/v2/fixtures.json": "4110eb23eb78589c56d2cf1326fb5969b3186ad10ec5def33a98910bff47d285",
+    "recipes/split/v2/recipe.json": "e2103dd1a24b1342ce4bf0a5d53e85a08dfa71deb520f55e16cd3379b3fb5ca8",
+    "renderer/contract.ts": "4a3a448fe2ef888fcb0556f9a6e73fa8c00c291daadc4003eb39d8cef9343902",
+    "renderer/index.ts": "aa8c39da84a2e9f500de88abfb226d282fe00b87fefcc9cd087732d190d76fad",
+    "rules/registry.json": "f44c043284e37b1b9f03475130cec2735bf5ca02aae9906d7fc7b0e50e30c004",
+    "scripts/export-renderer.mjs": "f95a3126effd52721ce734a501d932f3ec0b7054884a8d8d2c3e37584afe022c",
+    "source/components/Wordmark.tsx": "e6d76d6179e7ce99f8dd78ee857c2ac1bc08c7bc878b56739c6d1c11b2e7670b",
+    "source/components/admin/SocialArtwork.tsx": "0b64bdf2be8d7694c858be1ca5551aa427fbfd34f3521aa28d32fec47f974e92",
+    "source/components/admin/SocialDisplayText.tsx": "350ed453df70e298d6c605e376453bd5d424f226f854dafe3528ce51313bff90",
+    "source/lib/labFitting.ts": "9e816956d40eae5786439fd90a58db2ddb6d2444eca646d3c3f545453ffb0a52",
+    "source/lib/socialCurated.ts": "bde38ad6ab1554fd10fc67a955daafc131a88de715ec534feb209c192d294f9a",
+    "source/lib/socialDisplayText.ts": "86bf4d0f6828bb655900190bee7645b38a1161ed9f4c6ee050f252fe81291e68",
+    "source/lib/socialFooter.ts": "476684987639dd4081810e1f6044b4a4be085b31b036a7de0470f6838eb3c6e8",
+    "source/lib/socialImagePlacement.ts": "2e66365439acb4695aa02f759f421fc586a2a3c3f3a9f85bbef9273e6e662080",
+    "source/lib/socialList.ts": "77a4a7c5d7bbce634d0a7957973dca83006ec9b47bde20f9391b025191ccea77",
+    "source/lib/socialRenderer.ts": "9b071d2f84b165bb3ad6f02a651c9861d412956b1bd2fa9169731a4cb494cf39",
+    "source/lib/socialTypography.ts": "1d5bb139607fbe2c43db414988170053ce34835a0d54cdfd9c5041de2addafeb"
+  },
+  "artifactSha256": {
+    "index.js": "636c85e1f7c5e71c662142c7cf41e203e9e4a9e8a059d0b40d20682244770855",
+    "index.css": "d36aacd37c24e53900cf8ebf2cc93aafb2b655576371f275cbb52c8f619e578e",
+    "contract.json": "4d7b37efdb5a5b69b23bb20dc3f4bafcf93e8e35e80b562015b92daf8c4047e6",
+    "capabilities.json": "de6967bd5d968b291ba1b1b1cb44efdf06a67b08c53c16ffdcfadbe1fdb12864",
+    "package.json": "16d0249e7bc029673accfc9b84ee9758c401f67437683bb05a6bba1077ff876b"
+  },
+  "referenceSnapshots": {
+    "status": "not-yet-frozen",
+    "reason": "Existing screenshots are UI/viewport evidence; exact native accepted artwork with private asset references is not yet recorded. Do not treat missing-image Pick evidence as an accepted complete composition."
+  },
+  "productionIntegration": {
+    "status": "not-applied",
+    "requiresVisualParity": true
+  },
+  "experimental": [
+    "Editorial Cover expanded copy allocation",
+    "Arbitrary long-copy/image overlaps beyond reviewed states",
+    "Multiple simultaneous display-font choices: current font selector is shared module state"
+  ],
+  "immutability": "Do not overwrite this release after publication. New recipe behaviour requires new template/release versions."
+}

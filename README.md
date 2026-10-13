@@ -20,7 +20,11 @@ files are not accepted designs and must not be used as the baseline.
 `recipes/catalog.json` identifies the active versioned recipe and fixture files. Controls read
 bounds/defaults from those manifests. Procedural rendering stays in the source components;
 registered rule IDs point to implementations. The production renderer has not been changed to
-consume these manifests. No accepted snapshots have been frozen.
+consume these manifests. The reviewed baseline is packaged in `releases/v1.0.0`;
+`renderer/contract.ts` derives defaults/capabilities from the same manifests, and the Lab
+and portable entry use the same recipe-driven rendering bridge. Native accepted reference
+snapshots remain outstanding. See the release README and baseline lock for integration
+limits.
 
 ## Development
 
@@ -86,3 +90,15 @@ Pick v8 supersedes the rejected v7 placement change. Plain numbering remains out
 headline at its original composition anchor, matching headline font/weight/tracking/fitted
 size only. Headline fitting again measures title text alone; its original copy start and
 capacity are restored. Other templates and badge choices are unchanged.
+
+
+## Reusable first-version handover
+
+Run `npm run export:renderer` after `npm run build` to reproduce the versioned npm package.
+`releases/v1.0.0/contract.json` includes all five active recipe manifests, 24 fixtures and
+the referenced rule registry. `capabilities.json` is derived from those same manifests.
+Saved artwork inputs pin templateId/templateVersion; unsupported pins/options fail.
+The package uses the actual components, real fonts and procedural fitting. No design
+change is included in the handover. Native reference snapshots and production parity
+remain outstanding; production/Lovable are unchanged. Run `npm run test:contract` for
+package/source fingerprint and input-contract checks. Later changes need a new release.
