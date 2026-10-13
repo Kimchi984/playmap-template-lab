@@ -100,13 +100,19 @@ test('Copy protection follows measured copy rather than a fixed image zone',()=>
 });
 
 
-test('Plain Pick number belongs to the headline typography instead of a badge frame',async()=>{
+test('Plain Pick number keeps its composition anchor and matches the independently fitted title',async()=>{
  const {createElement}=await import('react');const {renderToStaticMarkup}=await import('react-dom/server');
  for(const treatment of ['visual-above','visual-below']){
   const {spec,assets}=makeSpec('curated-pick',{name:'CERES Community Park',hook:'Go outside',price:'Free'},{treatment,numberStyle:'plain'});
   const html=renderToStaticMarkup(createElement(SocialArtwork,{spec,assets}));
-  const heading=html.match(/<h2[^>]*>(.*?)<\/h2>/s)?.[1];assert.ok(heading?.includes('data-pick-number'));assert.ok(heading?.includes('data-pick-name'));
-  const numberStyle=heading.match(/data-number-style="plain" style="([^"]*)"/)?.[1];assert.ok(numberStyle);assert.ok(!/font-size|font-weight|font-family|letter-spacing/.test(numberStyle));
-  assert.equal(curatedNumberTreatment('plain','auto','teal',true).fontSize,undefined);
+  const heading=html.match(/<h2([^>]*)>(.*?)<\/h2>/s);assert.ok(heading[2].includes('data-pick-name'));assert.ok(!heading[2].includes('data-pick-number'));
+  const numberStyle=html.match(/data-number-style="plain"[^>]*style="([^"]*)"/)?.[1];assert.ok(numberStyle);
+  const field=(style,key)=>style.match(new RegExp(`(?:^|;)${key}:([^;]+)`))?.[1];
+  const headingStyle=heading[1].match(/style="([^"]*)"/)[1];
+  for(const key of ['font-size','font-family','font-weight','letter-spacing','line-height'])assert.equal(field(numberStyle,key),field(headingStyle,key));
+  assert.equal(field(numberStyle,'left'),'84px');assert.equal(field(numberStyle,'top'),treatment==='visual-below'?'176px':'548px');
+  assert.equal(field(numberStyle,'height'),treatment==='visual-below'?'72px':'96px');
+  const copyStyle=html.match(/data-pick-copy[^>]*style="([^"]*)"/)[1];assert.equal(field(copyStyle,'top'),treatment==='visual-below'?'286px':'700px');
+  assert.ok(!html.includes('01\nCERES')); // hidden title measurement also excludes the number
  }
 });

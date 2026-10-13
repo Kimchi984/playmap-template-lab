@@ -50,7 +50,7 @@ export function curatedNumberTreatment(style: CuratedPickSlideSpec['numberStyle'
   const foreground = SOCIAL_PALETTE[background].foreground === 'white' ? '#FFFFFF' : '#0F7C78';
   const selected = colour && colour !== 'auto' ? SOCIAL_PALETTE[colour].value : style === 'pill' ? SOCIAL_PALETTE[background === 'pink' ? 'sunshine' : 'pink'].value : foreground;
   const height = below ? 72 : 96;
-  if (style === 'plain') return {color:selected};
+  if (style === 'plain') return {width:'max-content',height,justifyContent:'flex-start',color:selected};
   if (style === 'outlined-circle') return {width:height,height,fontSize:below?36:48,fontWeight:800,color:selected,backgroundColor:SOCIAL_PALETTE[background].value,borderRadius:height/2,border:`3px solid ${selected}`};
   const fillKey = colour && colour !== 'auto' ? colour : background === 'pink' ? 'sunshine' : 'pink';
   return {width:below?112:144,height,fontSize:below?48:64,fontWeight:800,color:SOCIAL_PALETTE[fillKey].foreground === 'white' ? '#FFFFFF' : '#0F7C78',backgroundColor:selected,borderRadius:height/2,border:'none'};

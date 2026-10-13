@@ -328,8 +328,7 @@ function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPi
   const below = slide.treatment === 'visual-below';
   const showNumber=slide.numberStyle!=='none';
   const plainNumber=slide.numberStyle==='plain';
-  const showBadge=showNumber&&!plainNumber;
-  const copyTop = below ? (showBadge?286:176) : (showBadge?700:650), copyHeight = (below?800:1266)-copyTop;
+  const copyTop = below ? (showNumber?286:176) : (showNumber?700:650), copyHeight = (below?800:1266)-copyTop;
   const width = 912;
   const fg = textColour(defaultTextStyle(), slide.background);
   const name = normaliseSocialText(slide.name.text, 'Pick name');
@@ -347,8 +346,7 @@ function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPi
   const locationHeight = location ? locationFit.fit.height : 0, priceHeight = price ? priceFit.fit.height+pricePadding : 0;
   const metaHeight = leftPrice ? locationHeight+priceHeight+(location && price ? 12 : 0) : Math.max(locationHeight,priceHeight);
   const remainingHeight = copyHeight - (hook ? hookFit.fit.height + 20 : 0) - (detail ? detailFit.fit.height + 14 : 0) - (location || price ? metaHeight + 28 : 0);
-  const headlineText=plainNumber?`${number}\n${name}`:name;
-  const nameFit = useHeadlineFit(headlineText, width, Math.max(100, remainingHeight-(plainNumber?16:0)), 54, 144, displayTypography(slide.name.style.size).lineHeight, slide.name.style.size, true);
+  const nameFit = useHeadlineFit(name, width, Math.max(100, remainingHeight), 54, 144, displayTypography(slide.name.style.size).lineHeight, slide.name.style.size, true);
   const visual = slide.visual;
   const copy = useRef<HTMLDivElement>(null);
   const [copyBottom,setCopyBottom] = useState(copyTop+copyHeight);
@@ -365,7 +363,7 @@ function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPi
   const asset = visual?.assetId ? assets.find(a => a.id === visual.assetId) : null;
   return <div className="social-artwork-stage" data-pick-treatment={slide.treatment} style={{ backgroundColor: SOCIAL_PALETTE[slide.background].value }}>
     <Brand background={slide.background} spec={spec} />
-    <HiddenMeasure measureRef={nameFit.measureRef} typography={nameFit.typography} text={headlineText} width={width} />
+    <HiddenMeasure measureRef={nameFit.measureRef} typography={nameFit.typography} text={name} width={width} />
     <HiddenMeasure measureRef={hookFit.measureRef} typography={hookFit.typography} text={hook} width={width} />
     <HiddenMeasure measureRef={detailFit.measureRef} typography={detailFit.typography} text={detail} width={width} />
     <HiddenMeasure measureRef={locationFit.measureRef} typography={locationFit.typography} text={location} width={locationWidth} />
@@ -376,9 +374,9 @@ function CuratedPickComposed({ slide, number, spec, assets }: { slide: CuratedPi
       {asset ? <img data-pick-image src={asset.url} alt="" aria-hidden className="h-full w-full" style={{objectFit:visual?.fit==='contain'?'contain':'cover',objectPosition:`center ${visual?.focus||'center'}`}} /> : null}
     </div>}
     {protection ? <div data-pick-protection aria-hidden className="pointer-events-none absolute z-10" style={{...protectionBox,backgroundColor:SOCIAL_PALETTE[slide.background].value,opacity:.94,maskImage:protectionMask,WebkitMaskImage:protectionMask,maskComposite:'intersect',WebkitMaskComposite:'source-in'}} /> : null}
-    {showBadge ? <div data-pick-number className="absolute z-20 flex items-center justify-center" style={{ left: 84, top: below ? 176 : 548, ...displayTypography('default'), ...numberTreatment, lineHeight: 1 }}>{number}</div> : null}
+    {showNumber ? <div data-pick-number data-number-style={slide.numberStyle} className="absolute z-20 flex items-center justify-center" style={{ left: 84, top: below ? 176 : 548, ...(plainNumber ? { ...nameFit.typography, fontSize: nameFit.fit.fontSize } : { ...displayTypography('default'), lineHeight: 1 }), ...numberTreatment }}>{number}</div> : null}
     <div ref={copy} data-pick-copy className="absolute z-20" style={{ left: 84, right: 84, top: copyTop, height: copyHeight, color: fg }}>
-      <h2 className="social-artwork-headline" style={{ width, fontSize: nameFit.fit.fontSize, ...nameFit.typography, textAlign: socialTextAlign(slide.name.style) }}>{plainNumber ? <span data-pick-number data-number-style="plain" style={{display:'block',marginBottom:16,color:numberTreatment?.color||fg}}>{number}</span> : null}<span data-pick-name style={{display:'block'}}><SocialDisplayText text={name} colour={fg} style={slide.name.style} /></span></h2>
+      <h2 className="social-artwork-headline" style={{ width, fontSize: nameFit.fit.fontSize, ...nameFit.typography, textAlign: socialTextAlign(slide.name.style) }}><span data-pick-name style={{display:'block'}}><SocialDisplayText text={name} colour={fg} style={slide.name.style} /></span></h2>
       {hook ? <p data-pick-hook style={{ marginTop: 20, ...hookFit.typography, fontSize: hookFit.fit.fontSize }}><SocialDisplayText text={hook} colour={fg} style={slide.hook.style} /></p> : null}
       {detail ? <p data-pick-detail style={{ marginTop: 14, ...detailFit.typography, fontSize: detailFit.fit.fontSize, opacity: .92 }}>{detail}</p> : null}
       {location || price ? <div data-pick-metadata className="flex items-start" style={{marginTop:28,gap:leftPrice?12:24,flexDirection:leftPrice?'column':'row',justifyContent:leftPrice?'flex-start':location?'space-between':'flex-end'}}>

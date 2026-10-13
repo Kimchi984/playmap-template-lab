@@ -36,9 +36,9 @@
     {
       "id": "curated-pick",
       "label": "Curated Pick",
-      "version": 7,
-      "path": "recipes/curated-pick/v7/recipe.json",
-      "fixtures": "recipes/curated-pick/v7/fixtures.json",
+      "version": 8,
+      "path": "recipes/curated-pick/v8/recipe.json",
+      "fixtures": "recipes/curated-pick/v8/fixtures.json",
       "group": "Mixed post slides"
     }
   ]

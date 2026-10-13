@@ -80,3 +80,9 @@ shared rule IDs own the contract; see review/STATUS.md for actual verification a
 Pick v7 focuses on plain numbering: it is a line inside the headline stack, using the same
 real display typography and fitted size. Number and title are measured together; colour
 choices remain. Pill/circle badge geometry and other templates stay as in the v6 checkpoint.
+
+
+Pick v8 supersedes the rejected v7 placement change. Plain numbering remains outside the
+headline at its original composition anchor, matching headline font/weight/tracking/fitted
+size only. Headline fitting again measures title text alone; its original copy start and
+capacity are restored. Other templates and badge choices are unchanged.

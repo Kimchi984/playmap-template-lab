@@ -204,6 +204,16 @@
       "kind": "fitting",
       "contract": "Measure the plain number plus newline plus title together with the real headline face, width, tracking, weight and line-height. Reserve a 16px gap; one computed size applies to both. Shared-capacity monotonic intent remains.",
       "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-number-options-v4": {
+      "kind": "layout",
+      "contract": "Plain, pill and circle keep original composition-owned number anchors. Plain is not part of the title or copy stack. None releases number spacing and colour choices remain.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-independent-number-scale-v1": {
+      "kind": "typography",
+      "contract": "Fit only the title with loaded real-font metrics. Plain number reuses the resulting display font family, font size, weight, tracking and line height in its original 72/96px centred anchor. Number does not add a title line or reduce headline fitting capacity.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
     }
   }
 }
