@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "0.1",
+  "templateId": "curated-pick",
+  "templateVersion": 7,
+  "status": "lab",
+  "label": "Curated Pick",
+  "job": "Give one recommended place/event enough visual and practical information to stand alone as a slide.",
+  "dominantVisualIdea": "Retain the visual-above panel option; add type above a bottom-anchored composed frame. Media fit is independent of layout. Location and price have clear visual weight.",
+  "contentSlots": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "role": "display",
+      "maxLength": 100
+    },
+    "hook": {
+      "type": "string",
+      "required": true,
+      "role": "support",
+      "maxLength": 120
+    },
+    "detail": {
+      "type": "string",
+      "required": false,
+      "role": "support",
+      "maxLength": 120
+    },
+    "location": {
+      "type": "string",
+      "required": false,
+      "role": "metadata",
+      "maxLength": 40
+    },
+    "price": {
+      "type": "string",
+      "required": false,
+      "role": "metadata",
+      "maxLength": 24
+    }
+  },
+  "designOptions": {
+    "treatment": {
+      "type": "enum",
+      "label": "Composition",
+      "values": [
+        "visual-above",
+        "visual-below"
+      ],
+      "valueLabels": {
+        "visual-above": "Visual above · panel",
+        "visual-below": "Visual below · composed frame"
+      },
+      "default": "visual-above"
+    },
+    "displayFont": {
+      "type": "enum",
+      "label": "Headline font",
+      "values": [
+        "gabarito",
+        "dm-sans"
+      ],
+      "default": "gabarito"
+    },
+    "headlineSize": {
+      "type": "enum",
+      "label": "Headline size",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    },
+    "alignment": {
+      "type": "enum",
+      "label": "Headline alignment",
+      "values": [
+        "left",
+        "centre"
+      ],
+      "default": "left"
+    },
+    "accentEnding": {
+      "type": "enum",
+      "label": "Headline emphasis",
+      "values": [
+        "none",
+        "last-word"
+      ],
+      "default": "none"
+    },
+    "accentColour": {
+      "type": "enum",
+      "label": "Emphasis colour",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue",
+        "white"
+      ],
+      "default": "sunshine"
+    },
+    "wordmark": {
+      "type": "enum",
+      "label": "Wordmark",
+      "values": [
+        "show",
+        "hide"
+      ],
+      "default": "show"
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue"
+      ],
+      "default": "sunshine"
+    },
+    "imageFit": {
+      "type": "enum",
+      "label": "Image fit",
+      "values": [
+        "cover",
+        "contain",
+        "frame"
+      ],
+      "valueLabels": {
+        "cover": "Fill area · crop to fit",
+        "contain": "Fit whole image · preserve padding",
+        "frame": "Composed frame · natural aspect ratio"
+      },
+      "default": "cover",
+      "defaultBy": {
+        "control": "treatment",
+        "values": {
+          "visual-above": "cover",
+          "visual-below": "frame"
+        }
+      },
+      "valuesBy": {
+        "control": "treatment",
+        "values": {
+          "visual-above": [
+            "cover",
+            "contain"
+          ],
+          "visual-below": [
+            "frame",
+            "cover",
+            "contain"
+          ]
+        }
+      }
+    },
+    "imageFocus": {
+      "type": "enum",
+      "label": "Image focus",
+      "values": [
+        "top",
+        "center",
+        "bottom"
+      ],
+      "valueLabels": {
+        "top": "Top",
+        "center": "Centre",
+        "bottom": "Bottom"
+      },
+      "default": "center",
+      "disabledWhen": {
+        "imageFit": [
+          "frame"
+        ]
+      }
+    },
+    "visualBackground": {
+      "type": "enum",
+      "label": "Image area background",
+      "values": [
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue"
+      ],
+      "default": "seafoam",
+      "disabledWhen": {
+        "imageFit": [
+          "frame"
+        ]
+      }
+    },
+    "visualScale": {
+      "type": "enum",
+      "label": "Image width",
+      "values": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "default": "medium",
+      "visibleWhen": {
+        "treatment": [
+          "visual-below"
+        ]
+      },
+      "help": "Lower treatment only. Changes the whole image width and preserves its proportions.",
+      "valueLabels": {
+        "small": "Small · inset",
+        "medium": "Medium · generous",
+        "large": "Large · full width"
+      }
+    },
+    "numberStyle": {
+      "type": "enum",
+      "label": "Number style",
+      "values": [
+        "pill",
+        "plain",
+        "outlined-circle",
+        "none"
+      ],
+      "valueLabels": {
+        "pill": "Filled pill",
+        "plain": "Plain · headline number",
+        "outlined-circle": "Outlined circle",
+        "none": "No number"
+      },
+      "default": "pill"
+    },
+    "numberColour": {
+      "type": "enum",
+      "label": "Number colour",
+      "values": [
+        "auto",
+        "teal",
+        "blueTeal",
+        "warmLight",
+        "aqua",
+        "seafoam",
+        "sunshine",
+        "pink",
+        "lilac",
+        "orange",
+        "poolBlue",
+        "white"
+      ],
+      "valueLabels": {
+        "auto": "Auto · contrast"
+      },
+      "default": "auto",
+      "disabledWhen": {
+        "numberStyle": [
+          "none"
+        ]
+      }
+    },
+    "priceAlignment": {
+      "type": "enum",
+      "label": "Price alignment",
+      "values": [
+        "left",
+        "right"
+      ],
+      "valueLabels": {
+        "left": "Left · below suburb",
+        "right": "Right · flush with text edge"
+      },
+      "default": "right",
+      "defaultBy": {
+        "control": "treatment",
+        "values": {
+          "visual-above": "right",
+          "visual-below": "left"
+        }
+      },
+      "disabledWhen": {
+        "priceTreatment": [
+          "none"
+        ]
+      }
+    },
+    "overlapTreatment": {
+      "type": "enum",
+      "label": "Image behind copy",
+      "values": [
+        "soft-fade",
+        "none"
+      ],
+      "valueLabels": {
+        "soft-fade": "Soft backdrop · follows copy",
+        "none": "Full colour · no fade"
+      },
+      "default": "soft-fade",
+      "visibleWhen": {
+        "treatment": [
+          "visual-below"
+        ],
+        "imageFit": [
+          "frame"
+        ]
+      },
+      "help": "A feathered backdrop follows the actual text area, leaving the rest of the image clear."
+    },
+    "priceTreatment": {
+      "type": "enum",
+      "label": "Price treatment",
+      "values": [
+        "plain",
+        "tag",
+        "none"
+      ],
+      "valueLabels": {
+        "plain": "Plain text",
+        "tag": "Filled tag",
+        "none": "No price"
+      },
+      "default": "plain"
+    }
+  },
+  "artDirectionModes": [],
+  "rules": {
+    "layout": "curated-two-compositions-v1",
+    "measurement": "restored-real-font-measurement-v1",
+    "headlineFitting": "restored-monotonic-headline-v1",
+    "contentFitting": "curated-complete-copy-fit-v1",
+    "metadata": "curated-strong-metadata-v1",
+    "copyDensity": "curated-copy-density-v1",
+    "numberTreatment": "curated-number-options-v3",
+    "pricePlacement": "curated-optional-price-v1",
+    "copyProtection": "curated-copy-protection-v2",
+    "copyHierarchy": "curated-copy-hierarchy-v1",
+    "plainNumberFitting": "curated-headline-number-fit-v1"
+  },
+  "invariants": [
+    "real-font-measurement",
+    "text-size-monotonic",
+    "media-independent-composition",
+    "image-fit-does-not-move-copy",
+    "all-fields-preserved-or-overflow-reported"
+  ],
+  "sourceBaseline": {
+    "project": "The Playmap",
+    "commit": "ec495d390df67643d9206f0d65f30902883f4271",
+    "component": "source/components/admin/SocialArtwork.tsx"
+  },
+  "assetSlots": {
+    "visual": {
+      "role": "visual",
+      "optional": false,
+      "scope": "local-preview",
+      "label": "Image · photo or illustration"
+    }
+  },
+  "acceptance": {
+    "visuals": "V6 plain number looked detached and too small. V7 headline-number treatment is a focused candidate; badge options and other compositions retained.",
+    "noNewModes": true
+  },
+  "graphicCapabilities": {
+    "visual": "One upload for any image. Fit and focus are explicit; no source-type detection or automatic layout switch. Original pixels unchanged.",
+    "empty": "Image area remains empty and the Lab warns; no invented filler.",
+    "wordmark": "Wordmark setting is honoured with every uploaded medium.",
+    "frame": "Visual below defaults to a bottom-anchored 720/900/1080px-wide original frame at natural height. Transparency/padding stay intact. No photo-panel clipping. Overlap warns without resizing copy.",
+    "copyProtection": "Optional feathered background-colour scrim behind the actual lower copy bounds. Image itself stays unmasked. It follows measured text height, copy position and optional metadata."
+  },
+  "labNote": "Plain number shares the headline typography and copy stack"
+}

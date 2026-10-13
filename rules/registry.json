@@ -194,6 +194,16 @@
       "kind": "graphics",
       "contract": "Feathered background-colour scrim follows actual copy top/bottom and horizontal bounds with modest padding. Image remains full-colour outside this local region. No pixel analysis or asset measurements drive copy fitting.",
       "implementation": "source/lib/socialCurated.ts"
+    },
+    "curated-number-options-v3": {
+      "kind": "layout",
+      "contract": "Pill and outlined circle remain compact badges. Plain number is a line inside the headline stack, inheriting its full display typography and alignment; None remains available. Colour choices are retained.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
+    },
+    "curated-headline-number-fit-v1": {
+      "kind": "fitting",
+      "contract": "Measure the plain number plus newline plus title together with the real headline face, width, tracking, weight and line-height. Reserve a16px gap; one computed size applies to both. Shared-capacity monotonic intent remains.",
+      "implementation": "source/components/admin/SocialArtwork.tsx"
     }
   }
 }

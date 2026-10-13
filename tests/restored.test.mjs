@@ -98,3 +98,15 @@ test('Copy protection follows measured copy rather than a fixed image zone',()=>
  assert.equal(curatedNumberTreatment('none','auto','teal',true),null);
  for(const below of [false,true]){const c=curatedNumberTreatment('outlined-circle','auto','sunshine',below);assert.equal(c.width,c.height);assert.ok(c.fontSize<=c.height/2);}
 });
+
+
+test('Plain Pick number belongs to the headline typography instead of a badge frame',async()=>{
+ const {createElement}=await import('react');const {renderToStaticMarkup}=await import('react-dom/server');
+ for(const treatment of ['visual-above','visual-below']){
+  const {spec,assets}=makeSpec('curated-pick',{name:'CERES Community Park',hook:'Go outside',price:'Free'},{treatment,numberStyle:'plain'});
+  const html=renderToStaticMarkup(createElement(SocialArtwork,{spec,assets}));
+  const heading=html.match(/<h2[^>]*>(.*?)<\/h2>/s)?.[1];assert.ok(heading?.includes('data-pick-number'));assert.ok(heading?.includes('data-pick-name'));
+  const numberStyle=heading.match(/data-number-style="plain" style="([^"]*)"/)?.[1];assert.ok(numberStyle);assert.ok(!/font-size|font-weight|font-family|letter-spacing/.test(numberStyle));
+  assert.equal(curatedNumberTreatment('plain','auto','teal',true).fontSize,undefined);
+ }
+});
