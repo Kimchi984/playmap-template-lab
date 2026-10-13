@@ -202,7 +202,7 @@
     },
     "curated-headline-number-fit-v1": {
       "kind": "fitting",
-      "contract": "Measure the plain number plus newline plus title together with the real headline face, width, tracking, weight and line-height. Reserve a16px gap; one computed size applies to both. Shared-capacity monotonic intent remains.",
+      "contract": "Measure the plain number plus newline plus title together with the real headline face, width, tracking, weight and line-height. Reserve a 16px gap; one computed size applies to both. Shared-capacity monotonic intent remains.",
       "implementation": "source/components/admin/SocialArtwork.tsx"
     }
   }

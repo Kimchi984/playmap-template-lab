@@ -208,3 +208,29 @@ Type/Split v2 unchanged. No accepted reference snapshots frozen; production does
 consume these manifests. Next: Alina reviews v6 hierarchy, circle/pill scale and copy-local
 backdrop strength with her own illustration. Dense-copy/overlap warnings still require
 judgement. No Lovable calls/changes; spend remains 117.9 credits.
+
+
+## Pick v7 headline numbering — 13 October 2026 (Sydney)
+
+Alina rejected the small, detached plain 01 at the image boundary in both treatments.
+Plain numbering now forms the first line of the headline stack and inherits its actual
+font family, fitted size, weight, tracking, line height and alignment. The number and title
+are measured together using loaded fonts, with the visible 16px gap reserved in fitting.
+Pill/circle retain compact badge geometry; None and number colour choices remain available.
+
+Published renderer f58a18acc2fa3d04cfdbab38e8d6dfade2f0e82d deployed successfully to Pages.
+Hosted desktop upper/lower checks: number and title both Gabarito 130px/900, tracking -5.2px,
+line height 111.8px and identical left edges. DM Sans check: both 117px/900, tracking -4.68px,
+line height 100.62px. Real fonts report loaded. Long title state retains honest fitting/density
+warnings. A 390px iframe check shows the same number/title size and alignment in the 351px
+artwork; this is a browser viewport check, not a physical-device test. This narrow pass used
+no images because the change concerns typography; exact uploaded-illustration collisions
+remain for Alina's review. Desktop main/grid screenshots show the change in both views.
+
+Build and 15 focused checks pass. New rules curated-number-options-v3 and
+curated-headline-number-fit-v1 are recorded in the shared manifest/registry. Pick v7 fixtures
+carry the existing content cases with recipe version 7; List v6, Cover v5 and Big Type/Split v2
+remain active. Plain-number typography is a review candidate, not a frozen accepted snapshot.
+Production integration remains outstanding. Next: Alina reviews this plain numbering in
+both compositions, then continue only the specific refinements she identifies. No Lovable
+calls/changes; spend remains 117.9 credits.

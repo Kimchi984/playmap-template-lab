@@ -75,3 +75,8 @@ The lower-frame image stays unmasked. Optional copy protection is now a feathere
 behind actual measured copy bounds, rather than an image-wide alpha fade. It follows copy
 position and height, including changes from optional number/price. Manifest controls and
 shared rule IDs own the contract; see review/STATUS.md for actual verification and caveats.
+
+
+Pick v7 focuses on plain numbering: it is a line inside the headline stack, using the same
+real display typography and fitted size. Number and title are measured together; colour
+choices remain. Pill/circle badge geometry and other templates stay as in the v6 checkpoint.
